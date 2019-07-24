@@ -17,10 +17,10 @@ This article is all about giving examples, **of proving specifications**.
 
 This article is also about summary. And thanks to the wonderful Prof. Ellen, Prof. Nikolov, Prof. Chechik, Prof. Hehner, Prof. Rossman; and the great figure Stephen Cook, who I couldn't make it to take his course because I was too young. The range of this article will be in the knowledge of the undergraduate. 
 
-It is so sad I haven't been exposed enough on the abstract machines. There are a lot driven by the development of Programming Language Theory, they are too many for me to even mention here.
+It is so sad I haven't been exposed enough on the abstract machines. There are a lot driven by the development of Programming Language Theory, there are too many for me to even mention here.
 
 #### Automata
-Start with DFA. Please construct 
+Start with NFA. Please construct 
 
 
 
