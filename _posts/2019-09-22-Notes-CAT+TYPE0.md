@@ -1,0 +1,93 @@
+---
+layout: post
+title:  "Type Theory, Categorical Aspect, 0."
+date:   2019-09-23 00:56:11 -0400
+categories: CAT Math Type-Theory
+---
+
+#### References:
+As a study note, there is nothing nontrivially original. Currently the references include *Categorical Logic and Type Theory*(by *Jacobs*). 
+
+## Fibration & Category
+
+In *Jacobs*, the starting point is just fibrational category theory. Even though, as nlab suggests, to have a categorical model for STLC(**Simply Typed Lambda Calculus**) or **Dependent Typed Lambda Calculus**, a (locally) closed cartesian category is basically enough. But no one can stop Jacobs using more modern language.
+
+
+
+> A functor $p:\mathbb{E} \rightarrow \mathbb{B}$ is a **fibration** if for every $Y \in \mathbb{E}$ and $u (\in \mathbb{B}): I \rightarrow pY$, there is a **Cartesian Morphism** $f (\in \mathbb{E}):X\rightarrow Y$ above $u$ (i.e. $pf = u$).
+
+> With functor $p:\mathbb{E} \rightarrow \mathbb{B}$, an arrow $f:X\rightarrow Y$ is **Cartesian over** $u :I \rightarrow J$ if 
+> 
+> 1. $pf = u$
+> 
+> 2. for every $g: Z \rightarrow Y$ with the property that $pg$ can be composed by $u$, (i.e. there is a $w$ s.t. $pg = u \circ w$)
+>       we have a **unique** arrow $h$ s.t. $g = f \circ h$
+
+> and if $f$ is cartesian over $u$, we call $f$ as $u$'s cartesian lifting.
+
+The definition of cartesian morphism is easily demonstrated by the following diagram in the original book.
+
+![](/assets/img/2019-09-22-15-48-39.png)
+
+
+Observe that functor $F:{\mathbb{C}} \rightarrow \mathbb{D}$, if we denote $F^{-1}(X)$ as the collection of objects in $\mathbb{C}$ that will be mapped to $X$
+
+
+#### Example : Codomain Fibration
+
+In this example, we can see our old friends arrow category and slice category.
+
+
+#### Example : Set Indexed Category ($Fam$) 
+
+> $Fam(\mathbb{C})$ is a category
+> 
+> objects: $(I,X)$ where $I \in$ **Set** and $X: I \rightarrow \mathbb{C}_0$ (that maps elements in $I$ to objects in $\mathbb{C}$). We most of the time will use $X_i$ to denote $X(i)$ and thus an object is denoted as $(X_i)_{i\in I}$ 
+> 
+> arrows : $(u: I \rightarrow J, (f_i)_{i \in I} : X_i \rightarrow X_{u(i)}$ as a tuple of arrows and collections of arrows.
+
+We would have a fibration $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ s.t. mapping objects $(X_i)_{i \in I} \mapsto I$
+
+> Claim : That is really a fibration (i.e. cartesian lifting exists.)
+
+
+### Cloven & Split
+
+### Change-of-Base
+
+Recall
+
+> Given $\mathbb{A} \xrightarrow{f} \mathbb{C} \xleftarrow{g} \mathbb{B}$ where $\mathbb{A}, \mathbb{B}, \mathbb{C}$ are categories
+> 
+>  an **ordinary pullback** is an object (category) $\mathbb{X}$ 
+> 
+>  where objects are ${(A, B): f(A) = g(B)}$
+>  
+>  and arrows are ${(u,v): f(u) = g(v)}$
+> 
+>  It can easily proved that an ordinary pullback is a pullback.
+
+<details>
+
+    <summary>To Show it is a pullback:</summary>
+    <p>
+
+    </p>
+</details>
+
+Now we can give a definition on **Change-of-base**.
+
+> **(Change-of-Base)** Given $\mathbb{A} \xrightarrow{f} \mathbb{B} \xleftarrow{p} \mathbb{E}$ where $p$ is a fibration,
+> then we have the ordinary pullback $\mathbb{A} \xleftarrow{\pi_1} \mathbb{X} \xrightarrow{\pi_2} \mathbb{E}$ 
+> 
+> and also $\pi_1$ is a fibration, which is cloven/split given $p$ is cloven/split.
+
+<details>
+    <summary>To Show it is a fibration:</summary>
+    <p>
+
+    </p>
+</details>
+
+
+
