@@ -30,13 +30,23 @@ The definition of cartesian morphism is easily demonstrated by the following dia
 ![](/assets/img/2019-09-22-15-48-39.png)
 
 
-Observe that functor $F:{\mathbb{C}} \rightarrow \mathbb{D}$, if we denote $F^{-1}(X)$ as the collection of objects in $\mathbb{C}$ that will be mapped to $X$
 
 
 #### Example : Codomain Fibration
 
 In this example, we can see our old friends arrow category and slice category.
 
+
+> $cod: \mathbb{B}^\rightarrow \rightarrow \mathbb{B}$ is a fibration 
+> 
+> iff the $\mathbb{B}$ has pullback
+
+
+Observe that given a functor $F:{\mathbb{C}} \rightarrow \mathbb{D}$, if we denote $F^{-1}(X)$ as the collection of objects in $\mathbb{C}$ that will be mapped to $X$. 
+
+Now for a fixed $X$, $F^{-1}(X)$ can actually become a category, by taking the arrows to be $F^{-1}(id_X)$. This category will be called **fibre category**.
+
+Now consider if the above $F$ is the codomain fiberation, what is the category constructed? *Slice Category!*
 
 #### Example : Set Indexed Category ($Fam$) 
 
@@ -89,5 +99,7 @@ Now we can give a definition on **Change-of-base**.
     </p>
 </details>
 
+### Fibrations $\mathbf{Set}^\rightarrow \rightarrow \mathbf{Set}$ and $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ are very much the same.
 
+The formal statement is as below:
 
