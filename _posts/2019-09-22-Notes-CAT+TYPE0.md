@@ -31,6 +31,17 @@ The definition of cartesian morphism is easily demonstrated by the following dia
 
 
 
+This **unique**ness is shouting out the up-to-isomorphism.
+
+> Show that: if $f,f'$ are both the cartesian lifting of $u$, then there is isomorphism $i$ s.t. $f = f' \circ i$
+
+<details>
+    <summary>To find the isomorphism:</summary>
+    <p>
+
+    </p>
+</details>
+
 
 #### Example : Codomain Fibration
 
@@ -78,7 +89,6 @@ Recall
 >  It can easily proved that an ordinary pullback is a pullback.
 
 <details>
-
     <summary>To Show it is a pullback:</summary>
     <p>
 

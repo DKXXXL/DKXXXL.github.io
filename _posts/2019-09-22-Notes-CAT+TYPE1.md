@@ -10,7 +10,7 @@ categories: CAT Math Type-Theory
 ### Signature
 This topic is quite similar to the *diagram* in my notes on category, but it is more 'universal algebra' style. 
 
-Because we focus on Type Theory, thus the signatures are more about type theory instead of logic.
+Because we focus on Type Theory, thus the signatures are more around type theory instead of that of logic. But the definition below is a little abstract:
 
 > **Sign** is the change-of-base (ordinary pullback) of the
 > 
@@ -20,12 +20,15 @@ Because we focus on Type Theory, thus the signatures are more about type theory 
 > 
 > $T^*$ is the kleen-star of $T$, (i.e. $T^* = \bigcup_{i \in \mathbb{N}} T^i$)
 
-And objects in the **Sign** are signatures. Let's see how actually they and the arrows look like.
+> And objects in the **Sign** are signatures. 
+
+
+Let's see how actually the objects and the arrows look like.
 
 We know $\Sigma = (T, \mathcal{F})$.
 
 
-From now on, we will denote the Type-symbol collections as $T = |\Sigma|$
+From now on, we will denote the Type-symbol collections as $|\Sigma|$
 
 ### S-Models
 
@@ -45,6 +48,7 @@ We can define the categories of models, named as **S-Models**.
 
 
 
+
 BTW: You can easily see that the model defines here is basically a diagram where objects are $\{\sigma \in T\}$ and their products; and arrows are the function signatures. (Recall the definition of models in notes in cat). We can see that the above commutative diagram is just a result of natrual transformation between models of the diagram.
 
 
@@ -53,7 +57,44 @@ $$ \textbf{S-Models} \xrightarrow{F} \mathbf{Sign} \xrightarrow{G} \mathbf{Set} 
 
 $$ (\Sigma, (A_\sigma)_{\sigma \in T}, [ \cdot ]) \mapsto \Sigma \mapsto |\Sigma| $$
 
+
+We denote **S-Models**$(\Sigma)$ as the fibre category above $\Sigma$ (defined in the last chapter). 
+### Classifying Category
+Consider syntactically, classifying category is at the heart of the semantic of (simple) type theory because it is how types and judgements are translated into categories.
+
+> Given signature $\Sigma$, a **classifying category** $Cl(\Sigma)$ is a category where
+> 
+>   objects are contexts of judgements (or sequence of type declaration of variables)
+> 
+>   arrows are sequence of terms where
+> 
+>   $\Gamma \xrightarrow{M = t_1, .. ,t_n} \Delta = (v_1: \tau_1,..,v_n : \tau_n)$
+> and $\Gamma \vdash t_i : \tau_i$ for each $i$
+
+
+#### Classifying category $Cl(\Sigma)$ has finite product.
+
+<details>
+    <summary>Proof.</summary>
+    <p>
+
+    </p>
+</details>
+
+
 ### Functorial Semantic
 
-Functorial style is actually very natural because it presents an easy way to generalize semantic (the way to intepret).
+Functorial style is actually very natural because it presents an easy way to generalize semantic (the way to intepret) onto other categries than **Set**.
 
+> Given $\Sigma$, **S-Models**$(\Sigma)$ $\cong$ **FPCAT**$(Cl(\Sigma), \mathbf{Set})$
+> 
+> where **FPCAT** stands for category with categories with finite product as objects, finite-product-preserving functors as arrows, and thus on the RHS, arrows and natural transformations are the ones to inspect.
+
+<details>
+    <summary>Proof:</summary>
+    <p>
+
+    </p>
+</details>
+
+The above proposition justifies the reason why **FPCAT**$(Cl(\Sigma), \cdot)$ can be a good way to generalize semantic. Of course we can have **FPCAT**$(Cl(\Sigma), Cl(\Sigma))$, called *generic model*, as one of the semantic, which is although trivial, is similar to Henkin Method: "using syntactic term to construct model for a logic".  This 
