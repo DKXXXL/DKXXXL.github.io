@@ -63,9 +63,9 @@ Now consider if the above $F$ is the codomain fiberation, what is the category c
 
 > $Fam(\mathbb{C})$ is a category
 > 
-> objects: $(I,X)$ where $I \in$ **Set** and $X: I \rightarrow \mathbb{C}_0$ (that maps elements in $I$ to objects in $\mathbb{C}$). We most of the time will use $X_i$ to denote $X(i)$ and thus an object is denoted as $(X_i)_{i\in I}$ 
+> objects: $(I,X)$ where $I \in$ **Set** and $X: I \rightarrow  \mathbb{C_0}$ (that maps elements in $I$ to objects in $\mathbb{C}$). We most of the time will use $X_i$ to denote $X(i)$ and thus an object is denoted as $(X_i)_{i\in I}$ 
 > 
-> arrows : $(u: I \rightarrow J, (f_i)_{i \in I} : X_i \rightarrow X_{u(i)}$ as a tuple of arrows and collections of arrows.
+> arrows : $(u: I \rightarrow J$, {$f_i: X_i \rightarrow X_{u(i)}$} where $i \in I$) as a tuple of arrows and collections of arrows.
 
 We would have a fibration $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ s.t. mapping objects $(X_i)_{i \in I} \mapsto I$
 
@@ -109,7 +109,7 @@ Now we can give a definition on **Change-of-base**.
     </p>
 </details>
 
-### Fibrations $\mathbf{Set}^\rightarrow \rightarrow \mathbf{Set}$ and $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ are very much the same.
+#### Fibrations $\mathbf{Set}^\rightarrow \rightarrow \mathbf{Set}$ and $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ are very much the same.
 
 The formal statement is as below:
 
