@@ -14,18 +14,22 @@ Because we focus on Type Theory, thus the signatures are more around type theory
 
 > **Sign** is the change-of-base (ordinary pullback) of the
 > 
->  $Fam(\mathbf{Set}) \xrightarrow{p} \mathbf{Set} \xleftarrow{T \mapsto T^{*} \times T} \mathbf{Set}$, 
+>  $Fam(\mathbf{Set}) \xrightarrow{p} \mathbf{Set} \xleftarrow{T \mapsto^{f} T^{*} \times T} \mathbf{Set}$, 
 > 
 > where $p$ is the family fibration (introduced in the last note)
-
-$T^{\*}$ is the kleen-star of $T$, (i.e. $T^{*} = \bigcup_{i \in \mathbb{N}} T^i$)
+>
+> $T^{\*}$ is the kleen-star of $T$, (i.e. $T^{\*} = \bigcup_{i \in \mathbb{N}} T^i$)
 
 And objects in the **Sign** are signatures. 
 
 
-Let's see how actually the objects and the arrows look like.
+Let's see how formally the objects and the arrows look like. By definition **Sign**$_ 0$ is the collection {$ (X, Y) : f(X) = p(Y) $}, thus the objects in **Sign** are tuples of $(I, (X_i)_ {i \in I^{\*}\times I})$ and arrows are $(u: I \rightarrow J, (f_i : X_ i \rightarrow Y_ {u'(i)})_ {i \in I^{\*}\times I})$. The $u' : I^{\*} \times I \rightarrow J^{\*} \times J$ is defined in an obvious way.
 
-We know $\Sigma = (T, \mathcal{F})$.
+The meaning is simple: $I$ is the collection of type (symbol), and the family $(X_i)$ should be considered as a mapping ${\cal F}_ X$ from $(\sigma^{\*}, \sigma) \in I^{\*}\times I$ to **Set**$_ 0$, stands for the set of the function symbols of the type $\sigma^{\*} \rightarrow \sigma$.
+
+Thus a morphism $f_ i$ applying to a signature is basically applying to $X_ i$: let function symbol $F \in X_ i = X_ {\langle \sigma^{\*}, \sigma \rangle}$ thus $f_ i(F) \in Y_ {u'(i)} = Y_ {\langle u'(\sigma^{\*}), u(\sigma) \rangle}$. Basically saying function symbol $F : \sigma_ 0 \times ... \sigma_ n \rightarrow \sigma$ is mapping to $f_ i(F): u(\sigma_ 0) \times ... u(\sigma_ n) \rightarrow u(\sigma)$.
+
+
 
 
 From now on, we will denote the Type-symbol collections as $\vert\Sigma\vert$
@@ -53,6 +57,7 @@ BTW: You can easily see that the model defines here is basically a diagram where
 
 
 Also note that the below arrows are all fibrations
+
 $$ \textbf{S-Models} \xrightarrow{F} \mathbf{Sign} \xrightarrow{G} \mathbf{Set} $$
 
 $$ (\Sigma, (A_\sigma)_{\sigma \in T}, [ \cdot ]) \mapsto \Sigma \mapsto \vert\Sigma\vert $$
