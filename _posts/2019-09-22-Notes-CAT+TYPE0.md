@@ -5,8 +5,12 @@ date:   2019-09-23 00:56:11 -0400
 categories: CAT Math Type-Theory
 ---
 
+# IN CONSTRUCTION
+
 #### References:
 As a study note, there is nothing nontrivially original. Currently the references include *Categorical Logic and Type Theory*(by *Jacobs*). 
+
+This post is mostly about Fibration.
 
 ## Fibration & Category
 

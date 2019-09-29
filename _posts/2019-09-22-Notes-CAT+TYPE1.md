@@ -4,6 +4,8 @@ title:  "Type Theory, Categorical Aspect, 1."
 date:   2019-09-23 00:56:11 -0400
 categories: CAT Math Type-Theory
 ---
+# IN CONSTRUCTION
+
 
 ## Simply Typed Lambda Calculus
 
