@@ -15,7 +15,7 @@ Semantics with Applications: An Appetizer (Flemming Nielson and Hanne Riis Niels
 
 Basic Concepts of Abstract Interpretation (Patrick Cousot and Radhia Cousot).
 
-#### 
+***
 
 This blog is about the three Definitions on Abstract Interpretation/Dataflow Analysis I encountered and try to connect them together.
 
