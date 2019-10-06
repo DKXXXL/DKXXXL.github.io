@@ -67,11 +67,11 @@ Now consider if the above $F$ is the codomain fiberation, what is the category c
 
 > $Fam(\mathbb{C})$ is a category
 > 
-> objects: $(I,X)$ where $I \in$ **Set** and $X: I \rightarrow  \mathbb{C_0}$ (that maps elements in $I$ to objects in $\mathbb{C}$). We most of the time will use $X_i$ to denote $X(i)$ and thus an object is denoted as $(X_i)_{i\in I}$ 
+> objects: $(I,X)$ where $I \in$ **Set** and $X: I \rightarrow  \mathbb{C_0}$ (that maps elements in $I$ to objects in $\mathbb{C}$). We most of the time will use $X_i$ to denote $X(i)$ and thus an object is denoted as $\\{X_i\\}_{i\in I}$ 
 > 
 > arrows : $(u: I \rightarrow J$, {$f_i: X_i \rightarrow X_{u(i)}$} where $i \in I$) as a tuple of arrows and collections of arrows.
 
-We would have a fibration $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ s.t. mapping objects $(X_i)_{i \in I} \mapsto I$
+We would have a fibration $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ s.t. mapping objects $\\{X_i\\}_{i \in I} \mapsto I$
 
 > Claim : That is really a fibration (i.e. cartesian lifting exists.)
 
@@ -144,7 +144,7 @@ Some exercises are put here.
 
         <br/>
 
-        Let $G$ become a functor by throwing the commutative arrow (in the arrow category) $(v:X\rightarrow Y, u:I \rightarrow J)$ to $(u, v)$ since it is easy to prove $v : f^{-1}(i) \rightarrow g^{-1}(u(i))$
+        Let $G$ become a functor by throwing the commutative arrow (in the arrow category) $(v:X\rightarrow Y, u:I \rightarrow J)$ to $(u, (v)_ {i \in I})$ since it is easy to prove $v : f^{-1}(i) \rightarrow g^{-1}(u(i))$
 
         <br/>
 
@@ -154,6 +154,18 @@ Some exercises are put here.
 
         <br/>
 
-        Given $X \xrightarrow{f} I$, $\gamma(f):$
+        Given $X \xrightarrow{f} I$, $\gamma(f): F(G(f)) \rightarrow f = [\coprod_ {i \in I} f^{-1}(i) \rightarrow I] \rightarrow [X \xrightarrow{f} I]$.
+        Thus $\gamma(f) = (\pi_2, id)$
+
+        <br/>
+
+        Now we need to check commutativity for the natrual transformations.
+
+        <!-- ![](/assets/img/2019-09-30-21-24-50.png) -->
+        <!-- <img src="/assets/img/2019-09-30-21-24-50.png"> -->
+         <img src="/assets/img/2019-09-30-21-48-03.png">
+        <br/>
+
+        The other one is similar.
 
 </details>
