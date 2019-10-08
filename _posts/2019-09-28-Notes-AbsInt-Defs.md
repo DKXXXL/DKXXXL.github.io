@@ -13,7 +13,9 @@ Chechik, M (2018) CSC410;
 
 Semantics with Applications: An Appetizer (Flemming Nielson and Hanne Riis Nielson); 
 
-Basic Concepts of Abstract Interpretation (Patrick Cousot and Radhia Cousot).
+Basic Concepts of Abstract Interpretation (Patrick Cousot and Radhia Cousot);
+
+Abstract Interpretation (Susan B. Horwitz)
 
 ***
 
@@ -24,7 +26,7 @@ We all know that no matter DFA or AI, they are both just frameworks. All kinds o
 
 ### Nielsons' based on denotational semantic
 
-In the book (*Nielsons*), this part is phrased as Dataflow analysis. This definition is starting from denotational semantic of the program. Denotational semantic is basically using mathematical language to simulate what is happening when program is running. As Nielsons, we will just take language _while_ as an example.
+In the book (*Nielsons*), this part is phrased as Dataflow analysis. This definition is starting from denotational semantic of the program. Denotational semantic is basically using mathematical language to simulate what is happening when program is running. As Nielsons, we will just take language __while__ as an example.
 
 
 
@@ -103,16 +105,18 @@ Now we can proceed to AI.
 > 
 > *    
 
+
+
 You can see that, any interpretation would be a trivial "abstratc interpretation" according to the definition. That means the definition of abstract interpretation cannot guarantee practially computable.
 
 ### Cousots' based on transistion systems
 
-Different from Nielsons' and Horwitz's, Cousots' abstract interpretation starts its journey from transistion systems. It abstract away any control flow/continuation, and just assume the computation only relies on a transition system. I cannot quite understand Cousots' point of view so I may have to copying and pasting from the text books a lot. You will see that, the most confusing part is, in the above two frameworks, we can easily ask "if variable $x$ at line 9 is a constant or not". However, in this framework, it doesn't seem so obvious.
+Different from Nielsons' and Horwitz's, Cousots' abstract interpretation starts its journey from transistion systems. It abstract away any control flow/continuation, and just assume the computation only relies on a transition system. I cannot quite understand Cousots' point of view so I may have to copying and pasting from the text books a lot. You will see that, the most confusing part is, in the above frameworks, we can easily ask "if variable $x$ at line 9 is a constant or not". However, in this framework, it doesn't seem so obvious. 
 
 > Transition system is just a state machine using three tuples to represent 
-> $\tau = \langle \Sigma, \Sigma_ t, t \rangle$
+> $\tau = \langle \Sigma, \Sigma_ i, t \rangle$
 > 
-> where $\Sigma$ is the possible states, $\Sigma_t$ are the initial states and $t \subseteq \Sigma \times \Sigma$ stands for transition relationship
+> where $\Sigma$ is the possible states, $\Sigma_i$ are the initial states and $t \subseteq \Sigma \times \Sigma$ stands for transition relationship
 
 Note that Cousots points out $t$ stands for __possible__ succeeding states but never explicitly says non-determinism in the whole introduction.
 
@@ -135,3 +139,6 @@ $$\frac{\alpha(X)\rightarrow Y}{X \rightarrow \gamma(Y)}$$ -->
 #### Fixpoint Transfer Theorem
 
 #### Widening + Narrowing
+
+
+At the very end, I still don't know how to generate answer for a question like "Is the variable at Line 42 a constant?" in this framework. This framework seems completely interpret the whole program, just like the denotational semantic in some sense.
