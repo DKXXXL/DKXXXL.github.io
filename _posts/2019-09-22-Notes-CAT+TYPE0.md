@@ -133,13 +133,23 @@ Some exercises are put here.
 
 {% include _post_snip/FamSetEQVSetArr.md %}
 
+
+*** 
+***
+
+
 Recall the definition of $\omega$-**Set**: 
 > 
 > objects are $(X \in \mathbf{Set_0}, E_X : X \rightarrow \mathbb{N})$. 
 > 
-> arrows are $f: X \rightarrow Y$ with a natural number $e$ **tracking** $f$, i.e. $\varphi_ e(E_X(X)) \subseteq E_ Y(f(X))$
+> arrows are $f: X \rightarrow Y$ such that there exists a natural number $e$ **tracking** $f$, i.e.  for all $x \in X$, $\varphi_ e(E_ X(x)) \subseteq E_ Y(f(x))$ (can you see a commutative diagram here?)
 > 
 > Here $\varphi_e$ is the $e$-th partial recursive function (since partial recursive function is enumerable just like turing machines are enumerable, details please see any recursion theory)
 
+Notice that the existence of the number is enough, we don't care about what the tracking number actually is. In other words, two arrows are equal when they are same functions in **Set**, even if they have different tracking number.
+
+> $\omega$-**Set** has finite limit and exponential.
+
+{% include _post_snip/OmegaSetCCC.md %}
 
 
