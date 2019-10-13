@@ -80,6 +80,32 @@ We would have a fibration $Fam(\mathbf{Set}) \rightarrow \mathbf{Set}$ s.t. mapp
 
 ### Cloven & Split
 
+
+Recall the definition of substitution functor:
+> Given fibre ${\LARGE{\downarrow}}^{\cal E}_ {\cal B}$ and $u : I \rightarrow J \in {\cal B_1}$
+> 
+> $u$ can have several cartesian lifting, in which if we fix one as the choice then we get the lifting $\bar{u}(X): u^{\*}(X) \rightarrow X$
+> 
+> In this context, 
+> * after this fixing, we call this fibration **cloven** with a **cleavage**
+> * $u^{\*}$ is an induced functor ${\cal E}_ J \rightarrow {\cal E}_ I$
+> since it preserves the association of the arrows (because of cartesian morphism)
+
+Surprisingly, $u^{\*} \cdot \v^{\*}$ is naturally isomorphic to $(v \cdot u)^{\*}$, mostly because cartesian morphism is closed under association. We also have $id \cong id^{\*}$.
+
+{% include _post_snip\CloveAssociateUpToIso.md %}
+
+
+
+> * if $u^{\*} \cdot \v^{\*} \xrightarrow{\cong} (v \cdot u)^{\*}$ and $id \xrightarrow{\cong} id^{\*}$ are *identities*, then this fibration is **split**
+
+Example: Show that fibration ${\LARGE{\downarrow}}^{\mathbf{Set^\rightarrow}}_ {\mathbf{Set}}$ defined by the canonical pullback is a split fibration.
+
+
+It is easy to notice that $X \mapsto {\cal E}_ X$ and $u \mapsto u^{\*}$ can together become a **pseudo-functor**. It is almost a functor since $u^{\*} \cdot \v^{\*} {\cong} (v \cdot u)^{\*}$ instead of equal. In other words, a split fibration can induce a real functor. This functor/pseudo-functor ${\cal B}^{op} \rightarrow \mathbf{Cat}$ induces the concept of **${\cal B}$-indexed category/split ${\cal B}$-indexed category**.
+
+
+
 ### Change-of-Base
 
 Recall
@@ -119,7 +145,7 @@ Now we can give a definition on **Change-of-base**.
 
 The formal statement is as below:
 
-## Exercises
+## Exercises, mostly repeating the book, and exaggerate the details
 
 Some exercises are put here. 
 
@@ -151,5 +177,32 @@ Notice that the existence of the number is enough, we don't care about what the 
 > $\omega$-**Set** has finite limit and exponential.
 
 {% include _post_snip/OmegaSetCCC.md %}
+
+Recall the definition of $PER$:
+> 
+> objects are partial equivalence relations (relations transitive and symmetric)
+> 
+> arrows are 
+
+$PER$ is thought to be a complete lattice: $\bigwedge_ i S_ i = \bigcap \\{ R \in PER : R \supseteq \bigcup_ i S_ i  \\} $. 
+
+**Question: Why not $\bigwedge_ i S_ i = \bigcup_ i S_ i $.**
+
+It is also said it is easy to see $PER$ is closed under intersection. 
+
+Recall the definition of subobject, which is basically an equivalence class of monos. Then recall the definition that a relation on an object $I$ in category  ${\cal B}$ with finite limits is a subobject $R \rightarrowtail I \times I$; and  a category $Rel({\cal B})$ is
+> objects: subobjects with codomain of $I \times I$ for some object $I$ in ${\cal B}$
+> 
+> arrows: an arrow $u: I \rightarrow J \in {\cal B_0}$ that satisfies the following commutative diagram
+
+
+
+After categorify the relations, the reflectivity, symmetricity and transitivity are:
+
+
+Let's verify the transitivity in **Set** context: (TBD).
+
+
+
 
 
