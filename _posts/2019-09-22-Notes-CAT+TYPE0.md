@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Type Theory, Categorical Aspect, 0."
+title:  "Notes on Category Theory, 5: Fibers"
 date:   2019-09-23 00:56:11 -0400
 categories: CAT Math Type-Theory
 ---
@@ -27,7 +27,7 @@ In *Jacobs*, the starting point is just fibrational category theory. Even though
 > 1. $pf = u$
 > 
 > 2. for every $g: Z \rightarrow Y$ with the property that $pg$ can be composed by $u$, (i.e. there is a $w$ s.t. $pg = u \circ w$)
->       we have a **unique** arrow $h$ s.t. $g = f \circ h$
+>       we have a **unique** arrow $h$ s.t. $g = f \circ h$ and $ph = w$
 
 > and if $f$ is cartesian over $u$, we call $f$ as $u$'s cartesian lifting.
 
@@ -37,16 +37,20 @@ The definition of cartesian morphism is easily demonstrated by the following dia
 
 
 
-This **unique**ness is shouting out the up-to-isomorphism.
+This **unique**ness is talking about the up-to-isomorphism; and there are many more trivial properties to see:
 
-> Show that: if $f,f'$ are both the cartesian lifting of $u$, then there is isomorphism $i$ s.t. $f = f' \circ i$
+> 1. if $f,f'$ are both the cartesian lifting of $u$, then there is isomorphism $i$ s.t. $f = f' \circ i$
+> 2. A cartsian morphism is a mono
+> 3. Cartesian morphism is closed under composition
 
 <details>
     <summary>To find the isomorphism:</summary>
     <p>
-
+        It is easy to see $pf = pf'$ and thus $pf = pf' \circ id$ and $pf' = pf \circ id$. Thus we have two unique arrows $a,b$ s.t. $f = f' \circ a$ and $f' = f \circ b$. Similarly, we can have two unique arrows $i, d$ s.t. $f = f \circ i$ and $f' = f' \circ d$. It is easy to see $i = id, d = id$. and thus $b \circ a = id$, $a \circ b = id$. 
     </p>
 </details>
+
+
 
 
 #### Example : Codomain Fibration
@@ -57,6 +61,40 @@ In this example, we can see our old friends arrow category and slice category.
 > $cod: \mathbb{B}^\rightarrow \rightarrow \mathbb{B}$ is a fibration 
 > 
 > iff the $\mathbb{B}$ has pullback
+
+<details>
+    <summary>Carteisan morphism gives a pullback:</summary>
+    <p>
+        Given $A \xrightarrow{f} X \xleftarrow{g} B$ in ${\cal B}$, we have a cartesian lifting of $f$ to ${\cal B}^ \rightarrow$, denoted $(f', f) : (g' : {\LARGE \downarrow}^C_ A) \rightarrow (g : {\LARGE \downarrow}^B_ X)$. 
+
+        <br/>
+
+        It is easy to see $(f', f)$ as a pullback. Consider $A \xleftarrow{u} C' \xrightarrow{v} B$, and $f \circ u = g \circ v$, we get an another object and an arrow $u \in {\cal B^\rightarrow_0}$ and $(v, f): u \rightarrow g$. Due to the cartesian lifting $f'$ and the fact that $f = f \circ id$, there will be a unique arrow from $u$ to $g'$. The 'domain' part of the unique arrow is obviously the mediating arrow $C' \rightarrow C$ we want.
+
+        <br/>
+
+        Uniqueness is ensured by the uniqueness of the cartesian morphism. 
+    </p>
+</details>
+
+<details>
+    <summary>A pullback gives cartesian morphism:</summary>
+    <p>
+        
+        <!-- ![](assets/img/2019-10-13-16-48-57.png) -->
+        <img src="/assets/img/2019-10-13-16-48-57.png">
+
+        <br/>
+
+        Note that the uniqueness is ensured by the pullback, and also note that the uniqueness means 
+
+        <br/>
+
+        we have a unique arrow $h$ s.t. $g = f \circ h$ and ${\LARGE ph = w}$
+
+    </p>
+</details>
+
 
 
 Observe that given a functor $F:{\mathbb{C}} \rightarrow \mathbb{D}$, if we denote $F^{-1}(X)$ as the collection of objects in $\mathbb{C}$ that will be mapped to $X$. 
@@ -89,20 +127,22 @@ Recall the definition of substitution functor:
 > In this context, 
 > * after this fixing, we call this fibration **cloven** with a **cleavage**
 > * $u^{\*}$ is an induced functor ${\cal E}_ J \rightarrow {\cal E}_ I$
-> since it preserves the association of the arrows (because of cartesian morphism)
+> since it preserves the composition of the arrows (because of cartesian morphism)
 
-Surprisingly, $u^{\*} \cdot \v^{\*}$ is naturally isomorphic to $(v \cdot u)^{\*}$, mostly because cartesian morphism is closed under association. We also have $id \cong id^{\*}$.
+Surprisingly, $u^{\*} \circ v^{\*}$ is naturally isomorphic to $(v \circ u)^{\*}$, mostly because cartesian morphism is closed under composition. We also have $id \cong id^{\*}$.
 
-{% include _post_snip\CloveAssociateUpToIso.md %}
+{% include _post_snip/CloveAssociateUpToIso.md %}
 
 
 
-> * if $u^{\*} \cdot \v^{\*} \xrightarrow{\cong} (v \cdot u)^{\*}$ and $id \xrightarrow{\cong} id^{\*}$ are *identities*, then this fibration is **split**
+> * if $u^{\*} \circ v^{\*} \xrightarrow{\cong} (v \circ u)^{\*}$ and $id \xrightarrow{\cong} id^{\*}$ are *identities*, then this fibration is **split**
 
 Example: Show that fibration ${\LARGE{\downarrow}}^{\mathbf{Set^\rightarrow}}_ {\mathbf{Set}}$ defined by the canonical pullback is a split fibration.
 
 
-It is easy to notice that $X \mapsto {\cal E}_ X$ and $u \mapsto u^{\*}$ can together become a **pseudo-functor**. It is almost a functor since $u^{\*} \cdot \v^{\*} {\cong} (v \cdot u)^{\*}$ instead of equal. In other words, a split fibration can induce a real functor. This functor/pseudo-functor ${\cal B}^{op} \rightarrow \mathbf{Cat}$ induces the concept of **${\cal B}$-indexed category/split ${\cal B}$-indexed category**.
+Example: Show that fibration ${\Large \downarrow}^{\mathbf{Fam}({\cal C})}_ {\mathbf{Set}}$ is a split by lifting $I \xrightarrow{u} J$ to $(I, (Y_ {u(i)})_ {i \in I} \xrightarrow{(u, id)} (J, (Y_ j)_{j \in J})$
+
+It is easy to notice that $X \mapsto {\cal E}_ X$ and $u \mapsto u^{\*}$ can together become a **pseudo-functor**. It is almost a functor since $u^{\*} \circ v^{\*} {\cong} (v \cdot u)^{\*}$ instead of equal. In other words, a split fibration can induce a real functor. This functor/pseudo-functor ${\cal B}^{op} \rightarrow \mathbf{Cat}$ induces the concept of **${\cal B}$-indexed category/split ${\cal B}$-indexed category**.
 
 
 
@@ -184,9 +224,9 @@ Recall the definition of $PER$:
 > 
 > arrows are 
 
-$PER$ is thought to be a complete lattice: $\bigwedge_ i S_ i = \bigcap \\{ R \in PER : R \supseteq \bigcup_ i S_ i  \\} $. 
+$PER$ is thought to be a complete lattice: $\bigvee_ i S_ i = \bigcap \\{ R \in PER : R \supseteq \bigcup_ i S_ i  \\} $. 
 
-**Question: Why not $\bigwedge_ i S_ i = \bigcup_ i S_ i $.**
+**Question: Why not $\bigvee_ i S_ i = \bigcup_ i S_ i $.**
 
 It is also said it is easy to see $PER$ is closed under intersection. 
 

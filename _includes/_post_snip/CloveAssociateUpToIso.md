@@ -1,6 +1,6 @@
 
 <details>
-    <summary>To Show they are naturally iso:</summary>
+    <summary>To Show they are both naturally isomorphism:</summary>
 
     <br/>
 </details>
