@@ -1,13 +1,13 @@
 
 <details>
     <summary>To Show they are both naturally isomorphism:</summary>
-    $u^{\*} \circ v^{\*} \cong (v \circ u)^{\*}$
+    $u^{\\*} \circ v^{\\*} \cong (v \circ u)^{\\*}$
     <br/>
-    For arbitrary $X$, $\bar{u} \circ \bar{v} (X) : u^{\*} \circ v^{\*}(X) \rightarrow X$ is a cartesian morphism because cartesian morphism closed under composition. Of course, so is $\bar{v \circ u}$. We can also easily see both cartesian morphism are above same map, so there is an iso between $u^{\*} \circ v^{\*}$ and $ (v \circ u)^{\*}$
+    For arbitrary $X$, $\bar{u} \circ \bar{v} (X) : u^{\\*} \circ v^{\\*}(X) \rightarrow X$ is a cartesian morphism because cartesian morphism closed under composition. Of course, so is $\bar{v \circ u}$. We can also easily see both cartesian morphism are above same map, so there is an iso between $u^{\\*} \circ v^{\\*}$ and $ (v \circ u)^{\\*}$
     <br/>
-    $id \cong id^{\*}$
+    $id \cong id^{\\*}$
     <br/>
-    Because $id$, $id^{\*}$ are both cartesian morphism over $id$.
+    Because $id$, $id^{\\*}$ are both cartesian morphism over $id$.
 
     <br/>
     Natruality: The following diagram commutes, 

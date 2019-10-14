@@ -51,6 +51,7 @@ We can define the categories of models, named as **S-Models**.
 > objects: $(\Sigma, (A_ \sigma)_ {\sigma \in T}, [ \cdot ])$ where $((A_ \sigma)_ {\sigma \in T}, [ \cdot ])$ is a model for $\Sigma$
 > 
 > arrows : $(\phi, (H_ {\sigma})_ {\sigma \in T})$ where $\phi$ is morphism in **Sign** (between $\Sigma$s), and $H_ \sigma : A_ \sigma \rightarrow A'_ {\phi(\sigma)}$ with the following diagram commutes.
+![](/assets/img/2019-10-14-17-34-51.png)
 
 
 
@@ -97,12 +98,10 @@ Functorial style is actually very natural because it presents an easy way to gen
 > 
 > where **FPCAT** stands for category with categories with finite product as objects, finite-product-preserving functors as arrows, and thus on the RHS, arrows and natural transformations are the ones to inspect.
 
-<details>
-    <summary>Proof:</summary>
-    <p>
+**S-Model** $\xrightarrow[G]{F}$ **FPCAT ( Cl($\Sigma$) , Set )**
 
-    </p>
-</details>
+
+{% include _post_snip/SModelisFPFunctor.md %}
 
 The above proposition justifies the reason why **FPCAT**$(Cl(\Sigma), \cdot)$ can be a good way to generalize semantic. Of course we can have **FPCAT**$(Cl(\Sigma), Cl(\Sigma))$, called *generic model*, as one of the semantic, which is although trivial, is similar to Henkin Method: "using syntactic term to construct model for a logic".  
 
