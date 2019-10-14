@@ -40,7 +40,7 @@ The definition of cartesian morphism is easily demonstrated by the following dia
 This **unique**ness is talking about the up-to-isomorphism; and there are many more trivial properties to see:
 
 > 1. if $f,f'$ are both the cartesian lifting of $u$, then there is isomorphism $i$ s.t. $f = f' \circ i$
-> 2. A cartsian morphism is a mono
+> 2. Given $u,v$ above same map, a cartsian morphism $f$, if $f \circ u = f \circ v$ then $u = v$  
 > 3. Cartesian morphism is closed under composition
 
 <details>
@@ -135,14 +135,14 @@ Surprisingly, $u^{\*} \circ v^{\*}$ is naturally isomorphic to $(v \circ u)^{\*}
 
 
 
-> * if $u^{\*} \circ v^{\*} \xrightarrow{\cong} (v \circ u)^{\*}$ and $id \xrightarrow{\cong} id^{\*}$ are *identities*, then this fibration is **split**
+> if $u^{\*} \circ v^{\*} \xrightarrow{\cong} (v \circ u)^{\*}$ and $id \xrightarrow{\cong} id^{\*}$ are *identities*, then this fibration is **split**
 
 Example: Show that fibration ${\LARGE{\downarrow}}^{\mathbf{Set^\rightarrow}}_ {\mathbf{Set}}$ defined by the canonical pullback is a split fibration.
 
 
 Example: Show that fibration ${\Large \downarrow}^{\mathbf{Fam}({\cal C})}_ {\mathbf{Set}}$ is a split by lifting $I \xrightarrow{u} J$ to $(I, (Y_ {u(i)})_ {i \in I} \xrightarrow{(u, id)} (J, (Y_ j)_{j \in J})$
 
-It is easy to notice that $X \mapsto {\cal E}_ X$ and $u \mapsto u^{\*}$ can together become a **pseudo-functor**. It is almost a functor since $u^{\*} \circ v^{\*} {\cong} (v \cdot u)^{\*}$ instead of equal. In other words, a split fibration can induce a real functor. This functor/pseudo-functor ${\cal B}^{op} \rightarrow \mathbf{Cat}$ induces the concept of **${\cal B}$-indexed category/split ${\cal B}$-indexed category**.
+It is easy to notice that $X \mapsto {\cal E}_ X$ and $u \mapsto u^{\*}$ can together become a **pseudo-functor**. It is almost a functor since $u^{\*} \circ v^{\*} {\cong} (v \cdot u)^{\*}$ instead of equal. In other words, a split fibration can induce a real functor. This pseudo-functor/functor ${\cal B}^{op} \rightarrow \mathbf{Cat}$ induces the concept of **${\cal B}$-indexed category/split ${\cal B}$-indexed category**.
 
 
 
