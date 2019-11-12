@@ -50,5 +50,31 @@ where
 According to the book, we only need to show
 > $\rightarrow_l$ has diamond property.
 
+In other words,
+> For arbitrary $A, B, C$, if $A \rightarrow_l B, A \rightarrow_l C$, then there exists $D$ s.t. $B \rightarrow_l D$ and $C \rightarrow_l D$. 
+
+<details>
+    <summary>Proof.</summary>
+    <p>
+
+    </p>
+</details>
+
+Induction on $A \rightarrow_l B$ for proposition :
+
+For arbitrary $A, B$ if $A \rightarrow_l B$, and for arbitrary $C$ and if $A \rightarrow_l C$, then there exists $D$ s.t. $B \rightarrow_l D$ and $C \rightarrow_l D$.
+
+Base Case: When $B \equiv A$, then we know exists the $C$ s.t. $A \rightarrow_l C$ and $C \rightarrow_l C$.
+
+Inductive Step: Assume I.H. holds for some fixed $P \rightarrow_l P'$. When $\lambda x. P \rightarrow_l \lambda x.P'$ and $\lambda x.P \rightarrow_l C$. By the definition of $\rightarrow_l$, we know either $C \equiv \lambda x. P$, which would be a trivial case; or $C \equiv \lambda x. C'$ in a lambda form. (Since $\equiv$ means same equivalence class, thus the binding variable doesn't matter). And also, $P \rightarrow_l C'$ again by definition. Thus by I.H., there is $D'$ thus $C' \rightarrow_l D'$ and $P \rightarrow D'$ and thus $\lambda x. D'$ is what desired. 
+
+
+Inductive Step 2: Assume I.H. holds for some fixed $P \rightarrow_l P'$ and for some fixed $Q \rightarrow_l Q'$. When $P Q \rightarrow_l P' Q'$ and $P Q \rightarrow_l C$. There are only two cases how $C$ is formed.
+
+Case 2.a: If $C \equiv C_ 0 C_ 1$ and we also get $P \rightarrow_l C_ 0$ and also $Q \rightarrow_l C_ 1$. Now by I.H., everything is trivial.
+
+Case 2.b: If 
+
+
 
 ## A detour on computability
