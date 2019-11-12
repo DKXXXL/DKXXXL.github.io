@@ -76,5 +76,14 @@ Case 2.a: If $C \equiv C_ 0 C_ 1$ and we also get $P \rightarrow_l C_ 0$ and als
 Case 2.b: If 
 
 
+To derive a proof in this case won't be hard -- the point is how does the definition $\rightarrow_l$ come up? A superset of $\rightarrow_\beta$ but a subset of its transtive closure, which also supports diamond property. You will see that the reasoning above is totally in a wrong direction -- the researcher should first spot the fact that diamond property will be inherited by the transitive closure; and then attempt to construct the $\rightarrow_l$ from its specification. 
+**Something is missing here in this context.**  
+
+We also need to prove the below lemma
+> $M \rightarrow_l M'$ and $N \rightarrow_l N'$ implies $M[x := N] \rightarrow_l M'[x := N']$
+
+Interestingly, textbook says the above Theorem justifies the $\Lambda$ theory with $=_\beta$ is a consistent theory, by showing an unprovable statement.
+
 
 ## A detour on computability
+
