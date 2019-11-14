@@ -73,8 +73,16 @@ Inductive Step 2: Assume I.H. holds for some fixed $P \rightarrow_l P'$ and for 
 
 Case 2.a: If $C \equiv C_ 0 C_ 1$ and we also get $P \rightarrow_l C_ 0$ and also $Q \rightarrow_l C_ 1$. Now by I.H., everything is trivial.
 
-Case 2.b: If 
+Case 2.b: If $C \equiv P''[x:=Q'']$ for some $P'', Q'', x$. Thus we know $P \equiv \lambda x. P_0$ and $P_0 \rightarrow_l P'', Q \rightarrow_l Q''$. Thus $P \rightarrow_l \lambda x. P''$. Thus By I.H., there is $C_P$ s.t. $\lambda x. P'' \rightarrow_l C_P$ and $P' \rightarrow_l C_P$. and also $C_Q$ merges $Q', Q''$.
 
+Thus $C \equiv P''[x:=Q''] \rightarrow_l C_P C_Q$ (by rule 3); and $P' Q' \rightarrow C_P C_Q$. 
+
+
+Inductive Step 3: Assume I.H. holds for some fixed $P \rightarrow_l P'$ and for some fixed $Q \rightarrow_l Q'$.  When $(\lambda x.P) Q \rightarrow_l P'[x:= Q']$ and $(\lambda x.P) Q \rightarrow_l C$ for some $C$. 
+
+Case 3.a: If $C \equiv C_0 C_1$ where $\lambda x.P \rightarrow_l C_0$ and $Q \rightarrow_l C_1$. Thus $C_0 \equiv \lambda x. C_0'$. and $P \rightarrow_l C_0'$. Thus we have $C_P$ merges $P'$ and $C_0'$. and $C_Q$ merges $Q'$ and $C_1$. Thus $C_0 C_1 \equiv (\lambda x. C_0' )C_1 \rightarrow_l C_p[x:= C_Q]$ (by rule 3) and $C_P[x:=C_Q]$ by the below lemma.
+
+Case 3.b: If $C \equiv P''[x:=Q'']$.
 
 To derive a proof in this case won't be hard -- the point is how does the definition $\rightarrow_l$ come up? A superset of $\rightarrow_\beta$ but a subset of its transtive closure, which also supports diamond property. You will see that the reasoning above is totally in a wrong direction -- the researcher should first spot the fact that diamond property will be inherited by the transitive closure; and then attempt to construct the $\rightarrow_l$ from its specification. 
 **Something is missing here in this context.**  
