@@ -95,3 +95,35 @@ Interestingly, textbook says the above Theorem justifies the $\Lambda$ theory wi
 
 ## A detour on computability
 
+### Church Numeral
+
+We can use lambda term to define natural numbers:
+$$c_n = \lambda s. \lambda z. s^n(z)$$
+
+If you look closely, this is just a twisted, untyped version of inductive definition of $\mathbb{N}$, two constructors one as zero and the other as predecessor. The way to define the arithmetic operation is simple:
+
+Addition is just counting when one of the $z$ is the other number, 
+*  $a + b :=  (\lambda s. \lambda z. b(s, a(s, z)) )$
+  
+After we have addition, $n \times m$ is just $m$ plus to itself for $n$ times. It is easy to see, the argument in $s$ will be applied for $n$ times.
+
+* $a \times b := \lambda s. \lambda z. b(\lambda z. a(s,z), z)$
+
+Use the same idea, exponential is the same:
+
+* $a^b := \lambda s. \lambda z. b( - \times a, 1)$
+* $1 := \lambda s. \lambda z. s(z)$
+
+### Recursion
+
+We have the famous fix point, $\mathbf{Y}$ combinator, where $Y f  =_{\beta} f(Y(f))$ for arbitrary $f$. Let's make the construction of $Y$ acceptably smooth. 
+
+Observe $(\lambda x. x x)$, this term applies to itself would lead to the self-application again. This inspires us that a self-application of $\lambda x. ((x x) x)$ would lead to an infinite chain of self-application with increasing length. Just like how $Y$ applies to $f$  can lead to $f$ at the front; this one is just increasing at back. That means $\lambda x. (x (x x))$ would be increasing in the correct direction. Let's try to make the first $x$ into $f$ and see what's the result of one time self-apply. $(\lambda x. f (x x)) (\lambda x. f (x x)) \rightarrow_\beta f ((\lambda x. f (x x)) (\lambda x. f (x x)))$ surprisingly what we want -- For a fixed $f$, we constructed its fixpoint w.r.t $=_\beta$, which means $\Delta =_{\beta} f \Delta$. Let's try to abtract $\Delta$ to depend on $f$, which just mean $\mathbf{Y} := \lambda f. ((\lambda x. f (x x)) (\lambda x. f (x x)))$
+
+Without any background of Functional Programming, you would say "oh! Beautiful! Any lambda term would have a fix point now, so what?". The point is, we can use recursive equation to represent function/computation/lambda term now. For example, we know factorial $$n! :=  n > 0 ? n \times (n-1)! : 1$$
+
+where $! : \mathbb{N} \rightarrow \mathbb{N}$, can be easily represented by $!' := \lambda f. \lambda n. n > 0 ? n \times f(n-1) : 1$ and $! := \mathbf{Y}(!')$
+
+If you have read the little schemer, you would find out more behind -- about how $\mathbf{Y}$ cannot be used in a call-by-value language. It is easy to see that, the evaluator will just busy expanding $f$ instead of doing any application
+
+
