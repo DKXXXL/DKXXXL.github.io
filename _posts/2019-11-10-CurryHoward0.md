@@ -120,10 +120,26 @@ We have the famous fix point, $\mathbf{Y}$ combinator, where $Y f  =_{\beta} f(Y
 
 Observe $(\lambda x. x x)$, this term applies to itself would lead to the self-application again. This inspires us that a self-application of $\lambda x. ((x x) x)$ would lead to an infinite chain of self-application with increasing length. Just like how $Y$ applies to $f$  can lead to $f$ at the front; this one is just increasing at back. That means $\lambda x. (x (x x))$ would be increasing in the correct direction. Let's try to make the first $x$ into $f$ and see what's the result of one time self-apply. $(\lambda x. f (x x)) (\lambda x. f (x x)) \rightarrow_\beta f ((\lambda x. f (x x)) (\lambda x. f (x x)))$ surprisingly what we want -- For a fixed $f$, we constructed its fixpoint w.r.t $=_\beta$, which means $\Delta =_{\beta} f \Delta$. Let's try to abtract $\Delta$ to depend on $f$, which just mean $\mathbf{Y} := \lambda f. ((\lambda x. f (x x)) (\lambda x. f (x x)))$
 
-Without any background of Functional Programming, you would say "oh! Beautiful! Any lambda term would have a fix point now, so what?". The point is, we can use recursive equation to represent function/computation/lambda term now. For example, we know factorial $$n! :=  n > 0 ? n \times (n-1)! : 1$$
+Without any background of Functional Programming, you would say "oh! Beautiful! Any lambda term would have a fix point now, so what?". The point is, we can use recursive equation to represent function/computation/lambda term now. Generally speaking, a recurrence equation is (defining $f$) in a form of $f = G(f)$, and thus $f$ is actually a fixpoint of $G$, thus we can equivalently say $f = \mathbf{Y}(G)$. 
 
-where $! : \mathbb{N} \rightarrow \mathbb{N}$, can be easily represented by $!' := \lambda f. \lambda n. n > 0 ? n \times f(n-1) : 1$ and $! := \mathbf{Y}(!')$
+For example, we know factorial $$n! :=  n > 0 ? n \times (n-1)! : 1$$
+where $! : \mathbb{N} \rightarrow \mathbb{N}$, can be easily represented by $!' := \lambda f. \lambda n. n > 0 ? n \times f(n-1) : 1$ and $! := \mathbf{Y}(!')$. Under this definition, $n! =_ \beta Y(!')(n) =_ \beta ((!')(Y(!')))(n) =_ \beta n>0?n \times Y(!')(n-1) : 1 =_ \beta n>0? n \times (n-1)! : 1$
 
-If you have read the little schemer, you would find out more behind -- about how $\mathbf{Y}$ cannot be used in a call-by-value language. It is easy to see that, the evaluator will just busy expanding $f$ instead of doing any application
+If you have read the little schemer, you would find out more behind -- about how this $\mathbf{Y}$ cannot be used in a call-by-value language. Taking the above definition as example, when evaluating, it is the $Y(!')$ will keep being (infinitely) expanded. But we have a reduction way (i.e. there is a terminating term beta-equivalent to this term), it is just the normally used call-by-value, (evaluate the argument and the function first before application) cannot lead to that.
 
+### Recursion Theory 
+
+To show the expressibility, the book showed that every recursion/computable function is expressable in $\lambda$ term. But of course, we are not going to introduce other primitive datat type other than $\Lambda$ term, (e.g. natural number), thus we will use church numeral (the above) as 'natural number'.
+
+> A numeric function $f : \mathbb{N}^m \rightarrow \mathbb{N}$ is __$\lambda$-definable__ if there is a $\Lambda$ term $F^\lambda$ s.t. $$F^\lambda (c_ {n_ 1}, c_ {n_ 2}..., c_ {n_ m}) = c_{f(n_ 1, .. n_ m)}$$
+
+Because the class of *recursive functions* are inductively defined, we can again use induction to show that all the *recursive functions* are $\lambda$-definable.
+
+***
+Recall Rice Theorem: 
+> For a *nontrivial* set of  language $P$, the set $\{\langle M \rangle: L(M) \in P \}$ is undecidable
+> 
+> where *nontrivial* means $\exists M_1, M_2$ s.t. $L(M_1) \in P, L(M_2) \not \in P$
+
+Here $M$ is turing machine, $\langle M \rangle$ is the encoding of $M$.
 
