@@ -143,3 +143,41 @@ Recall Rice Theorem:
 
 Here $M$ is turing machine, $\langle M \rangle$ is the encoding of $M$.
 
+
+To formally prove the above problem, we just need half semster of any standard computability course. I remember that the idea of mapping reduction and at least one undecidable problem (proved by diagonal argument) is necessary.
+
+We will have the Kleene's approach as below.
+
+> Let $\langle - , - \rangle: \mathbb{N}^2 \rightarrow \mathbb{N}$ be a bijective, recursive function,
+> 
+> With which we will have $\# : \Lambda^- \rightarrow \mathbb{N}$ by defining $\#(v_i) = \langle 0, i \rangle$, $\#(\lambda x. M) = \langle 2, \langle \# (x), \# (M) \rangle \rangle$ and $\#(M N) = \langle 3, \langle \# (M), \# (N) \rangle \rangle$
+
+And we can extend to define on $\Lambda$, thus for $M \in \Lambda$, $\# (M)$ be the least possible $\# (M')$ s.t. $M' \in M$. 
+
+Right before the Rice Theorem, we need these definitions:
+> For $A \subseteq \Lambda$
+> 
+> * $A$ is *closed under* $=_ \beta$ when [ if $x \in A, x =_ \beta y$ then $y \in A$ ]
+> * $A$ is *nontrivial* if $A$ is not empty or $\Lambda$
+> * $A$ is *recursive* if $\{\#(M) : M \in A\}$ is recursive (i.e.) there is a $\Lambda$ term $F$ that will always terminate with $c_ 0, c_ 1$ s.t. $F \#(x) =_ \beta c_ 1 \Leftrightarrow x \in A$
+> 
+> We claim that if $A$ is closed under $=_ \beta$ and nontrivial, then $A$ is not recursive. 
+
+Proof, basically a copy from the book. I was having a hard time to come up one proof by myself, even the Rice Theorem phrased in Turing Machine.
+
+
+
+Assume $A$ is recursive, then we know $\{M : M c_ {\#(M)} \in A\}$ is also recursive (using the same 'checking' $\Lambda$ term). Thus we know there is $F \in \Lambda$ s.t. $x \in B \Leftrightarrow F \#(x) =_ \beta c_ 1$.
+
+We take $M_0 \in \Lambda \backslash A, M_1 \in A$ and 
+
+Now we make a [$G := \lambda x. \text{if zero? } Fx \text{ then }M_1 \text{ else } M_0$].
+
+If $G  c_ {\#(G)} \in A$, then $G  c_ {\#(G)} =_ \beta M_0 \not \in A$;
+
+If $G  c_ {\#(G)} \not \in A$, then $G  c_ {\#(G)} =_ \beta M_1 \in A$
+
+A contradiction. $\blacksquare$
+
+There is a strong similarity between this proof and the proof of the halting problem. This technique is called diagonal argument. We can have halting problem (phrased in $\lambda$-term) easily proved by this theorem.
+
