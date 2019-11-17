@@ -57,32 +57,32 @@ In other words,
     <summary>Proof.</summary>
     <p>
 
+Induction on $A \rightarrow_l B$ for proposition :  <p> </p>
+
+For arbitrary $A, B$ if $A \rightarrow_l B$, and for arbitrary $C$ and if $A \rightarrow_l C$, then there exists $D$ s.t. $B \rightarrow_l D$ and $C \rightarrow_l D$. <p> </p>
+
+Base Case: When $B \equiv A$, then we know exists the $C$ s.t. $A \rightarrow_l C$ and $C \rightarrow_l C$. <p> </p>
+
+Inductive Step: Assume I.H. holds for some fixed $P \rightarrow_l P'$. When $\lambda x. P \rightarrow_l \lambda x.P'$ and $\lambda x.P \rightarrow_l C$. By the definition of $\rightarrow_l$, we know either $C \equiv \lambda x. P$, which would be a trivial case; or $C \equiv \lambda x. C'$ in a lambda form. (Since $\equiv$ means same equivalence class, thus the binding variable doesn't matter). And also, $P \rightarrow_l C'$ again by definition. Thus by I.H., there is $D'$ thus $C' \rightarrow_l D'$ and $P \rightarrow D'$ and thus $\lambda x. D'$ is what desired. <p> </p>
+
+
+Inductive Step 2: Assume I.H. holds for some fixed $P \rightarrow_l P'$ and for some fixed $Q \rightarrow_l Q'$. When $P Q \rightarrow_l P' Q'$ and $P Q \rightarrow_l C$. There are only two cases how $C$ is formed. <br>
+
+Case 2.a: If $C \equiv C_ 0 C_ 1$ and we also get $P \rightarrow_l C_ 0$ and also $Q \rightarrow_l C_ 1$. Now by I.H., everything is trivial. <br>
+
+Case 2.b: If $C \equiv P''[x:=Q'']$ for some $P'', Q'', x$. Thus we know $P \equiv \lambda x. P_0$ and $P_0 \rightarrow_l P'', Q \rightarrow_l Q''$. Thus $P \rightarrow_l \lambda x. P''$. Thus By I.H., there is $C_P$ s.t. $\lambda x. P'' \rightarrow_l C_P$ and $P' \rightarrow_l C_P$. and also $C_Q$ merges $Q', Q''$. <br>
+
+Thus $C \equiv P''[x:=Q''] \rightarrow_l C_P C_Q$ (by rule 3); and $P' Q' \rightarrow C_P C_Q$. <p> </p>
+
+
+Inductive Step 3: Assume I.H. holds for some fixed $P \rightarrow_l P'$ and for some fixed $Q \rightarrow_l Q'$.  When $(\lambda x.P) Q \rightarrow_l P'[x:= Q']$ and $(\lambda x.P) Q \rightarrow_l C$ for some $C$. <br>
+
+Case 3.a: If $C \equiv C_0 C_1$ where $\lambda x.P \rightarrow_l C_0$ and $Q \rightarrow_l C_1$. Thus $C_0 \equiv \lambda x. C_0'$. and $P \rightarrow_l C_0'$. Thus we have $C_P$ merges $P'$ and $C_0'$. and $C_Q$ merges $Q'$ and $C_1$. Thus $C_0 C_1 \equiv (\lambda x. C_0' )C_1 \rightarrow_l C_p[x:= C_Q]$ (by rule 3) and $C_P[x:=C_Q]$ by the below lemma.<br>
+
+Case 3.b: If $C \equiv P''[x:=Q'']$.<p> </p>
+
     </p>
 </details>
-
-Induction on $A \rightarrow_l B$ for proposition :
-
-For arbitrary $A, B$ if $A \rightarrow_l B$, and for arbitrary $C$ and if $A \rightarrow_l C$, then there exists $D$ s.t. $B \rightarrow_l D$ and $C \rightarrow_l D$.
-
-Base Case: When $B \equiv A$, then we know exists the $C$ s.t. $A \rightarrow_l C$ and $C \rightarrow_l C$.
-
-Inductive Step: Assume I.H. holds for some fixed $P \rightarrow_l P'$. When $\lambda x. P \rightarrow_l \lambda x.P'$ and $\lambda x.P \rightarrow_l C$. By the definition of $\rightarrow_l$, we know either $C \equiv \lambda x. P$, which would be a trivial case; or $C \equiv \lambda x. C'$ in a lambda form. (Since $\equiv$ means same equivalence class, thus the binding variable doesn't matter). And also, $P \rightarrow_l C'$ again by definition. Thus by I.H., there is $D'$ thus $C' \rightarrow_l D'$ and $P \rightarrow D'$ and thus $\lambda x. D'$ is what desired. 
-
-
-Inductive Step 2: Assume I.H. holds for some fixed $P \rightarrow_l P'$ and for some fixed $Q \rightarrow_l Q'$. When $P Q \rightarrow_l P' Q'$ and $P Q \rightarrow_l C$. There are only two cases how $C$ is formed.
-
-Case 2.a: If $C \equiv C_ 0 C_ 1$ and we also get $P \rightarrow_l C_ 0$ and also $Q \rightarrow_l C_ 1$. Now by I.H., everything is trivial.
-
-Case 2.b: If $C \equiv P''[x:=Q'']$ for some $P'', Q'', x$. Thus we know $P \equiv \lambda x. P_0$ and $P_0 \rightarrow_l P'', Q \rightarrow_l Q''$. Thus $P \rightarrow_l \lambda x. P''$. Thus By I.H., there is $C_P$ s.t. $\lambda x. P'' \rightarrow_l C_P$ and $P' \rightarrow_l C_P$. and also $C_Q$ merges $Q', Q''$.
-
-Thus $C \equiv P''[x:=Q''] \rightarrow_l C_P C_Q$ (by rule 3); and $P' Q' \rightarrow C_P C_Q$. 
-
-
-Inductive Step 3: Assume I.H. holds for some fixed $P \rightarrow_l P'$ and for some fixed $Q \rightarrow_l Q'$.  When $(\lambda x.P) Q \rightarrow_l P'[x:= Q']$ and $(\lambda x.P) Q \rightarrow_l C$ for some $C$. 
-
-Case 3.a: If $C \equiv C_0 C_1$ where $\lambda x.P \rightarrow_l C_0$ and $Q \rightarrow_l C_1$. Thus $C_0 \equiv \lambda x. C_0'$. and $P \rightarrow_l C_0'$. Thus we have $C_P$ merges $P'$ and $C_0'$. and $C_Q$ merges $Q'$ and $C_1$. Thus $C_0 C_1 \equiv (\lambda x. C_0' )C_1 \rightarrow_l C_p[x:= C_Q]$ (by rule 3) and $C_P[x:=C_Q]$ by the below lemma.
-
-Case 3.b: If $C \equiv P''[x:=Q'']$.
 
 To derive a proof in this case won't be hard -- the point is how does the definition $\rightarrow_l$ come up? A superset of $\rightarrow_\beta$ but a subset of its transtive closure, which also supports diamond property. You will see that the reasoning above is totally in a wrong direction -- the researcher should first spot the fact that diamond property will be inherited by the transitive closure; and then attempt to construct the $\rightarrow_l$ from its specification. 
 **Something is missing here in this context.**  
@@ -150,16 +150,16 @@ We will have the Kleene's approach as below.
 
 > Let $\langle - , - \rangle: \mathbb{N}^2 \rightarrow \mathbb{N}$ be a bijective, recursive function,
 > 
-> With which we will have $\# : \Lambda^- \rightarrow \mathbb{N}$ by defining $\#(v_i) = \langle 0, i \rangle$, $\#(\lambda x. M) = \langle 2, \langle \# (x), \# (M) \rangle \rangle$ and $\#(M N) = \langle 3, \langle \# (M), \# (N) \rangle \rangle$
+> With which we will have $\\# : \Lambda^- \rightarrow \mathbb{N}$ by defining $\\#(v_i) = \langle 0, i \rangle$, $\\#(\lambda x. M) = \langle 2, \langle \\# (x), \\# (M) \rangle \rangle$ and $\\#(M N) = \langle 3, \langle \\# (M), \\# (N) \rangle \rangle$
 
-And we can extend to define on $\Lambda$, thus for $M \in \Lambda$, $\# (M)$ be the least possible $\# (M')$ s.t. $M' \in M$. 
+And we can extend to define on $\Lambda$, thus for $M \in \Lambda$, $\\# (M)$ be the least possible $\\# (M')$ s.t. $M' \in M$. 
 
 Right before the Rice Theorem, we need these definitions:
 > For $A \subseteq \Lambda$
 > 
 > * $A$ is *closed under* $=_ \beta$ when [ if $x \in A, x =_ \beta y$ then $y \in A$ ]
 > * $A$ is *nontrivial* if $A$ is not empty or $\Lambda$
-> * $A$ is *recursive* if $\{\#(M) : M \in A\}$ is recursive (i.e.) there is a $\Lambda$ term $F$ that will always terminate with $c_ 0, c_ 1$ s.t. $F \#(x) =_ \beta c_ 1 \Leftrightarrow x \in A$
+> * $A$ is *recursive* if $\{\\#(M) : M \in A\}$ is recursive (i.e.) there is a $\Lambda$ term $F$ that will always terminate with $c_ 0, c_ 1$ s.t. $F \\#(x) =_ \beta c_ 1 \Leftrightarrow x \in A$
 > 
 > We claim that if $A$ is closed under $=_ \beta$ and nontrivial, then $A$ is not recursive. 
 
@@ -167,15 +167,15 @@ Proof, basically a copy from the book. I was having a hard time to come up one p
 
 
 
-Assume $A$ is recursive, then we know $\{M : M c_ {\#(M)} \in A\}$ is also recursive (using the same 'checking' $\Lambda$ term). Thus we know there is $F \in \Lambda$ s.t. $x \in B \Leftrightarrow F \#(x) =_ \beta c_ 1$.
+Assume $A$ is recursive, then we know $\{M : M c_ {\\#(M)} \in A\}$ is also recursive (using the same 'checking' $\Lambda$ term). Thus we know there is $F \in \Lambda$ s.t. $x \in B \Leftrightarrow F \\#(x) =_ \beta c_ 1$.
 
 We take $M_0 \in \Lambda \backslash A, M_1 \in A$ and 
 
 Now we make a [$G := \lambda x. \text{if zero? } Fx \text{ then }M_1 \text{ else } M_0$].
 
-If $G  c_ {\#(G)} \in A$, then $G  c_ {\#(G)} =_ \beta M_0 \not \in A$;
+If $G  c_ {\\#(G)} \in A$, then $G  c_ {\\#(G)} =_ \beta M_0 \not \in A$;
 
-If $G  c_ {\#(G)} \not \in A$, then $G  c_ {\#(G)} =_ \beta M_1 \in A$
+If $G  c_ {\\#(G)} \not \in A$, then $G  c_ {\\#(G)} =_ \beta M_1 \in A$
 
 A contradiction. $\blacksquare$
 
