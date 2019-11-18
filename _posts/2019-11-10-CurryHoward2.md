@@ -23,4 +23,20 @@ I think *Curry* style shows a more non-intrusive beauty in its definition, howev
 Anyway, if *Church* is really weaker, it comes as a good price -- the typing is unique up to $\beta$-equivalence.
 
 ## Easy Property
-Both *Church* and *Curry* have the following property.
+Both *Church* and *Curry* have the following auxilary property.
+> **Substituion lemma**: 
+> * $\Gamma, x: T \vdash M : \tau$ and $\Gamma \vdash t : T$ $\Longrightarrow$ $\Gamma \vdash M[x:= t] : \tau$
+> * $\Gamma \vdash M : \tau$ $\Longrightarrow$ $\Gamma[\alpha := T] \vdash M : \tau [\alpha := T]$
+> 
+> **Free Variable Lemma**, Manipulation of the context solely depends on free vars:
+> * Extension of context will not change term's type
+> * Free variables of the typed term must be in the domain of the context
+> * Contracting context to only free variables preserving typing of the term.
+> 
+> **Generation Lemma**: The typing rules are 'reversible'.
+> 
+> **Subject Reduction (Preservation)**:  $\beta$-Reduction preserves type. 
+
+*Church* also has the **Uniqueness Property**, where each term can only have one type; and the type is unique up to $\beta$-equivalence.
+
+## Weak Normalization
