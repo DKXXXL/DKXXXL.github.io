@@ -40,3 +40,9 @@ Both *Church* and *Curry* have the following auxilary property.
 *Church* also has the **Uniqueness Property**, where each term can only have one type; and the type is unique up to $\beta$-equivalence.
 
 ## Weak Normalization
+
+
+## Strong Normalization
+
+
+## Expressibility
