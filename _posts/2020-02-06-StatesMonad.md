@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "States Monad for non-Functional Guy"
+date:   2019-09-23 00:56:11 -0400
+categories: Programming
+---
+
 # State Monad motivation for non-functional guy
 
 A Monad is a concept from category theory. Basically a mathematical set with certain axiom(structure) imposed on that.
