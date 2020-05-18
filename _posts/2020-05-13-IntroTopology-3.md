@@ -88,7 +88,7 @@ $\Large \text{Defintions}$ Let $X$ be a topological space, and $A \subseteq X$ a
 $\Large \text{Defintions}$ Let $X$ be a topological space , $x_1,x_2,...$ a sequence of points in $X$, we say $x \in X$ is **a limit of a sequence $x_1, ...$** iff for every nightbourhood $U$ of $x$ there exissts an $N \in \natnums$ s.t. $n \ge N$ implies $x_n \in U$.
 
 
-in $\reals^n$, limit point has only one point; but in topology no. But true in metric space.
+in $\reals^n$, converging sequence only has one limit; but in topology no. But true in metric space.
 
 $\Large \text{Theorem}$ Let $X, d_X$ be **a metric space** and $x_1,..$ a sequence with $x_i \rightarrow x$ and $x_i \rightarrow y$
 
