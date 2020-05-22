@@ -19,6 +19,8 @@ $\LARGE \text{Theorem:}$ (characteristic property of subsapace topology)
    1. $(P_s):$ For any topological space $Y$, a map $f : Y \rightarrow S$ is continuous if and only if the composite map $i_S \circ f : Y \rightarrow X$ is continuous.
 2. If $S \subseteq X$ is any subset where $X$ is a topological space, then the only topology on $S$ that satisifies $(P_s)$ is subspace topology.
 
+![](/assets/img/2020-05-21-21-42-50.png)
+
 Universal mapping property!!!
 
 $\text{Proof.}$  
@@ -109,3 +111,5 @@ Let $X_1,...,X_n$ be topological spaces.
 1) The product topology on $X_1 \times ... X_n$ satisfies the following:
    1) (P_s) For any topological space $Y$, a map $f: Y \rightarrow X_1 \times ... X_n$ is continuous iff $f_i = \pi_i \circ f$ ($i$-th component) is continuous for each $i$.
 2) The product topology on $X_1 \times ... X_n$ is the only topology on $X_1 \times ... X_n$  that satisfies this property.
+
+![](/assets/img/2020-05-21-21-45-25.png)
