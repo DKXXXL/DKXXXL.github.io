@@ -79,7 +79,7 @@ Let $(X, T)$ be a topology given by open sets. (here we precisely say $T$ are op
 Consider $A \subseteq X$ any subset.
 
 $\large \text{Definition}$
-1) **Interior** : The interior of $A$ is defined as $A'  := \bigcup_{U \in T, U \subseteq A}U $   
+1) **Interior** : The interior of $A$ is defined as $A'  := \bigcup_{U \in T, U \subseteq A}U$   
 * *Notice: this is open because arbitrary union of open set is open*
 
 1) **Closure** : The Closure of $A$ is defined as $\bar{A} := \bigcap_{\text{C is closed, }A \subseteq C} C$ 
@@ -92,7 +92,7 @@ the first is strict iff $A$ is open; the second is strict iff $A$ is closed
 
 There are things very close to $A$ but not inside A
 
-3) **Exterior** : Let $A \subseteq X$, we define its exterior as $Ext(A) := (\bar{A})^c = X \backslash \bar{A}$ *Notice: Because $\bar{A}$ is closed then $(\bar{A})^c is open thus $Ext(A)$ is open$*
+3) **Exterior** : Let $A \subseteq X$, we define its exterior as $Ext(A) := (\bar{A})^c = X \backslash \bar{A}$ *Notice: Because $\bar{A}$ is closed then $(\bar{A})^c$ is open thus $Ext(A)$ is open$*
 
 What are those not inside exterior or interior?
 

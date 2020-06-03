@@ -36,12 +36,12 @@ The problem is that we might never land in an open set we want.
 
 $\text{Continuity is far from openness... we will see example}$
 
-$\Large \text{Proposition}$: $f : X \rightarrow Y$ iff $V \subseteq Y$ closed, $f^{-1}(V) \subseteq X$ is closed.
+$\Large \text{Proposition}$: $f : X \rightarrow Y$ is continuous iff $V \subseteq Y$ closed, $f^{-1}(V) \subseteq X$ is closed.
 
 Proof. Suppose $f$ is continous. 
-Now Pick $c \subseteq Y$ closed, then $V^c$ is open, then $f^{-1}(V^c) = f^{-1}(C)^c$, but $f^{-1}(V)$ is open; hence $f^{-1}(C)$ is closed.
+Now Pick $c \subseteq Y$ closed, then $V^c$ is open, then $f^{-1}(V^c) = f^{-1}(V)^c$, but $f^{-1}(V)$ is open; hence $f^{-1}(V)$ is closed.
 
-Suppose $f^{-1}(C) \subseteq X$ is closed, then just inverse the step.
+Suppose $f^{-1}(V) \subseteq X$ is closed, then just inverse the step.
 
 The pull-out of complement is justifiable, easy proof. $\square$
 
