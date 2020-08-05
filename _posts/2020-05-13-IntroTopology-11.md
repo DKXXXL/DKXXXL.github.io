@@ -122,3 +122,5 @@ Let $\{U_\alpha\}_\alpha$ a cover of eucidean neighbourhood (of dim 2).
 $\xi_\alpha$ is homeomoprhism from $X$ to euclidean space.
 
 $\psi$ is the one that glues
+
+
