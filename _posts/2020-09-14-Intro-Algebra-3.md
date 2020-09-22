@@ -53,7 +53,7 @@ categories: Math
       * (we write $H <| G$ for normal subgroup)
   * The consequence is that the set of cosets become a group
   * they became a group iff it is a normal subgroup
-* The set of left cosets is denoted $G / H$, right is $G \backslash H$
+* The set of left cosets is denoted $G / H$, right is $H \backslash G$
 * If $H <| G$, $G / H = G \backslash H$ is a group, the quotient group
 * e.g. $\ints |> n\ints$, $Z/ nZ = \{nZ, 1+ nZ, ....\}$ addtion modulo $n$.
 
