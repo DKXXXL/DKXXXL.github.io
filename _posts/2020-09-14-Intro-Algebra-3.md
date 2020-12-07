@@ -10,7 +10,7 @@ categories: Math
   * given $x, y \in G$, either $xH = yH$ or totally disjoint
 * $G = \sqcup_{i} x_i H$
 * if we know $|H|$ and $|G|$
-  * then number of cosets is $\frac{|G|}{|H|} = [G : H]$, it is cadinality divison
+  * then number of cosets is $\frac{|G|}{|H|} = [G : H]$, it is sometimes not cadinality divison, this is called **index**
     * e.g. $G = \ints, H = n \ints$; $[G: H] = n$
 
 ***

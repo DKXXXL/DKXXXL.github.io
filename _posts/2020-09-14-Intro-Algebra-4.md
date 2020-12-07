@@ -64,12 +64,12 @@ categories: Math
       * (1 2 3 4) and (1 2 4 3) both generate 4 elements
       * (3 4) is a 2-cycle
     * $a_i \mapsto a_{i+1}, a_k \mapsto a_1$
-    * (a,b) two cycle = transportation
-    * (1 2 3)(3 4) = (1 2 3 4)
+    * (a,b) two cycle = transposition
+    * (1 2 3)(3 4) = (1 2 4 3)
     * (3 4)(1 2 3) = (1 2 3 4)
     * not disjoint, don't expect commute
     * Any permutation can be written as a product of dijoint cycles (unqiue except for rotational and order of disjoint cycles)
-    * (1 2 3) = (3 2 1)
+    * (1 2 3) = (3 1 2) = (2 3 1)
     * not unique for non-disjoint cycles
     * same permutation can be written in more than 1 way
     * a $k$-cycle has order $k$
