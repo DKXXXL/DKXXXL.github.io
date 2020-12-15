@@ -122,3 +122,16 @@ Nov. 17 : 2nd part 40min
 ### THeorem： Chvatal's THeorem for Hamiltonian Path (7.2.17)
 * proof by reduction to Chvatal's THeorem.
 * Nov.19, 29:26
+
+
+# Exercises:
+
+### 7.2.7
+* impossible. as that means there is a Hamiltonian Path from corner to center
+  * we add an edge between corner and center, then we get a Hamiltonian cycle
+  * Assume this is Hamiltonian, we remove first level 4 blocks
+    * second level 5 blocks
+    * third level 4 blocks.
+    * then we will have remaining 27-13 = 14 vertices/components > 13 vertices
+    * a contradiction to the necessary condition
+  * you can also check the standard answer
