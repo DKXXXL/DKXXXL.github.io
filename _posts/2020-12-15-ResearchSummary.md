@@ -57,6 +57,7 @@ Before diving in to the two details, we need some convention setup:
 2. But a mathematical model is not enough, because it is not computable. We need a syntactical relative complement
 3. It is claimed that, 
    1. $\llbracket C^{\ni x} \land C^{\not \ni x} \rrbracket_x = \llbracket \overline{C^{\ni x}} \land C^{\not \ni x} \rrbracket$ (partially proved)
+      1. yes, RHS (syntactic relative complement) will introduce disjunction inside,
    2. syntactical shrinking (about $x$) of $C^{\ni x} \land C^{\not \ni x}$ is actually just $C^{\not \ni x}$ (partially proved)
       1. semantical shrinking (about $x$) of a state $s$ can be modeled 
          1. to be the range of $\llbracket s \rrbracket$ excluding $x$
