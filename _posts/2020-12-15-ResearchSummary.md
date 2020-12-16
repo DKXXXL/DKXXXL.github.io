@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "miniKanren-Summary"
+title:  "Summary on miniKanren research for Fall"
 date:   2020-12-15 00:56:11 -0400
 categories: CS miniKanren
 ---
