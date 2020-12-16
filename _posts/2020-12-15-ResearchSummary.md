@@ -38,8 +38,8 @@ Before diving in to the two details, we need some convention setup:
      * $C^{\ni x}$ as the conjunction that each atomic propositions has $x$ appearing
      * $C^{\not \ni x}$  as the conjunction that each atomic proposition has no $x$ appearing
      * and thus $C = C^{\ni x} \land C^{\not \ni x}$
-3. For goal $G$, and state $s$, we will use $\llbracket G \rrbracket$ and $\llbracket s \rrbracket$ to indicate their modeling in the (elements /ground terms of) lisp universe $\mathbb{L}$ (maybe actually $\mathbb{L}^n$ when multi-var involved)
-     * Say $\llbracket \texttt{(== x y)} \rrbracket = \{(x,x) \in \mathbb{L}^2\}$ 
+3. For goal $G$, and state $s$, we will use $⟦ G ⟧$ and $⟦ s ⟧$ to indicate their modeling in the (elements /ground terms of) lisp universe $\mathbb{L}$ (maybe actually $\mathbb{L}^n$ when multi-var involved)
+     * Say $⟦ \texttt{(== x y)} ⟧ = \{(x,x) \in \mathbb{L}^2\}$ 
 
 ## Relative Complement + Shrinking
 
@@ -56,8 +56,8 @@ Before diving in to the two details, we need some convention setup:
    4. there are some technical details about above involved/unverified/intuitvely correct
 2. But a mathematical model is not enough, because it is not computable. We need a syntactical relative complement
 3. It is claimed that, 
-   1. $\llbracket C^{\ni x} \land C^{\not \ni x} \rrbracket_x = \llbracket \overline{C^{\ni x}} \land C^{\not \ni x} \rrbracket$ (partially proved)
+   1. $⟦ C^{\ni x} \land C^{\not \ni x} ⟧_x = ⟦ \overline{C^{\ni x}} \land C^{\not \ni x} ⟧$ (partially proved)
       1. yes, RHS (syntactic relative complement) will introduce disjunction inside,
    2. syntactical shrinking (about $x$) of $C^{\ni x} \land C^{\not \ni x}$ is actually just $C^{\not \ni x}$ (partially proved)
       1. semantical shrinking (about $x$) of a state $s$ can be modeled 
-         1. to be the range of $\llbracket s \rrbracket$ excluding $x$
+         1. to be the range of $⟦ s ⟧$ excluding $x$
