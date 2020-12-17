@@ -39,7 +39,7 @@ Before diving in to the two details, we need some convention setup:
      * $C^{\not \ni x}$  as the conjunction that each atomic proposition has no $x$ appearing
      * and thus $C = C^{\ni x} \land C^{\not \ni x}$
 3. For goal $G$, and state $s$, we will use $⟦ G ⟧$ and $⟦ s ⟧$ to indicate their modeling in the (elements /ground terms of) lisp universe $\mathbb{L}$ (maybe actually $\mathbb{L}^n$ when multi-var involved)
-     * Say $⟦ \texttt{(== x y)} ⟧ = \{(x,x) \in \mathbb{L}^2\}$ 
+     * Say $⟦ \texttt{(== x y)} ⟧ =$ {$(x,x) \in \mathbb{L}^2$} 
 
 ## Relative Complement + Shrinking
 
@@ -47,9 +47,9 @@ Before diving in to the two details, we need some convention setup:
    1. like a formal definition of $\mathbb{L}$ and 
    2. a choice/domain function $f_x : \mathbb{L}^n \rightarrow 2^{\mathbb{L}}$ indicating the domain $x$ can take when other (before/shadowing) $n$ vars are fixed 
       * say $\exists y \forall x. x \neq y$ will be interpreted as $f_x$, 
-        * where we know $f_x(1) = \{x \neq 1 : x \in {\mathbb{L}}\}$
+        * where we know $f_x(1) =$ {$x \neq 1 : x \in {\mathbb{L}}$}
    3. This defines semantically relative complement (on $x$) of $S$ as $S_x$ :
-        * $S_x = \{(x_1,x_2,..,x_n,x): x \in f_x(x_1,..,x_n)^{cwnp}\}$
+        * $S_x =$ {$(x_1,x_2,..,x_n,x): x \in f_x(x_1,..,x_n)^{cwnp}$}
         * $X^{cwnp}$ is just complement of $X$ when $X \neq \emptyset$ 
           * otherwise still empty
         * note here $S$ is just a denotation of state or a goal
