@@ -67,12 +67,54 @@ syn [] asmpt utched state g = #f -- or suspend for further
 syn (a \/ b):rem ... = 
   -- unification (a \/ b) with g and then 
   -- note that we are pattern matching! and since g doesn't change, we won't invoke start! (otherwise duplicate searching)
-  (bind (syn (a:[]) ...) to (syn b:rem ...))
-  (bind (syn (b:[]) ...) to (syn a:rem ...))
+(mplus 
+  (bind (syn (a:[]) ...) to (syn b:rem ...)) -- i.e. the ones satisfy the first will have to satisfy the second
+  -- (bind (syn (b:[]) ...) to (syn a:rem ...))
   (syn rem ...)
+)
 ```
 
 **The only case when `syn` invoke `start` again (to start semantic computation again) is when `g` changed. The only situation that happens is during constructive implication, because we start to prove the**
+
+constructive implication is actually like disjunction. (But I haven't thought through)
+
+```Haskell
+
+syn (a -> b):rem ... = 
+  -- unification (a -> b) with g and then 
+(mplus
+  (bind (syn b:[] utched state g) (start utched _ a))
+  (syn rem utched state g)
+)
+```
+
+
+Things become harder to pattern match for existential quantifier and universal quantifier
+
+For universal Quantifier, we will just instantiate a new logical variable.
+
+
+For existential quantifier
+
+```Haskell
+
+syn (∃a. b):rem ...
+  -- consider the assumptions are actually a list of pair of (proof-term, goal), say this one is k
+  -- we will construct b[pi_1(k)/a], so...
+  syn b[pi_1(k)/a]:rem ...
+```
+
+For example: For a given `t : ∃a. R(a)`, where `t` is a proof-term for proof-term generation, we will introduce another proof-term construct, pair projection `pi_1`, then we will have in the assumption base `R(pi_1(t))`. 
+
+This `pi_1(t)` will be considered as a literal/constant and thus can only unifies with itself *(or of course another logical variable)*. Then for example, ($A$ :=) `(\exists a. R(a)) cimpl (\exists x. R(x))` can be solved.
+
+However, the bad case come when the goal is `fresh (X) [ (\exists a. R(a)) cimpl R(X) ]`, it will falsely solve this goal while the goal is unsolvable. It will consider this as the same as the above $A$. The reason behind is that the generated proof-term doesn't respect the lexical scoping -- it will generate something like `(pi_1(t), λ (t: exists a. R(a)). pi_2(t)) `. 
+
+The way to solve this is to introduce, for each logical variable, a term-variable domain (inside the state). The domain includes what proof-term-variable it can be unified to, for example the above `X` will have domain empty, and thus cannot unifies with `pi_1(t)`. In example $A$, `x` has domain `t` and thus unifiable with `pi_1(t)`
+
+Using this approach, we will fail to have the ability to have equality between two proof terms, for example `pi_1(t) == pi_1(s)` with different dependent pair. User should at least be able to express this equality, that means we might need to introduce a (intrinsic?hacking?) propositional equality $Eq(a,b)$, disguised as a atomic proposition. 
+
+
 
 ## Proof Term Generation
 
