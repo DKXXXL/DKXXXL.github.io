@@ -95,9 +95,7 @@ For universal Quantifier, we will just instantiate a new logical variable.
 
 
 For existential quantifier
-
 ```Haskell
-
 syn (∃a. b):rem ...
   -- consider the assumptions are actually a list of pair of (proof-term, goal), say this one is k
   -- we will construct b[pi_1(k)/a], so...
