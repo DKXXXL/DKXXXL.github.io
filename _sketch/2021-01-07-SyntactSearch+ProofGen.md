@@ -106,8 +106,29 @@ For example: For a given `t : ∃a. R(a)`, where `t` is a proof-term for proof-t
 
 This `pi_1(t)` will be considered as a literal/constant and thus can only unifies with itself *(or of course another logical variable)*. Then for example, ($A$ :=) `(\exists a. R(a)) cimpl (\exists x. R(x))` can be solved.
 
-However, the bad case come when the goal is `fresh (X) [ (\exists a. R(a)) cimpl R(X) ]`, it will falsely solve this goal while the goal is unsolvable. It will consider this as the same as the above $A$. The reason behind is that the generated proof-term doesn't respect the lexical scoping -- it will generate something like `(pi_1(t), λ (t: exists a. R(a)). pi_2(t)) `. 
+However, the bad case come when the goal is `fresh (X) [ (\exists a. R(a)) cimpl R(X) ]`, it will falsely solve this goal while the goal is unsolvable. It will consider this as the same as the above $A$. The reason behind is that the generated proof-term doesn't respect the lexical scoping -- it will generate something like `(pi_1(t), λ (t: exists a. R(a)). pi_2(t)) `.
 
+`(\exists a. R(a) /\ a == 1) `
+
+
+`forall x. (R(x) /\ x == 1)`
+
+`R(X)`
+
+`R(pi_1(t)) /\ pi_1(t) == 1`
+
+***
+
+syn (`forall x. R(x)` : remain) org st g =
+ fresh Y
+  syn (R(Y):remain) org st g
+
+syn (`exists x. R(x)` : remain) org st g =
+ forall Y
+  syn (R(Y):remain) org st g
+
+
+`R(1)`
 The way to solve this is to introduce, for each logical variable, a term-variable domain (inside the state). The domain includes what proof-term-variable it can be unified to, for example the above `X` will have domain empty, and thus cannot unifies with `pi_1(t)`. In example $A$, `x` has domain `t` and thus unifiable with `pi_1(t)`
 
 Using this approach, we will fail to have the ability to have equality between two proof terms, for example `pi_1(t) == pi_1(s)` with different dependent pair. User should at least be able to express this equality, that means we might need to introduce a (intrinsic?hacking?) propositional equality $Eq(a,b)$, disguised as a atomic proposition. 
