@@ -15,13 +15,13 @@ categories: Math
   * $\overline{3}$ is also a zero divisor
 
 ### Definition: Zero Divisior
-* If $a, b \in \Reals$, $a \neq 0 \neq b$
+* If $a, b \in R$, $a \neq 0 \neq b$
   * but $ab=0$
   * then they are called "zero divisors"
     * can't happen in a field
 
 ### Definition: integral domain
-* If $\reals$ is a commutative ring with identity that has 
+* If $R$ is a commutative ring with identity that has 
   * no zero divisors
     * then $R$ is called **integral domain**
       * because they look like integer
@@ -93,6 +93,9 @@ categories: Math
 ![](../assets/img/2020-12-07-16-21-36.png)
 ![](../assets/img/2020-12-07-17-02-57.png)
 ![](../assets/img/2020-12-07-17-03-17.png)
+
+### Definition : unit
+* A unit is a multiplicative invertible element
 
 ### definition: Quotient Rings
 * If $I$ is two-sided ideal in a commutative ring $R$

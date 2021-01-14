@@ -85,6 +85,7 @@ categories: Math
 ### Factor Theorem in field:
 * if $p(q) = 0$, then $p(x) = (x-q)r(x)$ for some $r(x) \in F[x]$
   * So $I = (x-q)F[x]$
+  * Factor Theorem is proved by Division Theorem (long division, and thus the reaminder has degree less than 0 and thus must be zero)
 
 ***
 * In $F[x]$, $\{p(x) \in F[x] : p(a) = p(b) = 0\} = (x-a)(x-b)F[x]$
