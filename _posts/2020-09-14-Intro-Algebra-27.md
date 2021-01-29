@@ -13,7 +13,7 @@ categories: Math
 * $RI = I$? $RI \subseteq I$
 * Basically $(r+I)(s+I) = rs +I$ is not set equality...
   * because RHS is not "surjectively mapped"
-* Basically $I = 3Z$, $(0+I)(0+I) \neq I$??
+* Basically say $I = 3Z \subset X$, $(0+I)(0+I) = 9Z \neq 3Z = I$??
 
 ## $Z[i]$ is Gaussian Integers
 * is a Euclidean domain, 
