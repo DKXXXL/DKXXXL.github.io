@@ -37,4 +37,5 @@ Moreover
       1. specifically if $S$ a commutative ring with unit and $\phi:R \rightarrow S$ is an injective homomorphism
          1. then there is $\Phi|_R = \phi$
          2. and $\Phi$ is injective somehow
+   2. ![](../assets/img/2021-02-01-14-55-47.png)
 ![](../assets/img/2021-01-14-17-02-23.png)
