@@ -6,12 +6,12 @@ categories: Math
 ---
 # Proof Term Generation during miniKanren search
 ## The reason we want it is because
-  1. when universal quantifier want to halt, the domain exhaustiveness is checked but miniKanren
-     * but we need to *PROVE* the exhaustiveness for proof-checker
-     * It is non-trivial in the other way as when checking exhaustiveness, we are **maturing all the stream** to conclude **that is unsatisfiable**
-     * note that due to the nature of relative-complement algorithm, we will have
-  2. It also gives a proof on implication (of quantifier-free statement), as negation of unsatisfiable means validity.    
-     1. This is helpful for proof-term generation for several algorithm like ToDNF, ToAssymetric (that will transform a state into DNF or assymetrical form). Because the algorithm itself is too mechanical so maybe an automatic searching of proof for them is more engineering friendly
+1. when universal quantifier want to halt, the domain exhaustiveness is checked but miniKanren
+   * but we need to *PROVE* the exhaustiveness for proof-checker
+   * It is non-trivial in the other way as when checking exhaustiveness, we are **maturing all the stream** to conclude **that is unsatisfiable**
+   * note that due to the nature of relative-complement algorithm, we will have
+2. It also gives a proof on implication (of quantifier-free statement), as negation of unsatisfiable means validity.    
+   * This is helpful for proof-term generation for several algorithm like ToDNF, ToAssymetric (that will transform a state into DNF or assymetrical form). Because the algorithm itself is too mechanical so maybe an automatic searching of proof for them is more engineering friendly
 
 ## Elaborator as part of proof checker
 
