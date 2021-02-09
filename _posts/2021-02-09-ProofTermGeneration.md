@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Proof Term Generation on miniKanren"
-date:   2020-05-06 00:56:11 -0400
+date:   2021-02-09 00:56:11 -0400
 categories: Math
 ---
 
