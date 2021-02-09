@@ -64,3 +64,4 @@ You should notice that, the above two features should somehow be unified but I c
 1. We will need to extend the vanilla miniKanren (with type-constraint/inequality) (but without universal quantifier) to handle falsification proof-term generation on quantifier-free statement
    1. as elaborator for proof-term checker
 2. We will need to extend the miniKanren (with for-all) to have proof-term information on each generated state
+   1. we might need to do this for vanilla miniKanren as well
