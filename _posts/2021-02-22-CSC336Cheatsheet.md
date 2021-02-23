@@ -94,6 +94,14 @@ or $j − i > u$.
   * Choleski factorization : For symmetric positive matrix $A$
     * $A =  LDL^T = (LD^{\frac{1}{2}})(LD^{\frac{1}{2}})^T = CC^T$
     * $C$ here as Choleski factor
+* Pivot Pivoting: At the $k$-th GE step, before the multipliers at column $k$, rows $k + 1, ... , n,$ are computed, a search along the $k$th column from row $k$ to row $n$ is performed, to identify the largest in absolute value element.
+  * that element becomes pivot and we apply permutation matrix to reorder the the matrix
+* Row pivoting: reorder rows of the matrix. $(P_r A = LU, P_r$ permutation matrix)
+* Column pivoting: reorder columns of the matrix. $(AP_c = LU, P_c$ permutation matrix)
+* Partial pivoting: row or column pivoting (one of the two).
+* Complete pivoting: reorder both rows and columns of the matrix. $(P_r AP_c = LU)$
+* Symmetric pivoting: reorder both rows and columns of the matrix, but when rows k
+and s are interchanged, then columns k and s are also interchanged. $(PAP^T = LU)$
 ***
 * Compute Matrix multiplication:
   * For $A \in \Reals^{m\times n}, B \in \Reals^{n\times k}$
@@ -109,7 +117,7 @@ or $j − i > u$.
         * $L_A[(y_i)_i] = I$, which means $[(y_i)_i]$ is a unit lower triangle
       * $\frac{n^3}{3}$ (LU) $+\frac{n^3}{6}$ (F/S) $+ \frac{n^2}{2}*n = n^3$
     * ![](../assets/img/2021-02-23-00-51-45.png)
-      * Thus compute inverse of unit lower triangle, we only need $\frac{n^3}{6}$
+      * Thus compute inverse of unit lower triangle, we only need $\frac{n^3}{6}$ flops
     * 
 * Compute $A^{-1}B$ with $A \in \Reals^{n\times n}, B \in \Reals^{n\times k}$
   * cost $\frac{n^3}{3} + n^2k$
@@ -117,3 +125,16 @@ or $j − i > u$.
   * Don't compute inverse directly unless it is explicitly asked
 * Inverse of symmetric matrix is still symmetric
 * Inverse of banded matrix is **not necessarily banded** 
+* solving for $(l,u)$ banded matrices
+  *  (LU factorization) requires $nlu$ flops (pairs of add and mult)
+  *  if A is $(l, u)$-banded, the L and U matrices arising from GE are $(l, 0)$- and $(0, u)$-banded, 
+  *  The forward substitution requires $n(l+1) \approx nl$ flops
+  *  The backward substitution requires $n(u+1) \approx nu$ flops
+  *  the solution of an $(l, u)$-banded linear system by GE/LU and f/b/s requires $nlu + n(l + u)$ flops
+  *  ![](../assets/img/2021-02-23-14-21-06.png)
+  *  ![](../assets/img/2021-02-23-14-21-36.png)
+* LU factorization on Symmetric matrix:
+  * each step $k$ of GE produces a symmetric $(n-k) \times (n-k)$ submatrix
+  * computation lowers to $\frac{n^3}{6}$ flops
+* Compute inverse of unit lower/upper triangle, we only need $\frac{n^3}{6}$ flops
+  * ![](../assets/img/2021-02-23-00-51-45.png)
