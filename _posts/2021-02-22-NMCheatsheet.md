@@ -51,8 +51,8 @@ or $j − i > u$.
 * Semi-bandwidth of a symmetrically banded matrix: $l$ or $u$.
 * Tridiagonal matrix: a symmetrically banded matrix with semi-bandwidth 1.
 * Pentadiagonal matrix: a symmetrically banded matrix with semi-bandwidth 2.
-* (Row) Diagonally dominant matrix: a square matrix $A$ for which $|a_{ii}| \ge \sum_{j=1 j\neq i}^n |a_{ij}|$ for all $i = 1,...,n$
-* Strictly (Row) Diagonally dominant matrix: a square matrix $|a_ii| > \sum_{j=1 j\neq i}^n |a_{ij}|$ for all $i = 1,...,n$
+* (Row) Diagonally dominant Diagonal dominant matrix: a square matrix $A$ for which $\|a_{ii}\| \ge \sum_{j=1 j\neq i}^n \|a_{ij}\|$ for all $i = 1,...,n$
+* Strictly (Row) Diagonally dominant Diagonal dominant matrix: a square matrix $\|a_ii\| > \sum_{j=1 j\neq i}^n \|a_{ij}\|$ for all $i = 1,...,n$
   *  Strictly diagonally dominant matrices are nonsingular
 * Positive definite matrix: a square matrix $A$ for which, for any vector $x \neq  0$, $x^T Ax > 0$.
 * A symmetric matrix is positive definite (SPD), iff the diagonal elements of the U factor in the LU factorization are positive.
@@ -78,10 +78,10 @@ or $j − i > u$.
   * Moreover, $L$ is the product of the inverses of the $M^{(k)}$ matrices. The matrices $M^{(k)}$ are called elementary Gauss transformations.
   * Page II-88
   * Elementary Gauss transformation is close under inversion!
-  * ![](../assets/img/2021-02-23-00-28-03.png)
+  * ![](/assets/img/2021-02-23-00-28-03.png)
 * Elementary Gauss transformation:
-  * ![](../assets/img/2021-02-23-01-03-32.png)
-  * ![](../assets/img/2021-02-23-01-04-14.png)
+  * ![](/assets/img/2021-02-23-01-03-32.png)
+  * ![](/assets/img/2021-02-23-01-04-14.png)
 * LU factorization is unique:
   * $A = LU = L'U'$ if $L, L'$ are both unit lower triangle, then $L= L', U = U'$
   * $A = LU = LD\hat{U}$ where $\hat{U}$ is unit upper triangle and $D$ is diagonal
@@ -100,8 +100,10 @@ or $j − i > u$.
 * Column pivoting: reorder columns of the matrix. $(AP_c = LU, P_c$ permutation matrix)
 * Partial pivoting: row or column pivoting (one of the two).
 * Complete pivoting: reorder both rows and columns of the matrix. $(P_r AP_c = LU)$
-* Symmetric pivoting: reorder both rows and columns of the matrix, but when rows k
-and s are interchanged, then columns k and s are also interchanged. $(PAP^T = LU)$
+* Symmetric pivoting: reorder both rows and columns of the matrix, but when rows $k$
+and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = LU)$
+* Gauss Elimination LU factorization with pivoting:
+  * ![](../assets/img/2021-02-23-14-45-47.png)
 ***
 * Compute Matrix multiplication:
   * For $A \in \Reals^{m\times n}, B \in \Reals^{n\times k}$
@@ -116,7 +118,7 @@ and s are interchanged, then columns k and s are also interchanged. $(PAP^T = LU
         * as we know we ultimately are solving
         * $L_A[(y_i)_i] = I$, which means $[(y_i)_i]$ is a unit lower triangle
       * $\frac{n^3}{3}$ (LU) $+\frac{n^3}{6}$ (F/S) $+ \frac{n^2}{2}*n = n^3$
-    * ![](../assets/img/2021-02-23-00-51-45.png)
+    * ![](/assets/img/2021-02-23-00-51-45.png)
       * Thus compute inverse of unit lower triangle, we only need $\frac{n^3}{6}$ flops
     * 
 * Compute $A^{-1}B$ with $A \in \Reals^{n\times n}, B \in \Reals^{n\times k}$
@@ -131,10 +133,13 @@ and s are interchanged, then columns k and s are also interchanged. $(PAP^T = LU
   *  The forward substitution requires $n(l+1) \approx nl$ flops
   *  The backward substitution requires $n(u+1) \approx nu$ flops
   *  the solution of an $(l, u)$-banded linear system by GE/LU and f/b/s requires $nlu + n(l + u)$ flops
-  *  ![](../assets/img/2021-02-23-14-21-06.png)
-  *  ![](../assets/img/2021-02-23-14-21-36.png)
+  *  ![](/assets/img/2021-02-23-14-21-06.png)
+  *  ![](/assets/img/2021-02-23-14-21-36.png)
 * LU factorization on Symmetric matrix:
   * each step $k$ of GE produces a symmetric $(n-k) \times (n-k)$ submatrix
   * computation lowers to $\frac{n^3}{6}$ flops
 * Compute inverse of unit lower/upper triangle, we only need $\frac{n^3}{6}$ flops
-  * ![](../assets/img/2021-02-23-00-51-45.png)
+  * ![](/assets/img/2021-02-23-00-51-45.png)
+* Gauss Elimination with row pivoting
+  * cost requires $\frac{n^2}{2}$ comparisons in addition to the algorithm without pivoting
+  * Asymptotically, it has the same cost as the no pivoting algorithm $\frac{n^3}{3}$
