@@ -100,10 +100,14 @@ or $j − i > u$.
 * Column pivoting: reorder columns of the matrix. $(AP_c = LU, P_c$ permutation matrix)
 * Partial pivoting: row or column pivoting (one of the two).
 * Complete pivoting: reorder both rows and columns of the matrix. $(P_r AP_c = LU)$
+  * Actually after LU is done, we have
+    * $P_nP_{n-1}...P_2P_1AQ_1Q_2...Q_n = LU$
+  *  At the $k$-th GE step, before the multipliers at column $k$, rows $k + 1, ... , n$, are computed, a search in the submatrix of size $(n − k + 1) \times (n − k + 1)$ is performed,
 * Symmetric pivoting: reorder both rows and columns of the matrix, but when rows $k$
+  * special case of above
 and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = LU)$
 * Gauss Elimination LU factorization with pivoting:
-  * ![](../assets/img/2021-02-23-14-45-47.png)
+  * ![](/assets/img/2021-02-23-14-45-47.png)
 ***
 * Compute Matrix multiplication:
   * For $A \in \Reals^{m\times n}, B \in \Reals^{n\times k}$
@@ -140,6 +144,16 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
   * computation lowers to $\frac{n^3}{6}$ flops
 * Compute inverse of unit lower/upper triangle, we only need $\frac{n^3}{6}$ flops
   * ![](/assets/img/2021-02-23-00-51-45.png)
-* Gauss Elimination with row pivoting
+* Gauss Elimination with row pivoting (partial pivoting)
   * cost requires $\frac{n^2}{2}$ comparisons in addition to the algorithm without pivoting
   * Asymptotically, it has the same cost as the no pivoting algorithm $\frac{n^3}{3}$
+  * Cost for solving $m$ linear systems of size $n \times n$ with the same matrix:
+    * $\frac{n^3}{3} + m(\frac{n^2}{2} + \frac{n^2}{2})$ flops,
+      * $\frac{n^2}{2} + mn$ divisions
+      * and $\frac{n^2}{2}$ comparisons
+* Gauss Elimination LU factorization with scaled scaling row (partial) pivoting:
+  * Cost The algorithm requires $n(n − 1) \approx n^2$ comparisons and equal number of divisions in addition to the flops and comparisons required by the partial pivoting (no scaling)
+  * it requires approximately the same amount of work as the no pivoting algorithm $\frac{n^3}{3}$
+* Gauss Elimination LU factorization with  complete pivoting:
+  * cost $\frac{n^3}{3}$ comparisons in addition to the flops required by no-pivoting algorithm
+  * Asymptotically, it requires approximately twice the amount of work of the no-pivoting algorithm $\frac{2n^3}{3}$
