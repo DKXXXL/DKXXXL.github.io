@@ -6,6 +6,81 @@ categories: Math
 ---
 Use text searching please
 
+* mantissa, significand, exponent, characteristic, significant
+  * ![](../assets/img/2021-02-24-22-35-12.png)
+* overflow level, OFL, underflow level, UFL
+  * $N_{max}=(.aaa...)_b \times b^{(aa...a)_b}$ where $a=b-1$ while
+  * $N_{min}=(.1000..)_b \times b^{-(aa...a)_b}$ if normalised, or
+  * $N_{min}=(.0..001)_b \times b^{-(aa...a)_b}$ ekse
+  * ![](../assets/img/2021-02-24-22-41-45.png)
+* $\Reals_b(t,s)$  a notation for all numbers represented in $t$ $b$-digits mantissa including sign and $s$ $b$-digits exponent including sign
+  * on real computers when $b=2$ and normalized numbers are assumed the $t$ bits mantissa including sign can represent $t+1$ bits including the sign. The notation $\Reals_2(t, s)$ is still used here in the tutorial, meaning $t+1$ bits including the sign.
+  * (as one 1 is hidden in the front) 
+  * Note that this can happen only when $b = 2$.
+  * ![](../assets/img/2021-02-24-22-53-47.png)
+* Then, there are two common ways to convert $x \in \Reals$ to a floating-point number $fl(x)\in\Reals_b(t, s)$.
+  * Chopping: chop after digit $t$ of the mantissa.
+  * Rounding (traditional): chop after digit t, then round $D_t$ up or down, depending on whether $D_{t+1} \ge b/2$ or $D_{t+1} < b/2$ respectively, 
+    * or in other words, add b/2 to $D_{t+1}$, then chop
+  * Rounding (proper or perfect): same as traditional, except when $D_{t+1} = b/2$ and $D_{t+2} = D_{t+3} = ... = 0$; then round $D_t$ up or down, to the nearest even.
+  * The following is the negative as example
+  * ![](../assets/img/2021-02-24-23-05-03.png)
+* $\hat{x}$ as an approximation of $x$
+  * absolute error is $x - \hat{x}$
+  * relative error is $\frac{x - \hat{x}}{x}$
+  * we usually take absolute value of above
+* $fl(x)$ as floating point representation
+  * round-off error :$fl(x) - x$
+  * $fl(x) - x = x \delta$, 
+    * $\delta$ is relative round-off error
+      * we have a bound $\delta < u$,  
+        * where $u$ is called unit round-off unit round off
+    * which means round-off error is roughly proportional to $x$
+  * $\|\delta \| \le b^{1-t}$ if normalized numbers and chopping are assumed
+  * $\|\delta \| \le \frac{1}{2}b^{1-t}$ if normalized numbers and rounding are assumed
+* An approximation $\hat{x}$ to $x$ is said to be correct in $r$ siginificant $b$-digits 
+  * if $\|\frac{x - \hat{x}}{x}\| \le \frac{1}{2}b^{1-r}$
+* for arbitrary operation $o \in \{+,-,\times, \div\}, x \hat{o} y = fl(x o y)$, 
+  * makes error of easy arithmetic (including computer builtin function like $\sin$) round-off error of final result
+    * i.e. $\hat{f}(x) = fl(f(x))$
+* machine epsilon $\epsilon_{mach}$ is the smallest $b^{-i}, i > 0$
+  * s.t. $fl(1 +\epsilon_{mach}) > 1$
+  * $\epsilon_{mach} = b^{1-t}$ if chopping
+  * $\epsilon_{mach} = \frac{1}{2} b^{1-t}$ if traditional rounding
+  * $\frac{1}{2}b^{1-t} < \epsilon_{mach} \le b^{1-t}$ if proper rounding
+    * Thus $-\epsilon_{mach} \le \delta \le \epsilon_{mach}$
+    * we have $0 < UFL < \epsilon_{mach} < OFL$
+* saturation:
+  * a non-zero number added to the other number but the other doesn't changed, this phenomenon is called saturation
+* Error propagation of simple arithmetic
+  * $fl(x) \hat{\times} fl(y) \approx xy(1 + \delta_\times)$ where $\|\delta_times\| \le 3\epsilon_{mach}$
+  * $fl(x) \hat{\div} fl(y) \approx xy(1 + \delta_\div)$ where $\|\delta_div\| \le 3\epsilon_{mach}$
+  * $fl(x) \hat{+} fl(y) \approx xy(1 + \delta_+)$ 
+    * where $\|\delta_+\| \le 2 \epsilon_{mach}$ when $xy > 0$
+    * where $\|\delta_+\| \le 2 \epsilon_{mach}\|\frac{x-y}{x+y}\|$ when $xy > 0$
+      * when $x\approx -y$ the relative error blows up, causing catastrophic cancellation
+      * ![](../assets/img/2021-02-24-23-33-51.png)
+* relative condition number $\kappa_f(x) = \|\frac{xf'(x)}{f(x)}\|$
+  * assuming $f: \Reals \rightarrow \reals$ twice differentiable
+    * then using Taylor Expansion 
+      * $f(fl(x)) \approx f(x)(1+\delta_f)$ with $\delta_f = \frac{xf'(x)}{f(x)} \delta_x$
+      * we usually can assume $\|\delta_x\| \le \epsilon_{mach}$
+  * condition number is fixed between mathematically equivalent expression
+* well condition: if relatively small changes in the input, produce relatively small changes in the output, otherwise it is called ill-conditioned.
+  * usually we just make sure $\kappa_f(x) \le \frac{1}{\epsilon_{mach}}$
+* Stability is a concept similar to conditioning, but it refers to a numerical algorithm, 
+  * i.e. to the particular way a certain computation is carried out. 
+  * A numerical algorithm is stable if small changes in the algorithm input parameters have a small effect on the algorithm output, otherwise it is called unstable
+* Forward error, backward error
+  * ![](../assets/img/2021-02-24-23-40-18.png)
+  * relative forward error $\frac{y - \hat{y}}{y}$
+  * relative backward error $\frac{x - \hat{x}}{x}$
+  * $\|$relative forward error $\| \approx \|$ relative backward error $\| \times$ condition number
+* total error, propagated data error, forward error, backward error,
+* truncation error(= discretization error), rounding error
+  * The truncation and the rounding errors together form the computational error
+  * ![](../assets/img/2021-02-24-23-43-03.png)
+***
 * Orthogonal matrix:
   * $A^T A = I$
   * Orthogonal matrix doesn't have to be a square matrix
