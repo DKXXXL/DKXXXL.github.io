@@ -80,6 +80,10 @@ Use text searching please
 * truncation error(= discretization error), rounding error
   * The truncation and the rounding errors together form the computational error
   * ![](../assets/img/2021-02-24-23-43-03.png)
+* Taylor Theorem, taylor expansion
+* ![](../assets/img/2021-02-24-23-46-00.png)
+* ![](../assets/img/2021-02-24-23-46-48.png)
+* ![](../assets/img/2021-02-24-23-47-14.png)
 ***
 * Orthogonal matrix:
   * $A^T A = I$
