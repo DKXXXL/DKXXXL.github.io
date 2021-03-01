@@ -9,7 +9,7 @@ categories: Math
 * $R$ is a UFD then $R[x]$ is a UFD
 
 Recall that polynomials of PID are not necessarily PID. ($Z[x]$ is not necessarily PID)
-### Theorem: Gauss' Lemma
+### Theorem: Gauss' Lemma (Pg.303)
 * Suppose $R$ is a UFD, with quotient field $F$
 * If $p(x) \in R[x]$ is reducible in $F[x]$
   * then it is reducible in $R[x]$
@@ -67,13 +67,13 @@ Recall that polynomials of PID are not necessarily PID. ($Z[x]$ is not necessari
 * If $deg(f) = 2$ or $3$, then $f$ is irreducible iff
   * it has no root
 
-### Prop: Rational Root Theorem
+### Prop: Rational Root Theorem (Prop. 11, Pg. 308)
 * Consider $p(x) = a_nx^n + ... a_1x + a_0 \in Z[x]$
   * if $r/s \in \mathbb{Q}$ is a root in lowest term
     * then $r|a_0$, $s|a_n$ (i.e. $gcd(r,s) = 1$)
 * In particular, if $p(x)$ is monoic, every rational root is actually in $Z$, and it must divide $a_0$
 
-### Prop: 
+### Prop: (Prop 2 Pg.295)
 * Suppose $R$ is an integral domain
 * and $p(x) \in R[x]$ is monic, non-constant
   * suppose $0\neq I\neq R$ is non-trivial ideal
