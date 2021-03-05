@@ -34,3 +34,17 @@ Use text searching please
 * Reasoning under GCWA is non-monotonic
   * $\{p \lor \neg p\} \models_{GCWA} \neg p$ 
     * but $\{p \lor \neg p, p\} \models_{GCWA} p$ as $GCWA(\{p \lor \neg p, p\}) = \{p \lor \neg p, p\}$
+* Horn Logic is still semi-decidable
+  * Even with just Horn clauses,in the first-order case the possibility of generating an infinite branch of resolvents exists
+  * ![](../assets/img/2021-03-05-10-13-41.png)
+* Circumscription is not easy to cause inconsistency
+  * because we don't directly manipulate KB
+* Issue with circumscription:
+  * ![](../assets/img/2021-03-05-10-22-21.png)
+  * solution: 
+    * Fixed / Variable Predicate
+    * Mc Carthy's definition for Models with Minimal Abnormality
+* Extension for Default Logic can be not complete
+  * $\mathcal{F} = \{\beta\}, \mathcal{D} = \{ \alpha \Rightarrow \beta \}$
+  * $\mathcal{F}$ is an incomplete extension
+* Stable Expansion for Default Logic can be not complete
