@@ -15,7 +15,7 @@ My tiny head is just not enough to tidy these things up.
   * if $p(x)$ is reducible in $F[x]$ then $p(x)$ is reducible in $R[x]$
   * $p(x) = A(x)B(x)$ in $F[x]$ can lead to $dp = A'(x)B'(x)$, as a factorization in $R[x]$
 ***
-* for $g(x) \in R[x]$ with that gcd of coefficients of $p$ is 1
+* for $g(x) \in R[x]$ with that gcd of coefficients of $g(x)$ is 1
   * $g(x)$ is irreducible in $R[x]$ iff it is irreducible in $F[x]$
 ***
 *  Note that generally speaking if $g(x)$ is reducible in $R[x]$, it might not be reducible in $F[x]$
