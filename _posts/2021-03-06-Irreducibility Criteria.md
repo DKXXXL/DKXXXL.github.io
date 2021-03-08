@@ -67,3 +67,7 @@ My tiny head is just not enough to tidy these things up.
 ![](/assets/img/2021-03-07-00-06-22.png)
 * $p = a^2+b^2$
 * irreducible elements in $\mathbb{Z}[i]$
+
+### Fundamental Theorem of Finitely Generated Abelian Group
+
+![](/assets/img/2021-03-08-13-20-52.png)
