@@ -48,3 +48,16 @@ Use text searching please
   * $\mathcal{F} = \{\beta\}, \mathcal{D} = \{ \alpha \Rightarrow \beta \}$
   * $\mathcal{F}$ is an incomplete extension
 * Stable Expansion for Default Logic can be not complete
+* $\mathcal{M} \models \phi [\sigma]$ means $\mathcal{M}$ with variable assignemnt $\sigma$ is satisfies $\phi$ 
+  * $\mathcal{M} \models \phi [\sigma(m/x)]$ where $\sigma(m/x)$ is just like $\sigma$ except mapping $x$ to $m$
+* During answer extraction, we create $\exists x. P(x) \land \neg A(x)$
+  * when the result of $A(s)$ is proved,
+  * it is not possible to have something like $A(s) \land \neg P(s)$
+    * Say there's a constant a in the KB such that $\neg P(a)$ holds, and we're extracting answers that satisfy $P$. 
+    * Then we must resolve the literal $\neg P(x)$ in the clause $[\neg P(x),A(x)]$ with some ground literal like $P(b)$ (where $b$ is some constant) somewhere in the extraction resolution to get the resolvant $[A(b)]$, but it's not possible to resolve $\neg P(a)$ with $\neg P(a)$ as they both are negative literals.  
+  * Similarly, if $A(a)$ is the result, then we must have derived $P(a)$ otherwise $\neg P(a)$ in the clause is not resolvable
+* Resolution, convert to Clausal Form
+  * ![](/assets/img/2021-03-08-23-02-26.png)
+* Resolution tree, example  
+  * ![](/assets/img/2021-03-08-23-07-39.png)
+  * ![](/assets/img/2021-03-08-23-06-16.png)
