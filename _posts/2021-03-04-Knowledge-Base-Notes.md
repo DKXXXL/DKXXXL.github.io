@@ -35,7 +35,9 @@ Use text searching please
 * CWA, closed-world assumption
   * $CWA(\Phi) = \Phi \cup \{ \neg \alpha : \alpha \text{ is ground atomic formula and } \Phi \not \models \alpha  \}$
 * GCWA, generalized closed-world assumption
-* ![](../assets/img/2021-03-04-21-42-16.png)
+* ![](/assets/img/2021-03-04-21-42-16.png)
+* $CWADC(\Phi) = CWA(\Phi) \cup$ Domain Closure
+  * apply unique name to $CWADC$ resulting complete set of sentences
 * if $\Phi$ is a set of first order sentences (without quantifiers and equality symbols), $GCWA(\Phi)$ is not necessarily complete (w.r.t all the sentences generated from $\Phi$ w/o quantifier and equality)
   * Say $\Phi=\{p \lor q\}$, $GCWA(\Phi) = \Phi$ is still not complete
 * if $\Phi$ is a set of first order sentences (without quantifiers and equality symbols), $CWA(\Phi)$ will be complete (w.r.t all the sentences generated from $\Phi$ w/o quantifier and equality)
@@ -47,14 +49,17 @@ Use text searching please
     * but $\{p \lor \neg p, p\} \models_{GCWA} p$ as $GCWA(\{p \lor \neg p, p\}) = \{p \lor \neg p, p\}$
 * Horn Logic is still semi-decidable
   * Even with just Horn clauses,in the first-order case the possibility of generating an infinite branch of resolvents exists
-  * ![](../assets/img/2021-03-05-10-13-41.png)
+  * ![](/assets/img/2021-03-05-10-13-41.png)
 * Circumscription is not easy to cause inconsistency
   * because we don't directly manipulate KB
 * Issue with circumscription:
-  * ![](../assets/img/2021-03-05-10-22-21.png)
+  * ![](/assets/img/2021-03-05-10-22-21.png)
+    * might lead to eliminate to normal element in the domain
   * solution: 
     * Fixed / Variable Predicate
     * Mc Carthy's definition for Models with Minimal Abnormality
+      * ![](/assets/img/2021-03-09-11-16-42.png)
+      * variable predicates are those non-restricted predicates
 * Extension for Default Logic can be not complete
   * $\mathcal{F} = \{\beta\}, \mathcal{D} = \{ \alpha \Rightarrow \beta \}$
   * $\mathcal{F}$ is an incomplete extension
@@ -82,7 +87,7 @@ Use text searching please
 * A set of propositional formulas (with finite vocabulary) is always decidable
 * Herbrand Universe, Herbrand Theorem, Herbrand Base
   * ![](/assets/img/2021-03-09-00-51-15.png)
-  * ![](../assets/img/2021-03-09-00-52-22.png)
+  * ![](/assets/img/2021-03-09-00-52-22.png)
   * Herbrand Theorem
     * Theorem: $S$ is satisfiable iff Herbrand base of $S$ is.
   * Herbrand Base doesn't have variable, but could be infinite (when there is function of arity more than zero), basically propositionalized
@@ -97,3 +102,27 @@ Use text searching please
     * each resolvent comes from resolving one precedent with one from KB
   * Backward Chaining - goal oriented (starting from query)
   * Forward Chaining - derive all possible implication
+* Generic Statement: apply to most but not all classes of objects; defaults 
+* Montonic Reasoning:
+  * $\Phi \models_{(\cdot)} K \implies \Phi \cup \Phi' \models_{(\cdot)} K$
+* Default Logic: Extension
+  * normal defaults: rules in form of $\frac{\alpha : \beta}{\beta}$, also written in $\alpha \Rightarrow \beta$
+  * We can use $True \Rightarrow \neg \alpha$ to represent Closed World Assumption, for each atomic $\alpha$
+  * Extension
+    * ![](/assets/img/2021-03-09-11-27-59.png)
+    * extension is closed under entailment
+      * $a \in \Epsilon \iff \Epsilon \models a$
+    * extension is clused under application of defaults
+    * there can be more than one extension
+  * Issue with default:
+    * we cannot reason about default rules themselves
+    * cycle is happening in this definition, but this issue can be fixed
+* Skeptical Reasoner: believes what is common to all extensions
+* Credulous (brave) Reasoner: choose an extension arbitrarily.
+* Autoepistemic Logic
+  * stable expansion
+    * ![](/assets/img/2021-03-09-11-46-29.png)
+  * Enumerate Stable Expansion
+    * ![](/assets/img/2021-03-09-11-47-16.png)
+    * This algorithm only gives you objective parts
+      * even though each stable expansion is uniquely determined by objective formulas
