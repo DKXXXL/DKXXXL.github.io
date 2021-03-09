@@ -22,7 +22,7 @@ Use text searching please
     * given a set of sentences, we answer true if it is unsatisfiable; answer false otherwise
     * semi-decidable because resolution is refutation complete, and we can arrive at empty clause
     * but if the answer is false, then we may end up infinite loop
-    * we usually use proof assistant/let human guide the unsatisfiability/entailment
+    * we usually use proof assistant/let human guide the unsatisfiability/entailment or just use less expressive language
 * First order satisfiabiity is undecidable, not even semi-decidable
   * it is the co of the above question
   * we use propositionalize or Herbrand Theorem 
@@ -80,3 +80,20 @@ Use text searching please
   * thus with this we can calculate entailment by using refutation (to see if we can arrive contradiction)
     * $\Phi \cup \neg \alpha \models [] \iff \Phi \models \alpha$
 * A set of propositional formulas (with finite vocabulary) is always decidable
+* Herbrand Universe, Herbrand Theorem, Herbrand Base
+  * ![](/assets/img/2021-03-09-00-51-15.png)
+  * ![](../assets/img/2021-03-09-00-52-22.png)
+  * Herbrand Theorem
+    * Theorem: $S$ is satisfiable iff Herbrand base of $S$ is.
+  * Herbrand Base doesn't have variable, but could be infinite (when there is function of arity more than zero), basically propositionalized
+    * when it is finite, we can use SAT to solve them
+    * SAT is still NP-complete problem
+* Horn clause:
+  * a clause with at most one positive literal
+    * positive/negative literal
+    * definite literal = positive literal
+  * Still undecidable, semi-decidable, see above
+  * SLD -- linear complexity to the KB size (if terminates)
+    * each resolvent comes from resolving one precedent with one from KB
+  * Backward Chaining - goal oriented (starting from query)
+  * Forward Chaining - derive all possible implication
