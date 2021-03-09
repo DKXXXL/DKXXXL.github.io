@@ -129,5 +129,5 @@ Use text searching please
     * this algorithm is sound and complete
       * complete means when this algorithm fails, there is no stable expansion 
   * Example: 
-    * ![](../assets/img/2021-03-09-12-41-39.png)
-    * ![](../assets/img/2021-03-09-12-41-15.png)
+    * ![](/assets/img/2021-03-09-12-41-39.png)
+    * ![](/assets/img/2021-03-09-12-41-15.png)
