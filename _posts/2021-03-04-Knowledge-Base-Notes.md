@@ -6,6 +6,8 @@ categories: CS
 ---
 Use text searching please
 
+* We care about entailment because we don't want all knowledge be in knowledge base
+  * that would be too large
 * Consistency is equivalent to satisfiability
   * $\Phi$ is consistent means $\Phi \not \models \bot$ 
   * which means $\exists M, M \models \phi, M \not \models \bot$
@@ -15,6 +17,15 @@ Use text searching please
   * $\{p, \neg p\}$
 * every inconsistent set is complete
   * $\Phi \models \bot \models p, \neq p$
+* First order Unsatisfiability (checking entailment) is semi-decidable but not decidable
+  * First-order Unsatisfiability (checking entailment) is that 
+    * given a set of sentences, we answer true if it is unsatisfiable; answer false otherwise
+    * semi-decidable because resolution is refutation complete, and we can arrive at empty clause
+    * but if the answer is false, then we may end up infinite loop
+    * we usually use proof assistant/let human guide the unsatisfiability/entailment
+* First order satisfiabiity is undecidable, not even semi-decidable
+  * it is the co of the above question
+  * we use propositionalize or Herbrand Theorem 
 * Not every complete set of first-order sentences is decidable
   * Denote $N$ as the model for true arithmetic,
     * with addition, multiplication, successor function symbol, equality and less-than relation, and constant zero
@@ -50,6 +61,8 @@ Use text searching please
 * Stable Expansion for Default Logic can be not complete
 * $\mathcal{M} \models \phi [\sigma]$ means $\mathcal{M}$ with variable assignemnt $\sigma$ is satisfies $\phi$ 
   * $\mathcal{M} \models \phi [\sigma(m/x)]$ where $\sigma(m/x)$ is just like $\sigma$ except mapping $x$ to $m$
+* Answer Extraction:
+  * ![](/assets/img/2021-03-08-23-56-00.png)
 * During answer extraction, we create $\exists x. P(x) \land \neg A(x)$
   * when the result of $A(s)$ is proved,
   * it is not possible to have something like $A(s) \land \neg P(s)$
@@ -61,3 +74,9 @@ Use text searching please
 * Resolution tree, example  
   * ![](/assets/img/2021-03-08-23-07-39.png)
   * ![](/assets/img/2021-03-08-23-06-16.png)
+* Resolution is sound but not complete
+  * it is refutational complete
+    * i.e. $S \rightarrow [] \iff S \models \bot$
+  * thus with this we can calculate entailment by using refutation (to see if we can arrive contradiction)
+    * $\Phi \cup \neg \alpha \models [] \iff \Phi \models \alpha$
+* A set of propositional formulas (with finite vocabulary) is always decidable
