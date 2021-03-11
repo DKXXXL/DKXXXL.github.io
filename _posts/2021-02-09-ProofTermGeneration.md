@@ -63,8 +63,26 @@ The key point of giving a proof on unsatisifiability is to justifies the inconsi
 ***
 
 You should notice that, the above two features should somehow be unified but I currently have no idea to do it in an engineer-able way.
-## Conclusion:
+<!-- ## Conclusion:
 1. We will need to extend the vanilla miniKanren (with type-constraint/inequality) (but without universal quantifier) to handle falsification proof-term generation on quantifier-free statement
    1. as elaborator for proof-term checker
 2. We will need to extend the miniKanren (with for-all) to have proof-term information on each generated state
-   1. we might need to do this for vanilla miniKanren as well
+   1. we might need to do this for vanilla miniKanren as well -->
+
+***
+***
+***
+# Loop Invariant
+* we introduce a new `failed-state` to denote failure of state (inconsistent state)
+  * because we have more information now -- which is a proof of bottom from the primitive constraint imposed by the query
+* we introduce four terms `sta, stj, tha, thj`
+  * they are abbreviation of  *state-information-assumption*, *state-information-justification*, *what-it-went-THrough-assumption*, *what-it-went-THrough-justification*
+  * everyone of them is a hashtable of proof term -- goal as key, pf-term as values
+  * `sta, stj` have the goals in the state as subsets of keys
+  * `tha, thj` have the goals that unification goes through as subsets of keys
+  * every proof term inside `sta, tha` is a free variable
+  * `stj` has all its free variables scoped by `tha`
+  * `thj` has all its free variables scoped by `sta`
+  * Now I can conclude, these four terms consist all the information of
+    * state-goals <=> imposed (equality/inequality/type-)constraints
+  * Now we just need to maintain these invar
