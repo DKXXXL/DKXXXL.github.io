@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Intro to Algebra, Lec 37"
-date:   2020-09-10 00:56:11 -0400
+date:   2021-03-18 00:56:11 -0400
 categories: Math
 ---
 # Lec 37
@@ -19,6 +19,7 @@ Q2 in PS14:
 * $v \in Hom_R(M, R) \leftrightarrow$ dual space
 * Chapter 12
 * totally don't know what he is talking abut
+* suggesting going through the 5 minutes that you are lost, it is March 18th.
 * Theorem 4 page 460.
 ***
 ### Theorem: 5 page 462
