@@ -6,6 +6,8 @@ categories: Math
 ---
 Use text searching please
 
+## Error + Linear System
+
 * mantissa, significand, exponent, characteristic, significant
   * ![](/assets/img/2021-02-24-22-35-12.png)
 * overflow level, OFL, underflow level, UFL
@@ -85,6 +87,7 @@ Use text searching please
 * ![](/assets/img/2021-02-24-23-46-48.png)
 * ![](/assets/img/2021-02-24-23-47-14.png)
 ***
+## Linear System/ Matrix
 * Orthogonal matrix:
   * $A^T A = I$
   * Orthogonal matrix doesn't have to be a square matrix
@@ -236,3 +239,7 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
 * Gauss Elimination LU factorization with  complete pivoting:
   * cost $\frac{n^3}{3}$ comparisons in addition to the flops required by no-pivoting algorithm
   * Asymptotically, it requires approximately twice the amount of work of the no-pivoting algorithm $\frac{2n^3}{3}$
+***
+***
+***
+## Matrix Norm / Non-linear
