@@ -242,4 +242,109 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
 ***
 ***
 ***
-## Matrix Norm / Non-linear
+## Matrix Norm 
+* An Inner product $(\cdot ,\cdot) : S^2 \rightarrow \reals$
+  * $(x,x) \ge 0$;
+    * $(x,x) = 0 \iff x = 0$
+  * $(\alpha x,y) = \alpha (x,y) \forall \alpha \in \reals$
+  * $(x,y) = (y,x)$
+  * $(x+y,z) = (x,z) + (y,z)$
+* In Vector Space, a commonly used inner product
+  * $(x,y) =x^T \cdot y = \sum_i x_iy_i$
+* A norm $\|\cdot \| : S \rightarrow \reals^{\ge 0}$
+  * ![](/assets/img/2021-03-22-19-09-27.png)
+  * For each inner product, we have a corresponding norm $\|x\| = (x,x)^{\frac{1}{2}}$
+* Cauchy-Schwarz Inequality:
+  * $\|(x,y)\| \le (x,x)^\frac{1}{2} (y,y)^\frac{1}{2}$
+  * $(x,y) = \|x\|_2\|y\|_2\cos \theta$
+    * thus $\|(x,y)\| \le \|x\|_2 \|y\|_2$
+* Holder Inequality: if $p,q > 0, \frac{1}{p} + \frac{1}{q} = 1$
+  * then $\|(x,y)\| \le \|x\|_p \|y\|_q$
+* For vectors $x$
+  * $p$-norm, $\|x\|_p = (\sum_{i=1}^n \|x_i\|^p)^{\frac{1}{p}}$
+  * max (infinity) norm $\|x\|_\infty = \max_{i=1}^n \{\|x_i\|\}$
+  * one-norm $\|x\|_1 = (\sum_{i=1}^n \|x_i\|)$
+* Vector Norms Inequalities; equivalence of norms
+  * ![](/assets/img/2021-03-22-19-11-26.png)
+* Matrix Norm:
+  * $p$-norm, $\|A\|_p = \max_{x \neq 0}\{\frac{\|Ax\|_{p}}{\|x\|_p}\}=\max_{\|x\|_p = 1}\{\|Ax\|_{p}\}$
+  * Row norm, infinity norm: 
+    * $\|A\|_\infty = \max_{i=1}^m \{\sum_{j=1}^n \|a_{i,j}\|\}$
+    * example: 
+      * ![](/assets/img/2021-03-22-21-18-48.png)
+  * Column norm, 1-norm:
+    * $\|A\|_1 = \max_{j=1}^m \{\sum_{i=1}^n \|a_{i,j}\|\}$
+  * ![](/assets/img/2021-03-22-21-19-15.png)
+  * For the $p$-norm, the following properties, equivalence of norms:
+    * ![](/assets/img/2021-03-22-21-07-14.png)
+* Condition number of a non-singular matrix $A$
+  * $\kappa_a(A) = \|A\|_a\|A^{-1}\|_a = \frac{\max_{x \neq 0}\frac{\|Ax\|_a}{\|x\|_a}}{\min_{y\neq 0} \frac{\|Ay\|_a}{\|y\|_a}}$
+    * interpreted as ratio of largest relative stretching over the largest relative shrinking
+  * properties: residuals,
+  * ![](/assets/img/2021-03-22-21-24-11.png)
+  * when $Q$ is orthogonal, $\|Q\|_2 = 1, \kappa_2(Q) = 1$
+  * most decent algorithm will have small residuals all the time
+    * which doesn't mean we have small relative error
+  * ![](/assets/img/2021-03-22-21-26-38.png)
+    * pf: if we assume $A$ is machine representable, then
+    * by 
+      * $Ax = b, A \hat{x} = \hat{b}$, thus $x-\hat{x} = A^{-1}(b - \hat{b})$
+      * thus $\frac{\|x - \hat{x}\|}{\|x\|} \le \|A^{-1}\| \frac{\|b - \hat{b}\|}{\|x\|} = \|A\|\|A^{-1}\| \frac{\|b-\hat{b}\|}{\|A\|\|x\|} \le \kappa(A) \frac{\|r\|}{\|Ax\|} = \kappa(A) \frac{\|r\|}{\|b\|}$
+  * equivalence of condition number:
+    * ![](/assets/img/2021-03-22-22-12-33.png)
+## Non-Linear
+* Intermediate Value Theorem: IVT:
+  * if $f$ continuous on $[a,b]$, then for all scalar $c\in (f(a),f(b))$ 
+  * there exists $x \in [a,b]$ .s.t $f(x)=c$
+* Mean Value Theorem: MVT:
+  * if $f$ is differentiable on $(a,b)$ and continuous in $[a,b]$
+    * then there exists $x$ s.t. $f'(x) = \frac{f(b) - f(a)}{b-a}$
+* contraction, contractive map, systolic map
+  * ![](/assets/img/2021-03-23-00-38-53.png)
+* multiplicity means n-th derivative has roots
+  * ![](/assets/img/2021-03-23-00-40-09.png)
+* For the following: $g(x) = x \iff f(x) = 0$
+  * Theorem 1: existence of root. (Bolzano) (By IVT)
+  * Theorem 2: existence of fixpoint. (By Theorem 1)
+    * ![](/assets/img/2021-03-23-00-14-01.png)
+  * Theorem 3: uniqueness of root (by Mean Value Theorem) (basically monotonic)
+  * Theorem 4: existence and uniqueness of fixed point (by Thm 2 and contraction properties)
+    * ![](/assets/img/2021-03-23-00-25-18.png)
+  * Theorem 4b: extension of Thm 4, convergence of a given iteration scheme
+    * ![](/assets/img/2021-03-23-00-26-57.png)
+* Theorem 5: existence of convergence interval 
+  * ![](/assets/img/2021-03-23-00-28-01.png)
+* Theorem 6: rate, order of convergence (proof by Taylor Expansion and definition of rate of convergence)
+  * ![](/assets/img/2021-03-23-00-28-50.png)
+* Stopping Criteria
+  * ![](/assets/img/2021-03-23-10-31-01.png)
+  * here $f(x^{(k)})$ is called residual of $f$ at $x^{(k)}$
+  * none of the stopping criteria is perfect, any of them might lead to large error of the root
+    * note that by Taylor Expansion at $x*$, we know $\|x^{(k)} - x*\| \approx \frac{\epsilon}{\|f'(x*)\|}$, where we cannot bound $\|f'(x*)\|$
+* order of convergence, rate of convergence, asymptotic error constant
+  * ![](/assets/img/2021-03-23-10-40-20.png)
+  * ![](/assets/img/2021-03-23-10-41-12.png)
+    * $\beta$ doesn't have to be an integer
+* Bisection method: detecting the middle, using Thm 1
+* Newton's method: $x^{(n+1)} = x^{(n)} - \frac{f(x^{(n)})}{f'(x^{(n)})}$ 
+  * it is a fix-point algorithm, so we can use Thm 6 to detect convergence
+    * since $f(x*) = 0$, we can prove $g'(x*) = \frac{ff''(x)}{f'(x)^2} = 0$
+  * for several roots, no guarantee where Newton's method will converge to
+  * When root has mupltiplicative > 1, $\beta = 1, \kappa = 1 - \frac{1}{m}$
+  * modified newton's method:
+    * ![](/assets/img/2021-03-23-11-41-46.png)
+* Secant Method: using previous two steps to approxmiate derivative of Newton's Method
+  * ![](/assets/img/2021-03-23-11-45-38.png)
+  * starting with guess two, and we must have $f(x^{k}) \neq f(x^{k-1})$
+  * doesn't always converge
+  * $\beta = \frac{1+\sqrt{5}}{2}$
+  * it also converges slowly close to multiplicative root
+  * no guarantee which root to converge if multiple root
+* Newton's Method for System of non-linear equation:
+  * ![](/assets/img/2021-03-23-11-56-54.png)
+  * complexity:
+    * ![](/assets/img/2021-03-23-11-58-06.png)
+  * doesn't always converge
+  * Broyden's Method: (Secant on non-linear system)
+    * ![](/assets/img/2021-03-23-11-59-33.png)
+* ![](/assets/img/2021-03-23-10-51-32.png)
