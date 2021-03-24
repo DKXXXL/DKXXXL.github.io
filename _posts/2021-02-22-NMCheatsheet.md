@@ -348,3 +348,5 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
   * Broyden's Method: (Secant on non-linear system)
     * ![](/assets/img/2021-03-23-11-59-33.png)
 * ![](/assets/img/2021-03-23-10-51-32.png)
+* divergence, monotonic convergence, alternating convergence, quadratic convergence
+  * ![](/assets/img/2021-03-23-12-07-03.png)
