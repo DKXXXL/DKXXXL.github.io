@@ -52,5 +52,5 @@ def SecantMethod(f, a_1, a_0, fp, tolerance=0):
       break
     x_i_1, x_i_2 = xi, x_i_1
 
-NewtonsMethod(lambda x: x**3 - 8, 3)
+# NewtonsMethod(lambda x: x**3 - 8, 3)
 # SecantMethod(lambda x: x**3 - 8, 0, 3, 2)
