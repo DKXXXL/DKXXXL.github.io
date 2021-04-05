@@ -44,7 +44,7 @@ Use text searching please
     * able to give structure to the data
     * enable reasoning about the data
 
-## Description Logic:
+## Description Logic + Rule Languages:
 * a strict subset of First Order Logic
 * classification, subsumption, hierarchical information
 * Domain are individuals
@@ -76,4 +76,37 @@ Use text searching please
   * is $K \models C(a)$ assertional?
   * Reductions:
     * $C$ is unsatisfiable iff $C \sqsubseteq \bot$
-    * $C \equiv D \iff C \sqsubseteq$
+    * $C \equiv D \iff C \sqsubseteq D$ and $D \sqsubseteq C$
+    * disjointness = intersection is subseteq of bottom
+    * other reductions
+      * ![](../assets/img/2021-04-04-19-15-02.png)
+  * Translation to First Order Logic:
+    * ![](../assets/img/2021-04-04-19-15-58.png)
+  * Web Ontology can be Description Logic Based or Rule based
+* DL's advantage 
+  * it is decidable nad less (time)-complex, has well-defined semantic
+      * a lot of inference tasks
+* DL's limitation:
+  * ![](../assets/img/2021-04-04-20-11-20.png)
+* Rule language:
+  * head, body
+  * ![](../assets/img/2021-04-04-20-20-04.png)
+  * Horn-based Rule Language
+    * ![](../assets/img/2021-04-04-20-21-36.png)
+    * Expressive Limitation of Horn Rules
+      * No disjunctions and existential quantifiers in the head.
+      * No negation in the body
+* Description Language vs. Rule Language
+  * ![](../assets/img/2021-04-04-20-22-59.png)
+  * So combining two seems good
+* Combining DL and Rules
+  * Homogeneous Approaches: Tight Semantic Integration
+    * make no distinction between two vocabulary; include both parts; sub parts have exactly same semantic as the original ones
+    * Rules may be used for defining classes and ontologies 
+    * Undecidable
+    * Example:Semantic Web Rule Language (SWRL):
+      * ![](../assets/img/2021-04-04-20-53-23.png)
+  * Hybrid Approaches: Strict Semantic separation
+    * make distinction between rule predicates and ontology predicates
+    * rule cannot be used to define classes and properties of ontologies
+    * communication via safe interface
