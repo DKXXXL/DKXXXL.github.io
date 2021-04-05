@@ -146,8 +146,8 @@ Use text searching please
     * because we are working on propositional case:
       * every explanation will be negation of clauses/conjunction of literals
         * ![](../assets/img/2021-04-04-22-39-22.png)
-      * Thus we only need prime implicates
-      * prime implicate for explanation
+      * Thus we only need to compute prime implicates
+      * computing prime implicate for computing explanation
         * ![](../assets/img/2021-04-04-23-20-47.png)
         * ![](../assets/img/2021-04-04-23-26-59.png)
 * Prime implicate
@@ -160,6 +160,7 @@ Use text searching please
   * we can also compute validity/entailment using prime implicate
     * to query $KB \models A$ we just compute $KB$'s prime implicate and see if $A$ is inside
 * Abductive Diagnosis: 
+  * $KB \cup input \cup \alpha \models$ observation
   * using abnormal behaviour (Fault Models) to compute if $KB \models$ (**entailed**) observed behaviour
   * then making a table, enumerating $Ab(b_i)$
     * ![](../assets/img/2021-04-04-23-39-17.png)
@@ -170,6 +171,7 @@ Use text searching please
     * the other solutions include $Abn(b_1) \land \neg Abn(a_1) \land \neg Abn(a_2)$
       * $Abn(b_2) \land \neg Abn(a_1) \land \neg Abn(o_1)$
 * Consistency-based Diagnosis:
+  * $KB \cup input \cup \{Abn(k), \neg Abn(q) : k \in D, q \not \in D\} \cup$ observation is consistent
   * similar, also considering fault models
   * but find those cases that **consistent** with observed behaviour
   * but find a minimal set of $D$
@@ -177,3 +179,59 @@ Use text searching please
     * example:
     * ![](../assets/img/2021-04-04-23-45-15.png)
     * ![](../assets/img/2021-04-04-23-44-52.png)
+
+## Situation Calculus
+* situations : world history
+  * $S_0$ intial situation
+  * $do(a, S)$ situation that resulting doing action $a$
+    * e.g. $do(put(b,c) (do(put(c,d), S_0)))$
+  * actions
+  * fluent: predicate/function dependent on situation
+* In the following: all free varaibles are assumed to be universally quantified
+* Action Precondition
+  * Precondition Axiom:
+    * ![](../assets/img/2021-04-05-00-57-28.png)
+* Action Effect
+  * effect axiom:
+    * ![](../assets/img/2021-04-05-00-58-11.png)
+* Projection task：
+  * Given a sequence of action, to see whether the resulting situation is true w.r.t. something
+  * $KB \models \Phi(do(\vec{a}, S_0))$
+* Legality Task:
+  * Detect if a sequence of action is valid
+    * with the prescence of precondition axiom
+  * Example:
+    * ![](../assets/img/2021-04-05-01-02-39.png)
+* Frame Problem:
+  * to state fluents are uneffected by performing an action, otherwise we cannot deduce a lot of things
+  * Frame Axioms: To state something unchanged
+    * example:
+    * ![](../assets/img/2021-04-05-01-04-12.png)
+  * Frame problem:
+    * we will need to state a large number of frame axioms
+      * ![](../assets/img/2021-04-05-01-05-20.png)
+* Normal Form for Effect Axiom
+  * ![](../assets/img/2021-04-05-10-18-12.png)
+  * example
+    * ![](../assets/img/2021-04-05-10-19-07.png)
+* Causal Completeness Assumption:
+  * Positive/Negative Normal form Effect Axiom characterize all the condition a fluent changes in the successor situation
+  * Implication: Explanation Closure Axioms:
+    * ![](../assets/img/2021-04-05-10-21-03.png)
+* Unique Name Assumption:
+  * injectivity of action constructor
+    * ![](../assets/img/2021-04-05-10-22-22.png)
+* Consistency of Effect Axiom:
+  * For every Fluent $F$
+    * $\neg P_F(\bar{x}, a, s) \lor \neg N_F(\bar{x}, a, s)$
+      * not possible to both holds
+* Successor State Axiom:
+  * ![](../assets/img/2021-04-05-10-24-27.png)
+* Reiter's Approach
+  * ![](../assets/img/2021-04-05-10-24-58.png)
+  * advantage
+    * only need $n+m$ axioms to solve Frame Problem
+    * length of each successor axiom roughly propotional to the number of actions affecting fluent
+    * Conciseness and Perspicuity of the solution relies on
+      *  ![](../assets/img/2021-04-05-10-26-50.png)
+      *  i.e. if an effect axiom has two fluent in disjunction, then it cannot become normal form
