@@ -58,6 +58,7 @@ Use text searching please
   * ![](/assets/img/2021-04-04-00-06-49.png)
 * Extension of $\mathcal{AL}$
   * ![](/assets/img/2021-04-04-00-07-30.png)
+  * $\ge n \ R.C = \{x : \|\{y: (x,y) \in R^I \land y \in C\}\| \ge n\}$
 * Terminological Sentences:
   * subsumption: $C \sqsubseteq D$ : $C^I \subseteq D^I$
   * Definition: $C \equiv D$ : $C^I = D^I$
@@ -248,6 +249,8 @@ Use text searching please
     * ![](/assets/img/2021-04-05-13-45-51.png)
   * STRIPS operators are specified by preconditions and postconditions
     * ![](/assets/img/2021-04-05-13-50-07.png)
+    * example:
+      * ![](/assets/img/2021-04-06-00-01-09.png)
   * each state is a set of ground atomic proposition
     * if goal is subset of the state then we are done
   * STRIPS planning problem and solutions
