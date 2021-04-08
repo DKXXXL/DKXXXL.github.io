@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Knowledge Base Application Concept"
+title:  "a little Galois Theory"
 date:   2021-04-08 00:56:11 -0400
 categories: CS
 ---
