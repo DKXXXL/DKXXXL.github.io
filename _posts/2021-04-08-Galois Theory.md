@@ -45,8 +45,8 @@ Final lecture note of MAT347 Winter 2021.
 * Easy : reverses inclusions: smaller fields corresponds to bigger subgroup
 ### Prop:
 * Suppose $E$ is the splitting field of $f(x) \in F[x]$ (contains all the roots of $f$)
-  * then $|Aut(E/F)| \le [E : F]$
-  * $|Aut(E/F)| = [E:F] \iff f(x)$ is separable (can become linear factors, splits completely $E$) (???)
+  * then $\|Aut(E/F)\| \le [E : F]$
+  * $\|Aut(E/F)\| = [E:F] \iff f(x)$ is separable (can become linear factors, splits completely $E$) (???)
     * separable : its roots are distinct in an algebraic closure of K, that is, the number of distinct roots is equal to the degree of the polynomial
     * only one issue in character = p
 * proof: $F(a) \mapsto F(\sigma a)$ will be extends to $E \mapsto E$
@@ -57,7 +57,7 @@ Final lecture note of MAT347 Winter 2021.
 * Example:
   * $\Complex/R$ where $\sigma : z \mapsto \overline{z}$
     * $Aut(\Complex/R) = Gal(\Complex/R) = \{e, \sigma\}$
-    * $[\Complex : R] = 2 = |Aut(\Complex / R)|$
+    * $[\Complex : R] = 2 = \|Aut(\Complex / R)\|$
   * $Q[\sqrt{d}]/Q$ is of degree 2
     * then $Aut(Q(\sqrt{d}/Q)) = \{e, x+\sqrt{d} \mapsto x - y \sqrt{d}\}$
 ***
