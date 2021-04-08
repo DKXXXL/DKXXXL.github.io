@@ -75,4 +75,4 @@ Final lecture note of MAT347 Winter 2021.
     * requiring galois group is a solvable group
     * $S_2,S_3, S_4$ are solvable, but $S_5$ is not
       * but "most" of 5-th power has $S_5$ as Galois Group
-      * 
+* Legend says Galois finish all these in one night
