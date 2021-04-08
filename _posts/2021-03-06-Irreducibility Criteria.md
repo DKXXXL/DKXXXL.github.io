@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Irreducibility Criteria"
-date:   2021-03-04 00:56:11 -0400
+date:   2021-03-06 00:56:11 -0400
 categories: Math
 ---
 To decides if an element in a (polynomial) ring can be reduced or not 
