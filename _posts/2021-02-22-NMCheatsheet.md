@@ -443,3 +443,34 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
   * end conditions: 
     * clamped cubic spline interpolation, natural cubic spline interpolation, not-a-knot cubic spline interpolation
     * ![](/assets/img/2021-04-19-10-50-06.png)
+    * ![](/assets/img/2021-04-19-10-55-36.png)
+  * Error of the cubic spline interpolation
+    * ![](/assets/img/2021-04-19-10-57-14.png)
+    * Similar order error bounds hold for the not-a-knot and the natural cubic spline inter- polants.
+    * If $f^{(4)} = 0$ (say $f$ is polynomial of degree up to 3), then error is zero, interpolant is exactly
+    * if we double the data points, we will decrease error bound by a factor of 16
+    * we say convergence rate is of fourth order
+* Re-cap
+  *  A cubic spline is a cubic pp (thus it can be written in the form (10)) satisfying thecontinuity conditions (11)-(13).
+  * A cubic spline interpolant is a cubic spline (i.e. a cubic pp of the form (10)) satisfying, besides the continuity conditions (11)-(13), the interpolating conditions (14), and one type of end-conditions among (15), (16), (17) or (18).
+* MATLAB spline:
+  * ![](/assets/img/2021-04-19-11-02-44.png)
+* Construction of clamped cubic spline interpolant:
+  * you can see it from note5pp2
+* Rate of Convergence of interpolation:
+  * A method with order $p$ satisfies $e_n \approx kn^{-p}$ for some $k$
+    * ![](/assets/img/2021-04-19-11-25-27.png)
+    * ![](/assets/img/2021-04-19-11-25-59.png)
+* Experimentally determine the order of convergence of an interpolation method
+  * ![](/assets/img/2021-04-19-11-27-19.png)
+* Piecewise cubic Hermite Interpolation
+  * advantage over cubic spline interpolant
+    * incorporate derivative data points
+    *  original data may not be smooth enough to be cubic spline interpolated
+    *  shape preserving (presrving local max/min and montonicity)
+    *  ![](/assets/img/2021-04-19-12-08-33.png)
+ * calculate 
+   * ![](/assets/img/2021-04-19-12-08-59.png)
+   * ![](/assets/img/2021-04-19-12-13-15.png)
+   * just first deriviate continuous and interpolants.
+
