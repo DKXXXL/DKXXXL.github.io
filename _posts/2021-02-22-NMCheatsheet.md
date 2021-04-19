@@ -352,3 +352,94 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
   * ![](/assets/img/2021-03-23-12-07-03.png)
 * matrix inverse, 2x2
   * ![](/assets/img/2021-03-25-12-24-08.png)
+
+## Polynomial Interpolation:
+* Weierstrass Theorem:
+  * ![](/assets/img/2021-04-18-18-02-21.png)
+* Horner's Rule:
+  * Standard algorithm to evaluate a polynomial
+  * ![](/assets/img/2021-04-18-21-29-27.png)
+    * about $O(n)$ with degree $n$
+  * Horner's rule for evaluating polynomial
+  * ![](/assets/img/2021-04-18-21-30-58.png)
+    * NDD (Newton's Divided Difference) form also have a simple algorithm to evaluate
+* Existence and uniqueness of the interpolating polynomial
+  * Theorem: Given data $(xi, fi)$, $i = 0, ... , n$, with the $xi$ being distinct, there exists a unique polynomial of degree at most $n$, interpolating the data
+* Polynomial using monomial basis
+  * for $p_n(x) = a_0 + a_1x^1 + ... a_nx^n$
+  * with $n+1$ data $(x_i, f_i)$, we decides $n+1$ coefficient
+  * ![](/assets/img/2021-04-18-21-39-03.png)
+    * $B$ is called Vandermonde matrix, non singular but ill-conditioned for large $n$
+    * we may have $a_n = 0$ indicating degree less than $n$
+  * in matlab we use
+    * pn=polyfit(xi,yi,n) finding a polynomial with degree at most n, but requiring xi has n+1 elements
+      * polyval(pn, x) will eval pn on x 
+* Polynomial Interpolation with Lagrange basis
+  * Assume we interpolate on $(x_i,f_i)$ with $i=0,..,n$
+  * Define $l_j^{(n)}(x)$ basis functions
+    * ![](/assets/img/2021-04-18-21-49-24.png)
+      * with property that $l_j^{(n)}(x_j) = 1$ but zero at other data points
+  * ![](/assets/img/2021-04-18-21-57-11.png)
+  * Example:
+    * ![](/assets/img/2021-04-18-21-57-45.png)
+* Polynomial Interpolating with Newton's basis
+  * NDD : Newton's Divided Differences: $f[x_i,..,x_j]$
+    * Example
+    * ![](/assets/img/2021-04-18-22-15-38.png)
+    * ![](/assets/img/2021-04-18-22-16-18.png)
+    * ![](/assets/img/2021-04-18-22-38-04.png)
+      * ![](/assets/img/2021-04-18-22-38-57.png)
+      * $a_i = f[x_0,x_1,...,x_i]$\
+    * Example: incrementing:
+      * ![](/assets/img/2021-04-18-22-39-35.png)
+    * complexity:
+      * construct NDD takes $O(n^2)$
+      * takes $O(n)$ flops to evaluate one point
+      * often there are much more evluation points than $n$, thus of much higher cost than $O(n^2)$
+* Comparison of three basis: Monomial, Lagrange, Newton
+  * ![](/assets/img/2021-04-19-07-06-58.png)
+  * ![](/assets/img/2021-04-19-07-07-23.png)
+    * for machine computational purpose, Newton is preferred
+* Error in polynomial interpolation
+  * ![](/assets/img/2021-04-19-07-09-27.png)
+    * if f happens to be a polynomial of degree at most n, i.e. $f^{(n+1)} = 0$, then the interpolant is just f itself
+  * The error at interpolant is zero
+  * Denote $W(x) = \prod_i(x-x_i)$
+  * ![](/assets/img/2021-04-19-07-22-40.png)
+  * If the points xi are equidistant, W(x) tends to be larger towards the endpoints and smaller towards the midpoint (a + b)/2.
+  * **Chebychev points**:
+    * Certain choices for non-equidistant xi’s (denser towards the endpoints and sparser towards the midpoint) even-up W(x) along [a, b], so that max abs(W(x)) is minimized. Such choices are the so-called Chebychev points.
+  * problems of polynomial interpolation
+    * In order to get a fairly good approximation to a function f(x) by an interpolating polynomial of nth degree, it is often necessary to use a fairly large n. Unfortunately, polynomials of high degree often exhibit an oscillatory behaviour towards the endpoints.
+      * ![](/assets/img/2021-04-19-09-11-03.png)
+      * This problem is partly overcome by using the Chebyshev points, but we don't always have rights to choose data points
+      * high degree polynomial 
+        * had Vandermonde matrix and thus ill-conditioned, 
+        * sensitive to small pertubations of the coefficient 
+        * amplify error when doing evaluation of the polynomial
+## Piecewise Polynomial Interpolation:
+* advantage compared to poly interpolant:
+  * avoids oscillatory behaviour for large n;
+  * guarantees that the error decreases as n increases;
+  * often leads to well-conditioned matrices;
+  * requires O(n) flops for construction and O(1) flops for evaluation per data point.
+* piecewise polynomial, spline, knots, nodes, breakpoints, gridpoints
+  * ![](/assets/img/2021-04-19-09-24-48.png)
+  * ![](/assets/img/2021-04-19-09-28-21.png)
+  * A pp p(x) of degree N w.r.t. ∆ is often written as a function with n branches, with $(N+1)n$ coefficients
+    * For example, if p(x) is continuous at the interior knots, (N + 1)n − (n − 1) coefficients uniquely define the pp. (Because there will be n-1 equations)
+    * In general, a pp of degree N w.r.t. ∆ with continuous derivatives up to order k is uniquely defined by d = (N + 1)n − (k + 1)(n − 1) coefficients. 
+    * For example, $P^1_{\Delta,-1}$ has dimension $2n$ (non continuous at all, thus -1)
+    * We then say that the dimension of the space $P^N_{\Delta,k}$ of pps of degree N w.r.t. ∆ with continuous derivatives up to order k is d.
+    * Thus The dimension of maximum continuity (smooth) splines of degree N w.r.t. ∆ is $d = (N + 1)n − N(n − 1) = n + N$
+* Liner spline interpolation
+  * ![](/assets/img/2021-04-19-09-43-18.png)
+  * Error of linear spline interpolation 
+    * ![](/assets/img/2021-04-19-10-42-00.png)
+    * if we doubles $n$ (take twice the number of subintervals ~ almost twice number of data points), we can decrease our error bound by a factor of 4
+    * No computation needed for linear spline interpolation, but evaluation requires finding subinterval and $O(1)$ calculation
+* Cubic Spline Interpolant
+  * ![](/assets/img/2021-04-19-10-44-35.png)
+  * end conditions: 
+    * clamped cubic spline interpolation, natural cubic spline interpolation, not-a-knot cubic spline interpolation
+    * ![](/assets/img/2021-04-19-10-50-06.png)
