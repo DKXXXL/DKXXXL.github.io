@@ -320,7 +320,7 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
   * ![](/assets/img/2021-03-23-10-31-01.png)
   * here $f(x^{(k)})$ is called residual of $f$ at $x^{(k)}$
   * none of the stopping criteria is perfect, any of them might lead to large error of the root
-    * note that by Taylor Expansion at $x*$, we know $\|x^{(k)} - x*\| \approx \frac{\epsilon}{\|f'(x*)\|}$, where we cannot bound $\|f'(x*)\|$
+    * note that by Taylor Expansion at $x\*$, we know $\|x^{(k)} - x\*\| \approx \frac{\epsilon}{\|f'(x\*)\|}$, where we cannot bound $\|f'(x\*)\|$
 * order of convergence, rate of convergence, asymptotic error constant
   * ![](/assets/img/2021-03-23-10-40-20.png)
   * ![](/assets/img/2021-03-23-10-41-12.png)
@@ -328,7 +328,8 @@ and $s$ are interchanged, then columns k and s are also interchanged. $(PAP^T = 
 * Bisection method: detecting the middle, using Thm 1
 * Newton's method: $x^{(n+1)} = x^{(n)} - \frac{f(x^{(n)})}{f'(x^{(n)})}$ 
   * it is a fix-point algorithm, so we can use Thm 6 to detect convergence
-    * since $f(x*) = 0$, we can prove $g'(x*) = \frac{ff''(x)}{f'(x)^2} = 0$
+    * since $f(x^{\*}) = 0$, we can prove $g'(x\*) = \frac{ff''(x)}{f'(x)^2} = 0$
+    * ![](/assets/img/2021-04-20-20-44-21.png)
   * for several roots, no guarantee where Newton's method will converge to
   * When root has mupltiplicative > 1, $\beta = 1, \kappa = 1 - \frac{1}{m}$
   * modified newton's method:
