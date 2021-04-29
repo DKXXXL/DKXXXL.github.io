@@ -5,6 +5,16 @@ date:   2021-01-07 00:56:11 -0400
 categories: CS Logic
 ---
 
+Daniel Gratzer, in Multimodal Dependent Type Theory:
+
+> Canonicity is traditionally established through a logical relation. However, this method becomes very complicated when we have universes, as their presence makes the definition by induction on types impossible. It is instead necessary to construct a (large) relation on types, which associates a pair of types with a PER; the
+logical relation on terms is then subordinated to this relation on types. This technique requires significant effort, and involves many proofs by simultaneous induction.
+This approach can be simplified by replacing proof-irrelevant logical relations by a proof-relevant gluing construction.
+This leads to the construction of a model in which (a) types are paired with proof-relevant predicates and (b) terms are equivalence classes of syntactic terms, along with a (type-determined) proof of their canonicity.
+
+
+***
+
 The issue with Mitchell's notes on categorical glueing is that, it is still too abstract. 
 
 It reveals (sort-of) the relationship between categorical glueing and logical relation, but failed to demonstrate using categorical glueing to prove all sorts of meta-theory. (i.e. Fails to explain how to think like category theorists.)
@@ -38,4 +48,7 @@ I may not be able to understand Section 2; Sterling doesn't suggest reading the 
    3. reflection $\uparrow^T : Ne^T \rightarrow [T]$
    4. reification $\downarrow^T : [T] \rightarrow Nf^T$ (concretization, making semantic object into a syntactic term in object language)
    5. The weirdest thing is that I don't find the "fresh" condition and its solution really care about alpha-equivalence. It particularly use liftable term to give a more detailed implementation, but I don't think fresh is determinsitic during reification (even in the new version of NbE) (i.e. the chosen $x$ seems random and alpha-equivalent functions might not end up same syntactic term)
-   6. But I don't really care...
+   6. More importantly, why did anyone come up neutral and normal? I mean normal form seems natural, but why neutral expression? How does this concept appear?
+   7. But I don't really care... We are for glueing 
+***
+TBC
