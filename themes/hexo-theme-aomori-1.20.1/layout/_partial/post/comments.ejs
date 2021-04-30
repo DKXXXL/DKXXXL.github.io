@@ -1,0 +1,56 @@
+<% if (config.aomori_disqus_shortname){ %>
+<section class="comments comments-disqus">
+    <div id="disqus_thread"></div>
+    <script>
+        ;(function () {
+            // DON'T EDIT BELOW THIS LINE
+            var d = document,
+                s = d.createElement('script')
+            s.src =
+                'https://<%- config.aomori_disqus_shortname %>.disqus.com/embed.js'
+            s.setAttribute('data-timestamp', +new Date())
+            ;(d.head || d.body).appendChild(s)
+        })()
+    </script>
+</section>
+<% } %>
+
+<% if (config.aomori_disqusjs){ %>
+<section class="comments comments-disqusjs">
+    <div id="disqus_thread"></div>
+</section>
+<% } %>
+
+<% if (config.aomori_gitalk){ %>
+<section class="comments">
+    <div id="gitalk-container"></div>
+</section>
+<% } %>
+
+<% if (config.aomori_valine && config.aomori_valine.enable){ %>
+<section class="comments">
+    <div id="valine-container"></div>
+</section>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<% } %>
+
+<% if (config.aomori_remark42 && config.aomori_remark42.enable){ %>
+<div id="remark42"></div>
+<script>
+    (function() {
+        window.remark_config = {
+            host: "<%= config.aomori_remark42.host || '' %>",
+            site_id: "<%= config.aomori_remark42.site_id || '' %>",
+            max_shown_comments: "<%= config.aomori_remark42.max_shown_comments || 15 %>",
+            theme: "<%= config.aomori_remark42.theme || 'dark' %>",
+            locale: "<%= config.aomori_remark42.locale || 'en' %>",
+            show_email_subscription: "<%= config.aomori_remark42.show_email_subscription || false %>",
+            components: ['embed']
+        }
+        var d = document, s = d.createElement('script');
+        s.src = remark_config.host + '/web/embed.js';
+        s.defer = true;
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<% } %>

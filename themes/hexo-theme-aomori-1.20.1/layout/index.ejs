@@ -1,0 +1,15 @@
+<div class="index">
+  <% page.posts.each(function(post){ %>
+    <% if (post.layout === 'tweet'){ %>
+      <%- partial('_partial/article-tweet', {post: post}) %>
+    <% } else { %>
+      <%- partial('_partial/article-index', {post: post, index: true}) %>
+    <% } %>
+  <% }) %>
+
+  <% if (page.total > 1){ %>
+    <nav class="pagination">
+        <%- paginator() %>
+    </nav>
+  <% } %>
+</div>

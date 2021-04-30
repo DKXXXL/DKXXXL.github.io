@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <%
+        var title = page.title;
+        if (is_archive()){
+        title = __('Archive');
+        if (is_month()){
+            title += ' | ' + page.year + '/' + page.month;
+        } else if (is_year()){
+            title += ' | ' + page.year;
+        }
+        } else if (is_category()){
+            title = __('Category') + ' | ' + page.category;
+        } else if (is_tag()){
+            title = __('Tag') + ' | ' + page.tag;
+        }
+    %>
+    <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <% if (config.aomori_google_site && config.aomori_google_site.enable){ %>
+      <meta name="google-site-verification" content="<%= config.aomori_google_site.id %>" />
+    <% } %>
+
+    <% if (config.aomori_search_algolia){ %>
+        <%- algolia_search_config() %>
+    <% } %>
+
+    <% if (config.rss){ %>
+    <link rel="alternate" href="<%= url_for(config.rss) %>" title="<%= config.title %>" type="application/atom+xml">
+    <% } %>
+
+    <% if (config.favicon){ %>
+    <link rel="icon" href="<%- config.favicon %>">
+    <% } %>
+
+    <% if (config.aomori_gitalk){ %>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <% } %>
+
+    <% if (config.aomori_disqusjs){ %>
+    <link rel="stylesheet" href="https://unpkg.com/disqusjs@1.3/dist/disqusjs.css">
+    <% } %>
+
+    <%- css(`/dist/build.css?v=${theme.version}`) %>
+
+    <script>
+        window.isPost = <%- is_post() %>
+        window.aomori = {
+            <% if (config.aomori_gitalk){ %>
+            gitalk: {
+                enable: <%= config.aomori_gitalk.enable %>,
+                clientID: "<%= config.aomori_gitalk.clientID %>",
+                clientSecret: "<%= config.aomori_gitalk.clientSecret %>",
+                repo: "<%= config.aomori_gitalk.repo %>",
+                owner: "<%= config.aomori_gitalk.owner %>",
+                admin: [<% config.aomori_gitalk.admin.forEach(function(item){%>"<%=item %>",<% }) %>],
+                distractionFreeMode: <%= config.aomori_gitalk.distractionFreeMode %>  // Facebook-like distraction free mode
+            },
+            <% } %>
+            <% if (config.aomori_valine){ %>
+            valine: {
+                enable: <%= config.aomori_valine.enable || false %>,
+                appId: "<%= config.aomori_valine.appId || '' %>",
+                appKey: "<%= config.aomori_valine.appKey || '' %>",
+            },
+            <% } %>
+            <% if (config.aomori_disqusjs){ %>
+            disqusjs: {
+              enable: <%= config.aomori_disqusjs.enable || false %>,
+              shortname: "<%= config.aomori_disqusjs.shortname || '' %>",
+              siteName: "<%= config.aomori_disqusjs.siteName || '' %>",
+              api: "<%= config.aomori_disqusjs.api || 'https://disqus.skk.moe/disqus/' %>",
+              apikey: "<%= config.aomori_disqusjs.apikey || '' %>",
+              nesting: "<%= config.aomori_disqusjs.nesting || 4 %>",
+              nocomment: "<%= config.aomori_disqusjs.nocomment || '这里冷冷清清的，一条评论都没有' %>",
+              admin: "<%= config.aomori_disqusjs.admin || '' %>",
+              adminLabel: "<%= config.aomori_disqusjs.adminLabel || '' %>",
+            },
+            <% } %>
+        }
+        window.aomori_logo_typed_animated = <%= config.aomori_logo_typed_animated || false %>
+        window.aomori_search_algolia = <%= config.aomori_search_algolia || false %>
+
+    </script>
+
+</head>

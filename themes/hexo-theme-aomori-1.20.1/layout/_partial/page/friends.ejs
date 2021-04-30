@@ -1,0 +1,22 @@
+<div class="friends-links clearfix">
+    <% for (var link in site.data.friends) { %>
+    <a href="<%= site.data.friends[link].url %>" rel="nofollow" target="_blank"> <%= site.data.friends[link].name %> </a>
+    <% } %>
+</div>
+
+<% if (post.content){ %>
+<article
+  id="<%= post.layout %>-<%= post._id %>"
+  class="article article-type-<%= post.layout %>"
+>
+    <div class="article-inner">
+        <div class="article-entry post-inner-html">
+            <%- post.content %>
+        </div>
+    </div>
+</article>
+<% } %>
+    
+<% if (post.comment ){ %>
+<%- partial('../post/comments') %>
+<% } %>

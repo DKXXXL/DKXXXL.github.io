@@ -1,0 +1,29 @@
+<div class="columns clearfix">
+        <div class="column col-md-12">
+            <% site.data.photography.forEach(function(item, index){ %>
+                <% if (((index) % 3) === 0) { %>
+                    <%- partial('photography-item', {item}) %>
+                <% } %> 
+            <% }) %>
+        </div>
+        <div class="column col-md-12">
+            <% site.data.photography.forEach(function(item, index){ %>
+                <% if (((index) % 3) === 1) { %>
+                    <%- partial('photography-item', {item}) %>
+                <% } %> 
+            <% }) %>
+        </div>
+        <div class="column col-md-12">
+            <% site.data.photography.forEach(function(item, index){ %>
+                <% if (((index) % 3) === 2) { %>
+                    <%- partial('photography-item', {item}) %>
+                <% } %> 
+            <% }) %>
+        </div>
+</div>
+
+<style>
+.main .inner {
+    padding: 0;
+}
+</style>

@@ -1,0 +1,15 @@
+<% if (post.photos && post.photos.length){ %>
+
+<div class="swiper-container article-gallery">
+  <div class="swiper-wrapper">
+    <% post.photos.forEach(function(photo, i){ %>
+      <div class="swiper-slide">
+        <img src="<%- url_for(photo) %>" itemprop="image">
+      </div>
+    <% }) %>
+  </div>
+  <!-- 如果需要分页器 -->
+  <div class="swiper-pagination"></div>
+</div>
+
+<% } %>
