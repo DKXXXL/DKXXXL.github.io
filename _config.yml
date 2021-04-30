@@ -31,7 +31,7 @@ plugins:
 
 kramdown:
   math_engine: katex
-
+  parse_block_html: true
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
