@@ -11,6 +11,7 @@
     {% if page.layout == "post" %}
     <nav>
       <h4>Table of Contents</h4>
+      {% include toc.html html=content %}
     </nav>
     {% endif %}
 
