@@ -10,4 +10,4 @@ This note is following along (as a side comment/ verification/ concrete computat
 * [Notes on sconing and relators](https://link.springer.com/chapter/10.1007%2F3-540-56992-8_21)
 * [Type Systems for Programming Langauges](https://www.sciencedirect.com/science/article/pii/B9780444880741500135)
 
-<iframe src="https://drive.google.com/file/d/11L8iwnwG-3T7E1OQk8sVElIua84vd9JR/preview" width="parent" height="480"></iframe>
+<iframe src="https://drive.google.com/file/d/11L8iwnwG-3T7E1OQk8sVElIua84vd9JR/preview" width="640" height="480"></iframe>
