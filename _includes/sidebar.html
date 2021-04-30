@@ -34,10 +34,15 @@
             {% endif %}
           {% endif %}
         {% endfor %}
+
+      {%- include social.html -%}
     </nav>
     {% endif %}
+    
 
     <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
-    <p class="small">{{ site.description }}</p>
+    <p style="font-size: 12px">{{ site.description }}</p>
+
+
   </div>
 </div>
