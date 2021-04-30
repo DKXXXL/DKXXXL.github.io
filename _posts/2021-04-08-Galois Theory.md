@@ -2,7 +2,7 @@
 layout: post
 title:  "a little Galois Theory"
 date:   2021-04-08 00:56:11 -0400
-categories: CS
+categories: Math
 ---
 Final lecture note of MAT347 Winter 2021. 
 # Galois Theory
