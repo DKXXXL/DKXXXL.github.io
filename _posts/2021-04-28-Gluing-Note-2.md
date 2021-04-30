@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Notes on Categorical Glueing, Part II"
-date:   2021-01-07 00:56:11 -0400
+date:   2021-04-28 00:56:11 -0400
 categories: CS Logic
 ---
 
