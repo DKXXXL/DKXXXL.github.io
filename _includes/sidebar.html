@@ -1,0 +1,48 @@
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h2>
+        <a href="{{ "/" | relative_url }}">
+          {{ site.title }}
+        </a>
+      </h2>
+    </div>
+
+    {% if page.layout == "post" %}
+    <nav>
+      <h4>Table of Contents</h4>
+      {% include toc.html html=content %}
+    </nav>
+    {% endif %}
+
+
+    {% if page.layout == "page" or page.layout == "home" %}
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ "/" | relative_url }}">Home</a>
+
+      {% comment %}
+        The code below dynamically generates a sidebar nav of pages with
+        `layout: page` in the front-matter. See readme for usage.
+      {% endcomment %}
+
+
+        {% assign pages_list = site.pages %}
+        {% for node in pages_list %}
+          {% if node.title != null %}
+            {% if node.layout == "page" %}
+              <a class="sidebar-nav-item active" href="{{ node.url }}">{{ node.title }}</a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+      {%- include social.html -%}
+    </nav>
+
+    <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+    <p style="font-size: 12px">{{ site.description }}</p>
+
+    {% endif %}
+    
+
+  </div>
+</div>

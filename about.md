@@ -1,15 +1,9 @@
 ---
 layout: page
-title: About ..
-permalink: /about-site/
+title: About
 ---
 
-## .. Me?
 
-EDJ is a undergraduate student from University of Toronto, who is interested in Mathematical Logic and Programming Language Theory.  
 
-## .. This Site?
+This page is powered by *Jeykll* and [Hyde](http://hyde.getpoole.com), together with The Table of Content Generator by [Allejo](https://github.com/allejo/jekyll-toc)
 
-Thanks to the base Jekyll theme *minima*. You can find out more info about customizing your Jekyll theme at Jekyll website.
-
-Also thanks to Github Page service.

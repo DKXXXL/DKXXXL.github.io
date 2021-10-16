@@ -27,7 +27,11 @@ markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-katex
 
+kramdown:
+  math_engine: katex
+  parse_block_html: true
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
@@ -39,3 +43,5 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+avatar: https://avatars.githubusercontent.com/u/16682424?v=4
+# avatar: https://abs-0.twimg.com/emoji/v2/svg/2728.svg
