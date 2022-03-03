@@ -44,8 +44,10 @@ For these four tutorials:
 *** 
 
 #### Some fragments of thought
+0. There are also [a full (maybe outdated) story](https://github.com/coq/coq/blob/master/dev/doc/parsing.md) of how the parsing command for plugin means. You might find it helpful.
 1. In `construction_game`, `find_reference` is annotated as deprecated and suggesting to use `Coqlib.lib_ref`. It is easier to use, for example, if you want to refer to the addition function for `nat`, then check Coq doc/source code, and looking for this sentence `Register add as num.nat.add.`. Then you can directly get the reference via `Coqlib.lib_ref "num.nat.add"`. It is written clear in `coqlib.mli`
 2. In Coq, some natural number literals and string literals will not be interpreted until certain syntax scope is open. This means natural number and string literals are not intrinsic data of Coq's core language. But it is still possible to reflect a OCaml string into Coq's string. Except for using the above idea that recursively calling constructor of string, 
    1. a quick and dirty way is to use `CAst.make @@ CPrim ( Constrexpr.String (Names.Id.to_string f))` for ` f: string`. to get a `Constrexpr.constr_expr`, which by `interp_constr_evars`, we can get a typed Coq string. 
    2. Check `Notation.interp_prim_token_gen` you will see how the string literals are handled -- 
    3. which also shows the downside -- we have to instantiate the `local_scope`. An easy way out is to, in Coq file, first open the string scope, then issue the command that will interpret the `CPrim of string`.
+3. If you wonder what is `econstr`, check [here](https://github.com/coq/coq/blob/master/dev/doc/econstr.md). Basically it is a typed term with some unsolved meta-variable. So the `Evd.evar_map` store the meta-variable. And `Global.env()` is about global definitions
