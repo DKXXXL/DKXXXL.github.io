@@ -6,3 +6,5 @@ Gemfile.lock
 .vscode
 
 _posts/*-welcome-to-jekyll.markdown
+node_modules
+.gitignore
