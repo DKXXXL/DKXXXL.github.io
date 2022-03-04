@@ -62,5 +62,32 @@ For these four tutorials:
   1. How does `.` become `MPdot`?
   2. How to make sure ModPath can access to the thing I want? (Like a database, or library something)
   3. Can I extend grammar for new core language? Not only new command, but also new constr_expr/EConstr.expr ?
-  4. How does type checking interplay with module parameter?
+  4. 3.5 What is wit_ all about?
+  5. How does type checking interplay with module parameter?
    -->
+
+
+***
+### Fragments of thought
+0. Coq program starts inside the folder `toplevel`, also `stm.mli` will call `Vernacinterp.interp` which handles the interpretation of vernacular commands in Coq. `stm` stands for *state-transaction-machine interface*
+1. `pcoq.mli` seems includes the key documentation of parser extension
+2. `GRAMMAR EXTEND Gram` is really just context free grammar (complete style), unlike in the plugin
+   1. For example, the  `GRAMMAR EXTEND Gram\nGlobal: [sth]` [sth]() here are all the non terminal I assume
+   2. Unlike in the plugin, `VERNAC COMMAND EXTEND ...` this style is very partial, and doesn't create new non-terminal symbol *explicitly*
+   3. Look at How [Mtac extends grammar](https://github.com/Mtac2/Mtac2/blob/0a52632b8203860c95f18c5c808712c6a9da0859/src/metaCoqInit.mlg#L104), it is definitely possible to extend using `GRAMMAR EXTEND`
+   4. Look at How Coq-Equations extends a existent [non-terminal](https://github.com/mattam82/Coq-Equations/blob/a65e6511038bfc33ed87b8526b5a3e4e3041b1a8/src/g_equations.mlg#L288)
+      1. Of course we know we cannot extend `constr_expr/EConstr.expr` because it is a OCaml data structure 
+      2. but we don't know after this parsing, for this new equation for this non-terminal, where will the data constructed by extended law go to? How to make control flow 
+3. How does `.` become `MPdot`?
+   1. The possible answer is on `g_constr.mlg:189`, we have a rule
+      1. `| id = ident; f = Prim.fields; i = univ_annot -> { let (l,id') = f in CAst.make loc @@ CRef (make_qualid loc (DirPath.make (l@[id])) id', i)` 
+         1. we should test this idea by putting an `reference/qualid` in plugin
+      2. Once CRef is created, the `Constrintern.internalize` will apply `intern_applied_reference` to analyze `CRef`, which again uses `intern_qualid`
+         1. which is called by `intern_gen`, which is called by `interp_constr_evars` to type check
+      3. Note that, `EConstr.t` ⊃ `GlobRef.t` ⊃ `KerName` ⊃ `ModPath.t`
+4. Where does `ModPath` refer to?
+5. When modifying the environment
+6. Manipulating context related to Module
+   1. `Environ.add_modtype` might be able to do modification
+      1. then what is `the_modtypetab` used for? why there is this side effect stuff
+      2. 
