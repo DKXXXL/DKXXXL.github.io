@@ -51,3 +51,16 @@ For these four tutorials:
    2. Check `Notation.interp_prim_token_gen` you will see how the string literals are handled -- 
    3. which also shows the downside -- we have to instantiate the `local_scope`. An easy way out is to, in Coq file, first open the string scope, then issue the command that will interpret the `CPrim of string`.
 3. If you wonder what is `econstr`, check [here](https://github.com/coq/coq/blob/master/dev/doc/econstr.md). Basically it is a typed term with some unsolved meta-variable. So the `Evd.evar_map` store the meta-variable. And `Global.env()` is about global definitions
+  
+
+### How far can I extend Parser?
+
+### Module Component
+1. The projection on module fields like `a.b.c` will be interpreted as `Names.ModPath.t`. 
+2. `MPdot` is the constructor that represent `.` projection; `MPbound of uniq_ident (* reference to a module parameter in a functor *)` (locate at `names.mli`) is also related
+  <!-- 
+  1. How does `.` become `MPdot`?
+  2. How to make sure ModPath can access to the thing I want? (Like a database, or library something)
+  3. Can I extend grammar for new core language? Not only new command, but also new constr_expr/EConstr.expr ?
+  4. How does type checking interplay with module parameter?
+   -->
