@@ -108,15 +108,25 @@ For these four tutorials:
        1.  this calls `declaremods.end_module`
 10. Consider the complexity of Module and all other facility. Directly simulate the Vernacular Command seems a better idea.
     1.  `interp_control` will call `Vernacentries.translate_vernac` seems to be the place that interpret a vernacular command
-    2.  still -- to call it requires setting up the `atts:Attributes.vernac_flags` which doesn't seem feasible.
+    2.  still -- to call it requires setting up the `atts:Attributes.vernac_flags` 
         1.  I still need to figure out which part is triggering the vernacular commandline.
-11.  `vernac_assumption` will call `comAssumption.do_assumptions` which seems pretty complicated
-    1.  When `Parameter` and `Axiom` are used, it is not related to `Global.push_named_assum`, so weird.
-    2.    `| Some b, NoDischarge -> Global (importability_of_bool b) | None, NoDischarge -> Global ImportDefaultBehavior` in `enforce_locality_exp` makes the control (setting the `scope`)
-    3.  For example, `Parameter` has `discharge=NoDischarge, Decls.assumption_object_kind=Definitional`, and thus `declare_axiom`
+    3.  It seems like `Stm.query` is the one that mainly handover to `interp_control`, however calling it is also infeasible because it is too stateful 
+    4.  Let's try to set up `atts:Attributes.vernac_flags` by empty list first
+    5.  I think `atts:Attributes.vernac_flags` is really just those attributes from compilers -- set to empty is totally valid
+11. `Vernacentries.translate_vernac`
+    1.  is called by `vernacinterp.interp_expr`, which is called by `vernacinterp.interp_control`, the `atts` is setup by `cmd.attrs` where `cmd` is inside the `vernac_control`
+    2.  `interp_control` is called by `vernacinterp.interp` which is called by `Stm.stm_vernac_interp`
+    3.  `Stm.stm_vernac_interp` will setup `st` using `State.get_cached at`
+    4.  `at` is of type `Stateid.t`, which can be constructed by `Stateid.dummy`
+    5.  `stm_vernac_interp` will pass on `expr: vernac_control` to `Vernacinterp.interp`
+    6.  `Stm.query` will use `parse_sentence` to construct `vernac_control`
+12.  `vernac_assumption` will call `comAssumption.do_assumptions` which seems pretty complicated
+    7.  When `Parameter` and `Axiom` are used, it is not related to `Global.push_named_assum`, so weird.
+    8.    `| Some b, NoDischarge -> Global (importability_of_bool b) | None, NoDischarge -> Global ImportDefaultBehavior` in `enforce_locality_exp` makes the control (setting the `scope`)
+    9.  For example, `Parameter` has `discharge=NoDischarge, Decls.assumption_object_kind=Definitional`, and thus `declare_axiom`
         1.  will be called instead of `declare_variable`, which is calling `push_named_assum` 
-12. Thank god there is the `Modops.module_type_of_module` function that can transform a module body 
-13. Why module type can have definition inside??
+13. Thank god there is the `Modops.module_type_of_module` function that can transform a module body 
+14. Why module type can have definition inside??
 
 
 
