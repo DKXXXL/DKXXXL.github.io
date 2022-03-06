@@ -64,6 +64,7 @@ For these four tutorials:
   3. Can I extend grammar for new core language? Not only new command, but also new constr_expr/EConstr.expr ?
   4. 3.5 What is wit_ all about?
   5. How does type checking interplay with module parameter?
+  6. How to instantiate [a term parametrized by a module type] by a module?
    -->
 
 
@@ -87,7 +88,35 @@ For these four tutorials:
       3. Note that, `EConstr.t` ⊃ `GlobRef.t` ⊃ `KerName` ⊃ `ModPath.t`
 4. Where does `ModPath` refer to?
 5. When modifying the environment
-6. Manipulating context related to Module
+6. The `Summary.frozen` seems to relates to all the current global information
+   1. `start_module` will call `protect_summaries` which generate summary and pass into `Lib.start_module`
+      1. which will again store this summary information by `add_entry.start_mod` in `Lib.start_mod`
+      2. `Summary.freeze()` and `Summary.unfreeze` will store and take out the snapshot of the memory and 
+      3. The problem is, I still cannot see how environment `Environ.env()` information are changed by the `Summary.freeze()` and `Summary.unfreeze`
+         1. Because `Global.env()` will just return `!global_env` at the end, and this `global_env` seems something Summary in charge
+         2. `Summary` is working because there are no "higher-order reference", like pointer to a pointer to a pointer, every `ref` points to an immutable stuff. So the idea is that, `Summary` `freeze` will record all the reference 
+         3. actually even if it is "higher-order reference", it is still working as long as every level of reference is registered in `Summary`. Then a one copy of a flat `Summary` is just like a deep copy
+7. Manipulating context related to Module
    1. `Environ.add_modtype` might be able to do modification
       1. then what is `the_modtypetab` used for? why there is this side effect stuff
-      2. 
+   2. `add_modtype` seems to have correspondence in `Global` and other modules
+8. `Contrexpr.module_ast_r` only include `CMident, CMapply, CMwith`, the part that refer to the outer usage of module
+   1. `Global.end_module` has indicate the complexity of module construction
+9. How to construct a module body?
+   1.  The interaction happens by `g_vernac.VernacDefineModule`, it will be translated to `vernac_define_module` and `vernac_begin_segment` in `vernacentries`
+   2.  `Vernacentries.vernac_end_module` seems to be the starting point of "internalizing" a module
+       1.  this calls `declaremods.end_module`
+10. Consider the complexity of Module and all other facility. Directly simulate the Vernacular Command seems a better idea.
+    1.  `interp_control` will call `Vernacentries.translate_vernac` seems to be the place that interpret a vernacular command
+    2.  still -- to call it requires setting up the `atts:Attributes.vernac_flags` which doesn't seem feasible.
+        1.  I still need to figure out which part is triggering the vernacular commandline.
+11.  `vernac_assumption` will call `comAssumption.do_assumptions` which seems pretty complicated
+    1.  When `Parameter` and `Axiom` are used, it is not related to `Global.push_named_assum`, so weird.
+    2.    `| Some b, NoDischarge -> Global (importability_of_bool b) | None, NoDischarge -> Global ImportDefaultBehavior` in `enforce_locality_exp` makes the control (setting the `scope`)
+    3.  For example, `Parameter` has `discharge=NoDischarge, Decls.assumption_object_kind=Definitional`, and thus `declare_axiom`
+        1.  will be called instead of `declare_variable`, which is calling `push_named_assum` 
+12. Thank god there is the `Modops.module_type_of_module` function that can transform a module body 
+13. Why module type can have definition inside??
+
+
+
