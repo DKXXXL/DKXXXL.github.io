@@ -86,6 +86,7 @@ For these four tutorials:
       2. Once CRef is created, the `Constrintern.internalize` will apply `intern_applied_reference` to analyze `CRef`, which again uses `intern_qualid`
          1. which is called by `intern_gen`, which is called by `interp_constr_evars` to type check
       3. Note that, `EConstr.t` ⊃ `GlobRef.t` ⊃ `KerName` ⊃ `ModPath.t`
+      4. thus `EConstr.mkRef` should be able to represent a module
 4. Where does `ModPath` refer to?
 5. When modifying the environment
 6. The `Summary.frozen` seems to relates to all the current global information
