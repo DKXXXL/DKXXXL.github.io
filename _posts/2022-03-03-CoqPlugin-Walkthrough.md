@@ -121,13 +121,17 @@ For these four tutorials:
     4.  `at` is of type `Stateid.t`, which can be constructed by `Stateid.dummy`
     5.  `stm_vernac_interp` will pass on `expr: vernac_control` to `Vernacinterp.interp`
     6.  `Stm.query` will use `parse_sentence` to construct `vernac_control`
-12.  `vernac_assumption` will call `comAssumption.do_assumptions` which seems pretty complicated
-    7.  When `Parameter` and `Axiom` are used, it is not related to `Global.push_named_assum`, so weird.
-    8.    `| Some b, NoDischarge -> Global (importability_of_bool b) | None, NoDischarge -> Global ImportDefaultBehavior` in `enforce_locality_exp` makes the control (setting the `scope`)
-    9.  For example, `Parameter` has `discharge=NoDischarge, Decls.assumption_object_kind=Definitional`, and thus `declare_axiom`
+12. `Vernacentries.translate_vernac` will not actually do anything but only pass the DSL data to 
+    1.  `interp_typed_vernac`, which will return a pair of "Lemma and Program" information
+    2.  these information will be propagated to `interp_gen`, and set into the global by `Vernacstate.Declare.set`
+    3.  it will also propagated up until `stm_vernac_interp`, but the returned value from `stm_vernac_interp` is largely ignored
+13.  `vernac_assumption` will call `comAssumption.do_assumptions` which seems pretty complicated
+    4.  When `Parameter` and `Axiom` are used, it is not related to `Global.push_named_assum`, so weird.
+    5.    `| Some b, NoDischarge -> Global (importability_of_bool b) | None, NoDischarge -> Global ImportDefaultBehavior` in `enforce_locality_exp` makes the control (setting the `scope`)
+    6.  For example, `Parameter` has `discharge=NoDischarge, Decls.assumption_object_kind=Definitional`, and thus `declare_axiom`
         1.  will be called instead of `declare_variable`, which is calling `push_named_assum` 
-13. Thank god there is the `Modops.module_type_of_module` function that can transform a module body 
-14. Why module type can have definition inside??
+14. Thank god there is the `Modops.module_type_of_module` function that can transform a module body 
+15. Why module type can have definition inside??
 
 
 
