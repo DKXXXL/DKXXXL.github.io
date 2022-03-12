@@ -131,7 +131,22 @@ For these four tutorials:
     6.  For example, `Parameter` has `discharge=NoDischarge, Decls.assumption_object_kind=Definitional`, and thus `declare_axiom`
         1.  will be called instead of `declare_variable`, which is calling `push_named_assum` 
 14. Thank god there is the `Modops.module_type_of_module` function that can transform a module body 
+## Modules
 15. Why module type can have definition inside??
+16. Each `ident` in parser can resolve to module, but generally a full path will resolve to `quald` = `reference`
+17. Look at `g_vernac.mlg`, we use parenthesis to indicate the 
+    1.  `Include (module_type)` 
+    2.  Module appliciation that resolve to `CMapply(module_expr, module_expr_atom)` is of type  
+    3.  So it seems that using `module_ast = module_ast_r CAst.t` is a good idea to refer to module, module type
+18. How to construct module type given a fixed module?
+    1.  `Nametab.locate_module` can get `ModPath.t` from `qualid`
+    2.  given a `ModPath.t`, using `(Declarations/Global/Environ).lookup_module` we can get `module_body`
+    3.  then `module_type_of_module` can extract `module_type_body`
+    4.  then `Environ.add_modtype` can add `module_type_body` into th environment
+        1.  `Global`migth have a better `add_modtype`
+        2.  `Declaremods.declare_modtype` might have a good idea on how to use this `add_modtype`
+    5.  
+19. To resolve 
 
 
 
