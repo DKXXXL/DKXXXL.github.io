@@ -138,15 +138,18 @@ For these four tutorials:
     1.  `Include (module_type)` 
     2.  Module appliciation that resolve to `CMapply(module_expr, module_expr_atom)` is of type  
     3.  So it seems that using `module_ast = module_ast_r CAst.t` is a good idea to refer to module, module type
-18. How to construct module type given a fixed module?
+18. How to extract module type given a fixed module?
     1.  `Nametab.locate_module` can get `ModPath.t` from `qualid`
     2.  given a `ModPath.t`, using `(Declarations/Global/Environ).lookup_module` we can get `module_body`
     3.  then `module_type_of_module` can extract `module_type_body`
     4.  then `Environ.add_modtype` can add `module_type_body` into th environment
         1.  `Global`migth have a better `add_modtype`
         2.  `Declaremods.declare_modtype` might have a good idea on how to use this `add_modtype`
-    5.  
-19. To resolve 
+19. However, the above seems very  unreliable,
+    1.  see `Declaremods.declare_modtype`, before `add_modtype`, there are a bunch of work on universe solving
+    2.  So the most reliable idea seems to be check how  `Printmod.print_module` reify the module signature information
+        1.  and then we use parser again (I know it is ugly)
+20. To resolve 
 
 
 
