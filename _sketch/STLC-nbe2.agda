@@ -1,4 +1,4 @@
--- This is just a sketch
+-- This is just a sketch of twisted gluing
 
 -- work in an extensional type theory, to formalize in agda, that
 --    would be allowing UIP, axiom K, rewriting
@@ -169,12 +169,28 @@ Tm  PresheafModel = PShR.mor -- possibly ok
 -- Next we need embed (Tms ⋅ T) into PShR
 --    also a lot functor in type of Con →  Set 
 YRTm : {C : SimpleSC} → C.Ty → PShR.ob -- ≡ Functor()
--- YRTm T = λ Γ → (C.Tm Γ T)
+-- YRTm T = λ Γ → (C.Tm Γ T), ... naturality because we have renaming embedding into Tms
 YRTms : {C : SimpleSC} → C.Con → PShR.ob
 -- YRTm Δ  = λ Γ → (C.Tms Γ Δ)
 
+YRNf : {C : NormalSC} → C.Ty → PShR.ob
+-- YRNf T = λ Γ → (C.Tm Γ T), ... naturality because we have renaming embedding into Nfs
 
-↓Ty : 
+-- similarly, we have YRNfs, YRNe, YRNes
+
+record NTy  (C : SimpleSC) where 
+  T : C.Ty 
+  PT : PShR.ob 
+  ↓Ty : PT ⇒ YRNf T 
+  ↑Ty : YRNe T ⇒ PT
+  Rnf : YRNf T ⇒ YRTm T
+  Rne : YRNe T ⇒ YRTm T
+
+
+NormalizationModel : (C : SimpleSC) → SimpleSC
+Ty NormalizationModel = NTy 
+
+ 
 
 ```
 
