@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Subst Lemma in categorical structure"
-date:   2022-06-03 00:56:11 -0400
+date:   2022-06-17 00:56:11 -0400
 categories: CatSemantic
 ---
 

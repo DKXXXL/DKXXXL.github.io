@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "Notes on CBPV"
-date:   2022-06-03 00:56:11 -0400
+date:   2022-07-09 00:56:11 -0400
 categories: Type-Theory
 ---
 This note is mainly trying to solve the following questions
-1. What is the motivation of CBPV?
+1. What is the motivation of CsBPV?
 2. Why there is a computation class of types?
 3. Why all positive types located in value but negative types located in computation?
 4. How to add new type construct? Do I just add positive type into value and negative type into computation? Why will it work? Do I have all the η rules magically? Especially when there is effect?
