@@ -40,15 +40,14 @@ But on the other hand, the 'quotiented-too-much' problem might provide a good sp
 
 ## Normal Form/Neutral Form
 
-Note that, due to similar reason, there cannot be any quotient in `Nf`, `Ne`, otherwise we are returning non-determinsitic representation.
+Note that, due to similar reason, there cannot be any quotient in `Nf`, `Ne`, otherwise we are returning to "equivalence class".
 
 ## But I thought we are working on figuring out the yoneda?
-The problem is back again as now we know `y(t) : Tms ? Γ ⇒ Tm ? T` is not working, it should be at least some term of type `?? : Tms ? Γ ⇒ Nf ? T`, but then 1. it is not yoneda embedding, 2. it is not even an arrow in one category!
+The problem is back again as now we know `y(t) : Tms ? Γ ⇒ Tm ? T` is not working, it should be at least some term of type `?? : Tms ? Γ ⇒ Nf ? T`, but then (1). it is not yoneda embedding, (2). it is not even an arrow in one category!
 
-2 is more serious, to fix this, we need to enlarge the presheaf category so that `Nf ? T`, `Ne ? T`, `Tm ? T`, `Tms ? T` are all objects in this category, and that is *Presheaf over Renaming Category*, because 
+2 is more serious, to fix this, we need to enlarge the presheaf category so that `Nf ? T`, `Ne ? T`, `Tm ? T`, `Tms ? T` are all objects in this category, and that is *Presheaf over Renaming Category* as the generalization of Kripke Semantic with context as words. (Sterling & Spitters, 2018) points out embedding functor `i : Ren-Cat → Nf-Cat`, `Ne-Cat` and `Tm-Cat`, and thus we have precomposition functors ` _∘i = i* : Pr(Nf-Cat) → Pr(Ren-Cat)`, thus `i*(Tms ? T)` and `i*(Nf ? Γ)` are all embedded objects in `Pr(Ren-Cat)`. 
 
 
-One most straight-forward idea is to evaluate an open term $t$ a function $\Tilde{t} : Γ → T$ in Haskell, which requires the "value" of free variable as input. After evaluation, as we believe there is no redex anymore, we need to \textbf{reify} Haskell's function $\Tilde{t}$ back into an AST data $t'$. One way to do that is at the beginning make that $\Tilde{t}$ to accept AST (or just neutral form) and also outputing AST (or just normal form).
 
 
 # A quick review of NbE Proof
