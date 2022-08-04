@@ -21,7 +21,7 @@ The motivations for Normalization by Evaluation(NbE) are various.
 
 
 
-# An intuitive inspiration for NbE proof
+# An intuitive inspiration for the structure of NbE proof
 <!-- Copy and paste the intuition from our draft -->
 
 
@@ -48,14 +48,40 @@ The problem is back again as now we know `y(t) : Tms ? Γ ⇒ Tm ? T` is not wor
 2 is more serious, to fix this, we need to enlarge the presheaf category so that `Nf ? T`, `Ne ? T`, `Tm ? T`, `Tms ? T` are all objects in this category, and that is *Presheaf over Renaming Category* as the generalization of Kripke Semantic with context as words. (Sterling & Spitters, 2018) points out embedding functor `i : Ren-Cat → Nf-Cat`, `Ne-Cat` and `Tm-Cat`, and thus we have precomposition functors ` _∘i = i* : Pr(Nf-Cat) → Pr(Ren-Cat)`, thus `i*(Tms ? T)` and `i*(Nf ? Γ)` are all embedded objects in `Pr(Ren-Cat)`. 
 
 
-# Summary of Denotation
+## Summary of Denotation
 
 To reflect syntactic information back to meta-logic, we use Yoneda Embedding to denote types/ctxs `T, Γ` and term `Γ ⊢ t : T` information in syntactical category with objects and arrows in `Pr(Ren-Cat)`.
 
-To make this denotation work, we need to make sure judgemental equal stuff are mapped to same things, i.e. We need to construct functors `〚_〛` that map types/ctxs and terms to objects and arrows in `Pr(Ren-Cat)` by constructing models of STLC syntax as QIIT. This is done by inductively construct stuff according to the signature of STLC. Let's call the "codomain" of `〚_〛` normalization structure -- then we have corresponding `NCon, NTy, NTm, NTms`. 
+To make this denotation work, we need to make sure judgemental equal stuff are mapped to same things, i.e. We need to construct functors `〚_〛` that map types/ctxs and terms to objects and arrows in `Pr(Ren-Cat)` by constructing models of STLC syntax as QIIT. This is done by inductively construct stuff according to the signature of STLC. Let's call the "codomain" of `〚_〛` normalization structure `N` -- then we have corresponding `NCon, NTy, NTm, NTms`, each of them will contain objects and arrows in `Pr(Ren-Cat)` -- roughly
+```Haskell
+record NCon : Set where 
+  syn : Con            -- storing the syntax
+  denote : Pr(Ren-Cat) -- the denotation
+
+Record NTm (Γ' : NCon) (T' : NTy) where 
+  syn : Tm Γ'.syn T'.syn 
+  -- we make sure we can peel back the original syntax from the denotation, one of the feature of categorical gluing
+  denote : Γ'.denote ⇒ T'.denote 
+  -- natural transformation between two presheaves
+```
 
 
-Once we make sure judgemental equal stuff are mapped to the same thing, and once we can decide the equality of mapped stuff, we can use this `〚_〛` to decide judgemental equality! But NbE is further -- it is something 
+Once we make sure judgemental equal stuff are mapped to the same thing, and once we can decide the equality of mapped stuff, we can use this `〚_〛` to decide judgemental equality! But NbE is further -- it is something close to partial evaluation so we need to port back from `NCon, NTy, NTm, NTms` to `Nf` stuff.
+
+Note that for `t : Tm Γ T` we have `〚t〛 : NTm 〚Γ〛 〚T〛` s.t. `〚t〛.denote : 〚Γ〛.denote ⇒ 〚T〛.denote`, thus we need a "quote" back or "reification" that is `〚T〛.denote ⇒ Nf ? T`, similarly, we need at least a "reflection" function `Nes ? T ⇒ 〚Γ〛.denote` to provide a proper input. Bridge them together, we have a big natural transformation
+`h_t : Nes ? Γ ⇒ 〚Γ〛.denote ⇒ 〚T〛.denote ⇒ Nf ? T`, then we can have our normalization function easily:
+```Haskell
+nf : Tm Γ T → Nf Γ T
+nf t = (h_t Γ) (id)
+  where id : Nes Γ Γ -- is the identity function 
+```
+
+
+to concrete representation of syntax `Nf`. This hints on the existing natural transformation `N .. ⇒ Nf ..`. 
+
+What's more, the denotation `N`, for example, will map 
+
+
 
 # Dynamism
 Due to the power of category theory, we can stick with reduction-free style and equational theory and has a clear math semantic. However, this does bring challenge on understanding how under the hood NbE is running and doing 'beta reduction' and 'eta expansion'.
