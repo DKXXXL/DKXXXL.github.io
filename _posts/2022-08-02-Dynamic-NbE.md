@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "A Review of NbE, intrinsically and dynamically"
+title:  "A Review of Rough Structure for NbE, intrinsically and dynamically"
 date:   2022-08-02 00:56:11 -0400
 categories: Type-Theory
 ---
@@ -48,10 +48,14 @@ The problem is back again as now we know `y(t) : Tms ? Γ ⇒ Tm ? T` is not wor
 2 is more serious, to fix this, we need to enlarge the presheaf category so that `Nf ? T`, `Ne ? T`, `Tm ? T`, `Tms ? T` are all objects in this category, and that is *Presheaf over Renaming Category* as the generalization of Kripke Semantic with context as words. (Sterling & Spitters, 2018) points out embedding functor `i : Ren-Cat → Nf-Cat`, `Ne-Cat` and `Tm-Cat`, and thus we have precomposition functors ` _∘i = i* : Pr(Nf-Cat) → Pr(Ren-Cat)`, thus `i*(Tms ? T)` and `i*(Nf ? Γ)` are all embedded objects in `Pr(Ren-Cat)`. 
 
 
+# Summary of Denotation
+
+To reflect syntactic information back to meta-logic, we use Yoneda Embedding to denote types/ctxs `T, Γ` and term `Γ ⊢ t : T` information in syntactical category with objects and arrows in `Pr(Ren-Cat)`.
+
+To make this denotation work, we need to make sure judgemental equal stuff are mapped to same things, i.e. We need to construct functors `〚_〛` that map types/ctxs and terms to objects and arrows in `Pr(Ren-Cat)` by constructing models of STLC syntax as QIIT. This is done by inductively construct stuff according to the signature of STLC. Let's call the "codomain" of `〚_〛` normalization structure -- then we have corresponding `NCon, NTy, NTm, NTms`. 
 
 
-# A quick review of NbE Proof
-
+Once we make sure judgemental equal stuff are mapped to the same thing, and once we can decide the equality of mapped stuff, we can use this `〚_〛` to decide judgemental equality! But NbE is further -- it is something 
 
 # Dynamism
 Due to the power of category theory, we can stick with reduction-free style and equational theory and has a clear math semantic. However, this does bring challenge on understanding how under the hood NbE is running and doing 'beta reduction' and 'eta expansion'.
