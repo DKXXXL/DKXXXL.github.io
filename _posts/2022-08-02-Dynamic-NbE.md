@@ -21,7 +21,7 @@ The motivations for Normalization by Evaluation(NbE) are various.
 
 
 
-# An intuitive inspiration for the structure of NbE proof
+# An intuitive review for the structure of NbE proof
 <!-- Copy and paste the intuition from our draft -->
 
 
@@ -68,33 +68,54 @@ Record NTm (Γ' : NCon) (T' : NTy) where
 
 Once we make sure judgemental equal stuff are mapped to the same thing, and once we can decide the equality of mapped stuff, we can use this `〚_〛` to decide judgemental equality! But NbE is further -- it is something close to partial evaluation so we need to port back from `NCon, NTy, NTm, NTms` to `Nf` stuff.
 
-Note that for `t : Tm Γ T` we have `〚t〛 : NTm 〚Γ〛 〚T〛` s.t. `〚t〛.denote : 〚Γ〛.denote ⇒ 〚T〛.denote`, thus we need a "quote" back or "reification" that is `〚T〛.denote ⇒ Nf ? T`, similarly, we need at least a "reflection" function `Nes ? T ⇒ 〚Γ〛.denote` to provide a proper input. Bridge them together, we have a big natural transformation
-`h_t : Nes ? Γ ⇒ 〚Γ〛.denote ⇒ 〚T〛.denote ⇒ Nf ? T`, then we can have our normalization function easily:
+## Reflection and Reification
+
+Note that for `t : Tm Γ T` we have `〚t〛 : NTm 〚Γ〛 〚T〛` s.t. `〚t〛.denote : 〚Γ〛.denote ⇒ 〚T〛.denote`, thus we need a "quote" back or "reification" that is `↓Ty T :〚T〛.denote ⇒ Nf ? T`, similarly, we need at least a "reflection" function `↑Con Γ : Nes ? T ⇒ 〚Γ〛.denote` to provide a proper input. Bridge them together, we have a big natural transformation
+`Nes ? Γ ⇒ 〚Γ〛.denote ⇒ 〚T〛.denote ⇒ Nf ? T`, then we can have our normalization function easily:
 ```Haskell
 nf : Tm Γ T → Nf Γ T
-nf t = (h_t Γ) (id)
+nf t =  ((↓Ty T ) ∘ ⟦ t ⟧  ∘ (↑Con Γ)) Γ (id)
   where id : Nes Γ Γ -- is the identity function 
 ```
+To make induction/normalization structure work with reflection and reification, our normalization structure will attach these two natural transformations as well, and thus
 
+```
+record NCon : Set where 
+  syn : Con            -- storing the syntax
+  denote : Pr(Ren-Cat) -- the denotation
+  ↑Con : Nes ? syn ⇒ denote
+  ↓Con : denote ⇒ Nfs ? syn
 
-to concrete representation of syntax `Nf`. This hints on the existing natural transformation `N .. ⇒ Nf ..`. 
+record NTy : Set where
+  syn : Ty 
+  denote : Pr(Ren-Cat)
+  ↑Ty : Ne ? syn ⇒ 
+```
 
-What's more, the denotation `N`, for example, will map 
+Naturally, we will expect `NTms, NTm` to change correspondingly. Surprisingly, they will change but only carry proof of naturality condition -- they are only used to prove the correctness of nbe.
+
+## Two Invariance for the proof
+
+To prove the correctness of `nf`, we need soundness and completeness, basically `a ≡ b ↔ nf a ≡ nf b`, which also hints how decidability of judgemental equality is achieved since in `Nf` judgemental equality is trivially decidable.
+
+To prove from left to right is trivial as we are working in QIIT framework thus `nf` automatically respects equality. The other direction is the key of the proof -- 
+
+### One more thing - Definable Lambda
 
 
 
 # Dynamism
-Due to the power of category theory, we can stick with reduction-free style and equational theory and has a clear math semantic. However, this does bring challenge on understanding how under the hood NbE is running and doing 'beta reduction' and 'eta expansion'.
+Due to the power of category theory, we can stick with reduction-free style and equational theory and has a clear math semantic for NbE. However, this does bring challenge on understanding how under the hood NbE is running and doing 'beta reduction' and 'eta expansion'.
 
 
 Looking closely at the definition of NbE, 
 ```Haskell
 nf : Tm Γ T → Nf Γ T
-nf t =  ((↓Ty T Γ) ∘ ⟦ t ⟧Γ  ∘ (↑Con Γ Γ)) (id')
+nf t =  ((↓Ty T ) ∘ ⟦ t ⟧  ∘ (↑Con Γ)) Γ (id)
 ```
-We notice that the key ingredient of the correctness of `nf` comes from the fact that, we have a good 'denotation', i.e.  `⟦_⟧` will map judgementally equal term into same denotation. Then by reification we can end up with the same normal form. In fact, even without normalization, this denotation along should help us to decide judgemental equality. 
+We notice that the key ingredient of the correctness of `nf` comes from the fact that, we have a good 'denotation', i.e.  `⟦_⟧` will map judgementally equal term into same denotation. In fact, even without normalization, this denotation along should help us to decide judgemental equality. 
 
-Thus to understand the dynamic, the key is to understand what happens in the denotation.
+Thus to understand the dynamic, the key is to understand what happens in the denotation -- how denotation doing beta-reduction and eta-expansion correspondingly.
 
 ## How denotation looks like
 
