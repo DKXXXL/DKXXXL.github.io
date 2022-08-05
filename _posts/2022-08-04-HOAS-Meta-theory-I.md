@@ -13,6 +13,8 @@ STERLING, JONATHAN. "Naïve logical relations in synthetic Tait computability."
 
 Hu, Jason ZS, Brigitte Pientka, and Ulrich Schöpp. "A Category Theoretic View of Contextual Types: from Simple Types to Dependent Types." arXiv preprint arXiv:2206.02831 (2022).
 
+Despeyroux, Joëlle, Amy Felty, and André Hirschowitz. "Higher-order abstract syntax in Coq." International Conference on Typed Lambda Calculi and Applications. Springer, Berlin, Heidelberg, 1995.
+
 *** 
 
 # Intro
@@ -32,8 +34,8 @@ The problem here is that --
 2. What is the concrete construction of λ?
 3. What does above mean? Why commutation is enough?
 4. Will there be any problem/restriction using HOAS as syntax? Say the style as Naive Logical Relation demonstrated.
-5. (Sterling & Spitters, 2018) and (Hofmann 99) both emphasizes in the presheaf topos
-6. (Sterling & Spitters, 2018) says these are constructors, that means we have an eliminator! What does that look like? (Especially for `Nf ? (Arr σ τ)`, does everything in this presheaf definable by this `λ`?)
+5. (Sterling & Spitters, 2018) and (Hofmann 99) both emphasizes in the presheaf topos we have ``
+6. (Sterling & Spitters, 2018) says in section 3.2 these are constructors, that means we have an eliminator! What does that look like? (For example, for `Nf ? (Arr σ τ)`, does everything in this presheaf definable by this `λ`?) Does that mean, `Nf ? T` is (inductively) constructed via these constructor? 
 
 
 ***
@@ -72,10 +74,21 @@ then use this `tm` should be equivalent to use first order syntax to define `tm`
 1. we should have constructors
 2. we should have a good eliminator, that can do all the thing the eliminator for the first order syntax can do -- pretty printing, evaluation, NbE, and so on.
 
-These above questions seems hard and inappropriate to ask in this post because 
+These above questions seems hard but inappropriate to ask in this post because 
 
 But Question 4 itself is problemtic
-1. (Sterling & Spitters, 2018) is not using HOAS as syntax, it is sticking to explicit substitution (in first order syntax). So it is far from the signature in Naive Logical Relation
+1. (Sterling & Spitters, 2018) **is not using HOAS as syntax**, it is sticking to explicit substitution (in first order syntax). So it is far from the signature in Naive Logical Relation
 2. This HOAS seem more like a syntactic sugar -- mainly because the model we are constructing is presheaf (over renaming) model and each arrows in renaming category can yoneda embed into presheaf model and act as renaming action, thus the above high-order notation `λ` can have good substitution property
 
 It is definitely not 
+
+
+***
+
+# Review, Hofmann's HOAS, 3rd Style syntax
+
+Question 4 is not here in 3rd style, because this HOAS is not breaking strict-positivity condition. We still have initial-algebraic semantic -- actually,  (Despeyroux et al 1995) has an example of preservation (of type safe proof), and I believe there are multiple example in the literature that using this style to do meta-theory.
+
+In fact, I don't see the advantage of using this style -- I prefer HOAS because in Naive Logical Relation, we see most substitution lemma/naturality condition is omitted by shifting from explicit sub to HOAS. But here using 3rd Style syntax, we still have to prove substitution lemma again. 
+
+Then the only question remain is that, what is (Hofmann 99) section 7 (3rd style) aiming at? Since (Despeyroux et al 1995) has shown in Coq an induction principle, and we have initial algebraic semantic for sure.
