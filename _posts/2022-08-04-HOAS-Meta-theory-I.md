@@ -32,10 +32,10 @@ like the following
 The problem here is that -- 
 1. What is 'representable presheaf of variables'?
 2. What is the concrete construction of λ?
-3. What does above mean? Why commutation is enough?
-4. Will there be any problem/restriction using HOAS as syntax? Say the style as Naive Logical Relation demonstrated.
-5. (Sterling & Spitters, 2018) and (Hofmann 99) both emphasizes in the presheaf topos we have ``
-6. (Sterling & Spitters, 2018) says in section 3.2 these are constructors, that means we have an eliminator! What does that look like? (For example, for `Nf ? (Arr σ τ)`, does everything in this presheaf definable by this `λ`?) Does that mean, `Nf ? T` is (inductively) constructed via these constructor? 
+3. Will there be any problem/restriction using HOAS as syntax? Say the style as Naive Logical Relation demonstrated.
+4. (Sterling & Spitters, 2018) and (Hofmann 99) both emphasizes in the presheaf topos we have `𝓕^(yτ)(Γ) ≅ 𝓕(Γ × τ)`, why?
+5. (Sterling & Spitters, 2018) says in section 3.2 these are constructors, that means we have an eliminator! What does that look like? (For example, for `Nf ? (Arr σ τ)`, does everything in this presheaf definable by this `λ`?) Does that mean, the presheaf `Nf ? T` can be seen (inductively) constructed via these constructors? 
+6. Is λ commuting with renaming? and why is Rnf commutes with λ in the proof of reify and reflect yoga for function?
 
 
 ***
@@ -57,13 +57,11 @@ For 2, what is `λ : (Ren ? σ ⇒ Nf ? τ) ⇒ Nf ? (Arr σ τ)`?
   h = f (Γ, σ) π₁
 ```
 
-***
 
-For 3, let's first see why it is commuting
 
 ***
 
-Question 4 is still the problem: 
+Question 3 is still the problem: 
 The meaning of using HOAS to model syntax, say we have
 ```haskell
 data tm where
@@ -76,19 +74,31 @@ then use this `tm` should be equivalent to use first order syntax to define `tm`
 
 These above questions seems hard but inappropriate to ask in this post because 
 
-But Question 4 itself is problemtic
+But Question 3 itself is problemtic
 1. (Sterling & Spitters, 2018) **is not using HOAS as syntax**, it is sticking to explicit substitution (in first order syntax). So it is far from the signature in Naive Logical Relation
 2. This HOAS seem more like a syntactic sugar -- mainly because the model we are constructing is presheaf (over renaming) model and each arrows in renaming category can yoneda embed into presheaf model and act as renaming action, thus the above high-order notation `λ` can have good substitution property
-
-It is definitely not 
 
 
 ***
 
-# Review, Hofmann's HOAS, 3rd Style syntax
+For 4 and 5, it is because `Nf ? τ` is a presheaf object over renaming, and thus using we have `(Nf Γ T)^𝒱(σ) ≅ Nf (Γ, σ) T` while the latter one is exactly the premise of `lam` to construct `Nf Γ (Arr _ _)`, thus we can have `λ` as another constructor. Similar for `v`, since `𝒱τ` is exactly `Ren-Cat(?, τ)`, which is part of the premise to construct `Ne ? τ`, thus `v` is the same constructor in another form.
+
+
+***
+
+For Question 6, let's first see why it is commuting
+
+
+
+***
+
+# Review: Hofmann's HOAS, 3rd Style syntax
 
 Question 4 is not here in 3rd style, because this HOAS is not breaking strict-positivity condition. We still have initial-algebraic semantic -- actually,  (Despeyroux et al 1995) has an example of preservation (of type safe proof), and I believe there are multiple example in the literature that using this style to do meta-theory.
 
 In fact, I don't see the advantage of using this style -- I prefer HOAS because in Naive Logical Relation, we see most substitution lemma/naturality condition is omitted by shifting from explicit sub to HOAS. But here using 3rd Style syntax, we still have to prove substitution lemma again. 
 
 Then the only question remain is that, what is (Hofmann 99) section 7 (3rd style) aiming at? Since (Despeyroux et al 1995) has shown in Coq an induction principle, and we have initial algebraic semantic for sure.
+
+
+# Review: Adequacy of Hofman's HOAS, intrinsically
