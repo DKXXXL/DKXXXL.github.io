@@ -50,7 +50,7 @@ The problem is back again as now we know `y(t) : Tms ? Γ ⇒ Tm ? T` is not wor
 
 2 is more serious, to fix this, we need to enlarge the presheaf category so that `Nf ? T`, `Ne ? T`, `Tm ? T`, `Tms ? T` are all objects in this category, and that is *Presheaf over Renaming Category* as the generalization of Kripke Semantic with context as words. (Sterling & Spitters, 2018) points out embedding functor `i : Ren-Cat → Nf-Cat`, `Ne-Cat` and `Tm-Cat`, and thus we have precomposition functors ` _∘i = i* : Pr(Nf-Cat) → Pr(Ren-Cat)`, thus `i*(Tms ? T)` and `i*(Nf ? Γ)` are all embedded objects in `Pr(Ren-Cat)`. 
 
-Now that we have a larger category, we can still use yoneda embedding to embed terms.
+Now that we have a larger category, we can still use the embedding `Nf ? T`, `Nfs ? Γ` and etc. to embed syntactic terms (though we may only use `Nf ? T` and `Nfs ? Γ`). Yoneda over presheaf of renaming here, due to the fact that there are only variable permutation in renaming, will be pretty weak.
 
 ## Summary of Denotation
 
