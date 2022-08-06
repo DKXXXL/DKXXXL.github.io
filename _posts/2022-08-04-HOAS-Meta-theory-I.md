@@ -33,7 +33,7 @@ The problem here is that --
 1. What is 'representable presheaf of variables'?
 2. What is the concrete construction of λ?
 3. Will there be any problem/restriction using HOAS as syntax? Say the style as Naive Logical Relation demonstrated.
-4. (Sterling & Spitters, 2018) and (Hofmann 99) both emphasizes in the presheaf topos we have `𝓕^(yτ)(Γ) ≅ 𝓕(Γ × τ)`, why?
+4. (Sterling & Spitters, 2018) and (Hofmann 99) both emphasizes in the presheaf topos we have `𝓕^(yτ)(Γ) ≅ 𝓕(Γ × τ)` as *a simpler characterization of exponential by representable*, why?
 5. (Sterling & Spitters, 2018) says in section 3.2 these are constructors, that means we have an eliminator! What does that look like? (For example, for `Nf ? (Arr σ τ)`, does everything in this presheaf definable by this `λ`?) Does that mean, the presheaf `Nf ? T` can be seen (inductively) constructed via these constructors? 
 6. Is λ commuting with renaming? and why is Rnf commutes with λ in the proof of reify and reflect yoga for function?
 
@@ -82,6 +82,12 @@ But Question 3 itself is problemtic
 ***
 
 For 4 and 5, it is because `Nf ? τ` is a presheaf object over renaming, and thus using we have `(Nf Γ T)^𝒱(σ) ≅ Nf (Γ, σ) T` while the latter one is exactly the premise of `lam` to construct `Nf Γ (Arr _ _)`, thus we can have `λ` as another constructor. Similar for `v`, since `𝒱τ` is exactly `Ren-Cat(?, τ)`, which is part of the premise to construct `Ne ? τ`, thus `v` is the same constructor in another form.
+
+Now with this concrete example, this following quote why this *simpler characterization of exponential by representable* is useful in (Hofmann 99) become understandable:
+> In a nutshell the idea is as follows. Interpret the metalanguage in an appropriate functor category `Pr(C)` where `C` is chosen such that all metalanguage types appearing in negative
+positions (such as tm in the typing of lam in the definition) are representable. Then use Equation 17 to analyse the types of constants.
+
+I actually don't really know what this final word 'type of constants' mean, I guess he meant to say type of "first order structure" (i.e make function space back into first order, just like how `(Nf Γ T)^𝒱(σ) ≅ Nf (Γ, σ) T`)
 
 
 ***
