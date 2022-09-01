@@ -67,4 +67,10 @@ For example, once entering `void b`, `x` is totally unaccessible (not even reada
 ***
 The collected two paper both achieved "well-bracketed control flow" and "local-state encapsulation" but using different capability mechanism. The first one uses local capabilities (closer to CHERI)
 
-# Review of "Reasoning with Local "
+# Review of "Using Local Capabilities"
+
+
+# Review of "Using Linear Capabilities"
+***
+
+# Graph-based Model of Capabilities vs. Logical Relation based
