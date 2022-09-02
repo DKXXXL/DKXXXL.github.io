@@ -1,9 +1,12 @@
 ---
 layout: post
-title:  "Review HOAS for meta-theory reasoning, I"
+title:  "Review HOAS for meta-theory reasoning, I 🚧"
 date:   2022-08-05 00:56:11 -0400
 categories: Type-Theory
 ---
+
+# 🚧
+
 Reference: 
 Hofmann, Martin. "Semantical analysis of higher-order abstract syntax." Proceedings. 14th Symposium on Logic in Computer Science (Cat. No. PR00158). IEEE, 1999.
 
