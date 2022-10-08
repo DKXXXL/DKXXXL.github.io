@@ -5,12 +5,24 @@ date:   2022-06-17 00:56:11 -0400
 categories: CatSemantic
 ---
 
-Our exploration will focus on the categorical semantic of type theory
+Our exploration will focus on the categorical semantic of type theory. 
+
+In other words, those internal language of categorical structure, 
+
+or in another other words, establish linguistic intuition for categorical structure. As this is the only formalizable way for mundane type theorists.
 <!-- 
 the story this time is mainly about
   limit/colimit, adjoint, continuous/cocontinuous
   substitution functor
  -->
+
+# Setting up : Internal Language
+
+# Setting up : Linguistic Understanding of Categorical Structure
+
+
+# Substitution Lemma, but categorically
+
 
 
 <!-- Show 

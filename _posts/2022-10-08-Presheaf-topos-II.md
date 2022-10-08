@@ -20,6 +20,8 @@ Last time, we already know Ω is just like the `Prop` in a topos, that it stands
 
 I think working with elementary topos here is fine. So we stick with elementary topos.
 
+## Internal Language
+
 ## How Logical Functor Preserve structure, Linguistically
 
 ## How Geometric Morphism Preserve structure, Linguistically
