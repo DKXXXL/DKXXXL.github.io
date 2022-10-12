@@ -73,6 +73,8 @@ Looking closely, we have this because term are directly morphisms in cat, and et
 
 Sum type will also be interesting, because it has an eta rule usually not presented in type theory.
 
+What about exponential?
+
 What about equalizer? 
 
 What about limit?
@@ -137,8 +139,9 @@ The following needs references on
 # Substitution Lemma on Type, categorically
 This part will need some fibrations.
 
-Substitution functor is pullback functor ... but why substitution functor above is not? Reference 2 pointed out, substitution 
+Substitution functor is a pullback functor ... but why the substitution functor above is not? Reference 2 pointed out, substitution on term is composition and substitution on 
 
+Pullback functor is an adjoint.
 
 <!--
   A lot of categorical structure is limit and colimit
@@ -179,5 +182,27 @@ Substitution functor is pullback functor ... but why substitution functor above 
   Show how Fibration is coming to the picture
   the equivalence between fibration, indexed category, and Cwf(?)
   -->
+
+***
+# CCC functor preserves ... internal language?
+## CCC functor
+Cited from [nlab](https://ncatlab.org/nlab/show/cartesian+closed+functor):
+
+A cartesian closed functor is a functor F:𝒞 → 𝒟 between cartesian closed categories which preserves both products and exponential objects/internal homs (all the structure of cartesian closed categories).
+
+
+### More details?
+#### [Product Preserving functor](https://ncatlab.org/nlab/show/product-preserving+functor) 
+* When functor F preserves product, it means F(A × B) is the product of F(A) and F(B) witnessed by F(π₁) and F(π₂)
+  * i.e. F(A × B) ≅ F(A) × F(B)  
+#### Exponential Preserving Functor
+Recall exponential 
+Similarly, that would be
+* When functor F preserves exponential, it means F(A → B) ≅ F(A) → F(B) 
+
+#### Then this preserving functor is not strict! i.e. F(A × B) != F(A) × F(B) but only isomorphic
+
+but still if u ≡ v, then F(u) ≡ F(v) because same morhphism is mapped to the same morphism by a functor; 
+but to be honest, F(u) ≡ F(v) is very misleading. because F(u), syntactically, internal language speaking, should be just u in the internal language. So it should be something like C ⊧ u = v, then F(C) ⊧ u = v. 
 
 # Appendix: Left adjoint preserve colimit and right adjoint preserve limit

@@ -33,7 +33,10 @@ Finally, we need to distinguish the elementary topos and grothendieck topos, to 
 
 In type theory, the most basic topos we work on must be presheaf topos, so we will focus on that to get a feeling of working with arbitrary topos. 
 
-# Definition of Presheaf topos
+# Definition of Presheaf Category
+Cited from [here](https://ncatlab.org/nlab/show/category+of+presheaves):
+
+For `C` a small category, its category of presheaves is the functor category `PSh(C):= Hom [C^op,Set]` from the opposite category of C to Set.
 
 
 # Definition of Elememntary topos
@@ -57,7 +60,7 @@ We will next time
 
 
 
-## How Ω is a Proposition anyway?
+## How Ω stands for a Proposition anyway?
 
 <!-- we need to show some examples here
       how each proposition is interpreted using topos
@@ -69,7 +72,7 @@ We will next time
 
 
 ## Geometric Morphism
-
+Cited from [Olivia's Lecture note](https://www.oliviacaramello.com/Teaching/CambridgeToposTheoryCourseLectures9and10.pdf)
 > The natural, topologically motivated, notion of morphism of
 Grothendieck toposes is that of geometric morphism. The natural
 notion of morphism of geometric morphisms if that of geometric
@@ -88,7 +91,7 @@ transformation.
 ***
 
 Apparently, a grothendieck topos is already an elementary topos, so what is there difference?
-## Differences Between
+## Differences Between Elementary Topos and Grothendieck one
 
 
 
