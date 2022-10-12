@@ -7,6 +7,7 @@ categories: CatSemantic
 
 Reference : 
 1. Category of Container, Thesis (Mainly First Three Chapters for internal language)
+2. Andrew Pitt's Categorical Logic https://www.cl.cam.ac.uk/~amp12/papers/catl/catl.pdf
 
 
 Our exploration will focus on the relationship of linguistic aspect of categorical semantic and type theory. 
@@ -29,21 +30,61 @@ A category
 # Setting up : Internal Language (in STLC form)
 We can setup the language of STLC and we can interpret each part into a CCC.
 
-We can introduce equation between terms
+We can introduce equation between terms, and then the internal language can become a *theory*.
 
-The internal language of CCC is when we use Check P15 of Reference 1
+The internal language of CCC is STLC, the reader can check P15 of Reference 1, P10 of Reference 2 for most details.
+
+(Though I think there is no deduction structure inside the internal language in P15 of Reference 1, so the Theorem 2.1.4 is either too trivial to prove (holds by definition) or not enough structure to prove (because there is no extra typing/derivation rules in P17 of Reference 1)) 
+
+(Similar things happen in Reference 2, 
+
+**thus I think internal language doesn't stand alone (doesn't have derivation rules by itself)**, 
+
+but as an alternative formal language to do cat, and thus all the derivation rules come from the category theory themselves)
+
+Despite these weird parts, we know how internal language is basically interpreted, *category of context*, i.e. 
+1. contexts are interpreted by objects of the cat, 
+2. terms are interpreted arrows. 
+3. We can even have substitution and equation. 
+4. Equations are interpreted as the same morphism inside the target category
 
 
+The syntax side, we still use QIIT-introduced syntax, where `x : (Tm Γ A)` stands for `Γ ⊢ x : A`, and etc. 
 
-# Setting up : Linguistic Understanding of Categorical Structure
+# Setup : Categorical Structure and the Internal Language
 
+For example, we can interpret product type using product object, 
+```haskell
+_,_ : {∀G} (a : Tm G A) → (b : Tm G B) → Tm G (A × B)
+π₁ : Tm G (A × B) → Tm G A
+π₂ : Tm G (A × B) → Tm G B
+  where π₁ (a, b) = a ; π₂ (a, b) = b -- beta 
+  where (π₁ t, π₂ t) = t -- eta
+```
+Interestingly, this is corresponding to the universal property of product type `A × B`!
+```C
+For arbitrary G, with a : G → A and b : G → B, 
+we have a *unique* <a, b> : G → A × B // this is corresponding to Line 1
+s.t. π₁ ∘ <a, b> = a, π₂ ∘ <a, b> = b
+```
+The only suspicious part is the uniqueness, which will be corresponded by the eta rule.
 
-# Substitution Lemma, but categorically
+Looking closely, we have this because term are directly morphisms in cat, and eta rule represented uniqueness property.
 
+Sum type will also be interesting, because it has an eta rule usually not presented in type theory.
 
+What about equalizer? 
 
-<!-- Show 
-      in CCC how product is left adjoint to exponential
+What about limit?
+
+What about (left) adjoint?
+
+<!--  Show 
+      in CCC how product is left adjoint to exponential -->
+
+# Substitution Lemma on Term, but categorically
+
+<!--
     Show why substitution can preserve in product, i.e.
     (a, b)[τ] ≡ (a[τ], b[τ])
     in categorical sense/meaning
@@ -56,6 +97,47 @@ The internal language of CCC is when we use Check P15 of Reference 1
     Weirdly, this should already holds, because hom functor preserve limit
     ... thus why do we need to postulate it in the  
  -->
+ 
+Say, `a : Tm Γ A` and `b : Tm Γ B`, given `γ : Tms Δ Γ`,
+we have subst lemma `(a,b)[γ] ≡ (a[γ], b[γ])`
+
+Weirdly, there should be a general way to describe this substitution lemma... since currently for QIIT, every type construct we need to write a subst lemma by intuition. Why don't we have a general characterization?
+
+Looks closely, `(a,b)[γ] ≡ (a[γ], b[γ])` is just a commutative diagram
+for ` (_[γ]) ∘ (_, _) ≡ (_[γ], _[γ])`:
+```C
+    Hom(Y, A) × Hom(Y, B) --- > Hom(Y, A × B)
+              |                         |
+    Hom(X, A) × Hom(X, B) --- > Hom(X, A × B)
+```
+Weirdly, this diagram should already holds, because hom functor preserve limit... Why do we still need to specify the naturality condition/subst lemma? What happens? 
+
+**Because in QIIT formulation, (a,b) : A × B is not the only constructor! t[γ] : A × B is also a constructor, without stating the subst lemma, that breaks the universal property**
+
+```haskell
+_[_] : Tms Γ Δ → Tm Δ A → Tm Γ A
+
+
+```
+
+What's more, we should have similar stuff for `(inl a)[γ] ≡ inl a[γ]`
+or `(_[γ]) ∘ (inl _) ≡ (inl _) ∘`
+```C
+    Hom(Y, A)  --- > Hom(Y, A + B)
+         |                  |    
+    Hom(X, A)  --- > Hom(X, A + B)
+```
+It also seems like some naturality condition, especially 
+
+***
+
+The following needs references on 
+1. Revisiting the categorical interpretation of dependent type theory [Curien et al]
+2. https://math.andrej.com/2012/09/28/substitution-is-pullback/
+# Substitution Lemma on Type, categorically
+This part will need some fibrations.
+
+Substitution functor is pullback functor ... but why substitution functor above is not? Reference 2 pointed out, substitution 
 
 
 <!--
