@@ -22,6 +22,12 @@ Last time, we already know Ω in a topos is just like the `Prop` , which stands 
 
 ## Internal Language of an (Elementary) topos
 
+Reference: https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nabou+language
+
+The usual universal and existential quantifiers are the right and left adjoints, respectively, of "adding a dummy variable"(weakening)(From https://math.stackexchange.com/questions/467640/categorical-interpretation-of-quantification) 
+
+### What's the difference using Identity Type and Identity Interpretation in Omega?
+
 ## How Logical Functor Preserve logical structure, Linguistically
 
 ## Geometric Logic

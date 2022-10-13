@@ -39,14 +39,42 @@ Cited from [here](https://ncatlab.org/nlab/show/category+of+presheaves):
 For `C` a small category, its category of presheaves is the functor category `PSh(C):= Hom [C^op,Set]` from the opposite category of C to Set.
 
 
-# Definition of Elememntary topos
+# Definition of [Elememntary topos](https://ncatlab.org/nlab/show/topos#ElementaryTopos)
+an elementary topos is a category which
+
+1. has finite limits,
+
+2. is cartesian closed, and
+
+3. has a subobject classifier.
+
+Note, elementary topos has [all finite colimit](https://math.stackexchange.com/questions/1374500/topos-have-colimits) 
+
+### [Subobject Classifier](https://ncatlab.org/nlab/show/subobject+classifier)
+Subobject Classifier can be considered as taking arbitrary "subset" relation into an arrow into Ω. We will not repeat definition, but remember a monomorphism `U → X` will induce a pullback and a "characteristic function" `χ : X → Ω`.
+
+This pullback means that the "characteristic function" decides this monomorphism uniquely as well.
+
+[The example in Set Theory](https://ncatlab.org/nlab/show/subobject+classifier#in_) makes things easier to remeber---basically for arbitrary subset we will have a unique "characteristic function", and one-to-one correspondence (i.e. the characteristic function decides the subset as well).
+
+
+Though using internal language of topos, there is still problem : why this universal property special? Can't we just think of monomorphism (classes) as subset relationship? In other words, why the "characteristic function" so special?
+
+
+
+### What is Power Object
+Alternatively, an elementary topos can also be defined as 
+1. has finite limits,
+2. has power objects
+
+We care about power objects because it may provide "∈" notation.
 
 
 ## Logical Functor
 In nLab,
 > A logical morphism or logical functor is a homomorphism between elementary toposes that preserves the structure of a topos as a context for logic: a functor which preserves all the elementary topos structure, including in particular power objects, but not necessarily any infinitary structure (such as present additionally in a sheaf topos).
 
-We will next time 
+
 
 
 ## Presheaf Topos is an Elementary topos
@@ -69,6 +97,7 @@ We will next time
 
 *** 
 # Definition of Grothendieck topos, starting from Logos
+We follow the definition of Sterling's Thesis, which is also [Giraud's axiomatic characterization](https://ncatlab.org/nlab/show/Grothendieck+topos#Giraud)
 
 
 ## Geometric Morphism
