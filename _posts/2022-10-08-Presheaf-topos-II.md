@@ -26,7 +26,12 @@ Reference: https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nabou+language
 
 The usual universal and existential quantifiers are the right and left adjoints, respectively, of "adding a dummy variable"(weakening)(From https://math.stackexchange.com/questions/467640/categorical-interpretation-of-quantification) 
 
+
+
+What's more,  in [MB Language](https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nabou+language), the formulas are terms of type Ω, where Ω is the subobject classifier; but in type theory, formulas are types of type `Prop`, what happened?
 ### What's the difference using Identity Type and Identity Interpretation in Omega?
+
+
 
 ## How Logical Functor Preserve logical structure, Linguistically
 
