@@ -41,6 +41,11 @@ What's more,  in [MB Language](https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nab
 ### What's the difference using Identity Type and Identity Interpretation in Omega?
 
 
+## What is the difference between extensional dependent type theory and constructive higher order logic?
+
+We know extensional dependent types is the internal language for LCCC, constructive higher order logic is the internal language of elementary topos. 
+
+One insight is that, in Cat-Logic-0, we know 
 
 ## How Logical Functor Preserve logical structure, Linguistically
 
