@@ -45,7 +45,7 @@ What's more,  in [MB Language](https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nab
 
 We know extensional dependent types is the internal language for LCCC, constructive higher order logic is the internal language of elementary topos. What are their differences?
 
-One insight is that, in Cat-Logic-0, we know intuitionistic first order logic can be interpreted in LCCC, but with Ω, **we cannot quantify over the proposition** (like `∀ p : Ω, ...`), thus we cannot express higher order logic like we do in elementary topos.
+One insight is that, in Cat-Logic-0, we know intuitionistic first order logic can be interpreted in LCCC, but without Ω, **we cannot quantify over the proposition** (like `∀ p : Ω, ...`), thus we cannot express higher order logic like we do in elementary topos.
 
 ## How Logical Functor Preserve logical structure, Linguistically
 
