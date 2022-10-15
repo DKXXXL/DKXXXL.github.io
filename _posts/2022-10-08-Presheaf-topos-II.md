@@ -21,14 +21,23 @@ Last time, we already know Ω in a topos is just like the `Prop` , which stands 
 <!-- I think working with elementary topos here is fine. So we stick with elementary topos. -->
 
 ## Internal Language of an (Elementary) topos
+Reference: 
+1. [introduction to higher order categorical logic, [Lambek]](https://www.cambridge.org/ca/academic/subjects/mathematics/logic-categories-and-sets/introduction-higher-order-categorical-logic?format=PB&isbn=9780521356534)
+2. https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nabou+language
 
-Reference: https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nabou+language
+For arbitrary monomorphism `m : A → B`, we can have `χm : B → Ω` as charactrization arrow 
 
-The usual universal and existential quantifiers are the right and left adjoints, respectively, of "adding a dummy variable"(weakening)(From https://math.stackexchange.com/questions/467640/categorical-interpretation-of-quantification) 
-
+On Lambek, the interpretation is almost clear, we have an arrow indicating `True : 1 → Ω`, and propositions are encoded as arrows to Ω, thus a closed proposition is correct when `p : 1 → Ω` is equal to `True`, for example
+1.  `a = b` is a term interpreted by  `χ〈id, id〉∘〈a, b〉` : 1 → A × A → Ω
+2.  `a ∈ A` is a term
+3.  
+4.  for `p : G × A → Ω`, we have `(∀ p) : G → ` 
+The usual universal and existential quantifiers are the right and left adjoints, respectively, of "adding a dummy variable"(weakening)(From https://math.stackexchange.com/questions/467640/categorical-interpretation-of-quantification/467693#467693) 
+1. ``
 
 
 What's more,  in [MB Language](https://ncatlab.org/nlab/show/Mitchell-B%C3%A9nabou+language), the formulas are terms of type Ω, where Ω is the subobject classifier; but in type theory, formulas are types of type `Prop`, what happened?
+(We need to find out how dependent type theory is relsated to topos.)
 ### What's the difference using Identity Type and Identity Interpretation in Omega?
 
 
