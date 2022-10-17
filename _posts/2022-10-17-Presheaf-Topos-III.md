@@ -45,6 +45,8 @@ For example, can we prove some equivalence argument (in System F that would be p
 
 ## Programming in Presheaf Topos
 
+## [Natural Models](https://arxiv.org/pdf/1406.3219.pdf)
+
 ## Presheaf Topos on CCC
 
 ## HOAS in Presheaf Topos
