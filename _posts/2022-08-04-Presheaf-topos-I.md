@@ -67,8 +67,14 @@ Alternatively, an elementary topos can also be defined as
 1. has finite limits,
 2. has power objects
 
-We care about power objects because it may provide "∈" notation.
+We care about power objects because it may provide "∈" notation. Power object `PA` (or written as `Ω^A` is intuitively the power set of `A`), 
 
+The [universal property](https://ncatlab.org/nlab/show/power+object) is saying that, arbitrary relation `r` of `c × d`, 
+is one to one corresponding to `χ : d → Ω^c`, in other words,
+
+intuitively and set theory speaking, any relation `r` can make into a function `χ : d → P(c)` where `χ(y) = \{c : (c,y) ∈ r\}`
+
+Apparently, the `∈` is really the `in` relation.
 
 ## Logical Functor
 In nLab,
@@ -124,4 +130,14 @@ Apparently, a grothendieck topos is already an elementary topos, so what is ther
 
 
 
+***
+
+# Sites, Sheaves, and Topos
+
+* The problem here is that, with the intuition of locale vs. frame, we still cannot capature the the intution of topos vs. logos., even though Sterling suggests that way
+* Because the first example, punctual topos, has logos as set category, we cannot see what is that, geometrically
+* because locale/topological space can be intuitively understood as R^3 or some euclidean space, but geometric intuition here for punctual is not enough
+* So some more geometric intuition for each topos is necessary
+
+But to understand that, we 
 
