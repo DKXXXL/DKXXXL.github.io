@@ -132,12 +132,31 @@ Apparently, a grothendieck topos is already an elementary topos, so what is ther
 
 ***
 
-# Sites, Sheaves, and Topos
+# Sites, Sheaves, and Topos, and Geometric Intuition
 
 * The problem here is that, with the intuition of locale vs. frame, we still cannot capature the the intution of topos vs. logos., even though Sterling suggests that way
 * Because the first example, punctual topos, has logos as set category, we cannot see what is that, geometrically
-* because locale/topological space can be intuitively understood as R^3 or some euclidean space, but geometric intuition here for punctual is not enough
+* As locale/topological space can be intuitively understood as R^3 or some euclidean space, but geometric intuition here for punctual topos is not enough
 * So some more geometric intuition for each topos is necessary
 
-But to understand that, we 
+But to understand that, we need to understand the concrete construction
+
+* [Site](https://stacks.math.columbia.edu/tag/00VG) is a pair  of a category `C` and `Cov(C)` a bunch of morphisms in `C` indicating open covering
+  * the second is saying open inside open is still open
+  * the third is saying the pullback functor still makes open
+    * it looks like saying intersection between a subspace `V` and an open subspace `U` is an subspace `V ∩ U` open in `V`
+  * So generally speaking, a site `(C, Cov(C))` is really a space (geometric stuff) where each object is a subspace and morphism in `Cov(C)` indicating subsumption on the space
+
+Let's just consider site as a topological space.
+
+A sheaf is one presheaf over a site, satisfying some condition
+
+A topos is a cateory of sheaves.
+
+Now topos vs. logos. 
+
+> Given a topos X, an object of the logos SetX is referred to as a sheaf on X; it is also appropriate to refer to it as a set over X
+
+An object of a logos is a sheaf (WTF? sheaf is presheaf right? Object is object right? Do we now just identify an object with its yoneda embedding? Why an object is a sheaf?)
+
 
