@@ -8,3 +8,5 @@ Gemfile.lock
 _posts/*-welcome-to-jekyll.markdown
 node_modules
 .gitignore
+
+test.md
