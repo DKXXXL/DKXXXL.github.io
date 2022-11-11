@@ -74,3 +74,20 @@ What's the relationship of this section with that section in the context of fibr
 ## Family of Presheaf 
 Family of presheaf is just a presheaf over elements of presheaf.
 https://types.pl/@endexl/109327370483620195
+
+
+***
+
+# Gluing for type theory
+
+## Canonicity Gluing in usual sense
+
+Recall how canonicity is glued. Basically we construct a comma category (in Set), 
+* where objects are injection arrow to closed terms (i.e. subsets of closed terms)
+* arrows are commutative diagrams
+
+![](../assets/img/2022-11-11-18-20-06.png)
+
+Of course, $T$ and $G$ are the objects of the original category (in our case, it is the syntax)---that means they can be either context or types.
+
+A concrete example would be 
