@@ -68,7 +68,7 @@ One can see that, displayed algebra is basically just the "dependent part of the
 
 The section is the required coherence condition to make it possible to have `f : ℕᴬ → (∑ (a : ℕᴬ) . ℕᴰ(a))` an algebra homomorphism, such that `π₁ ∘ f = id`. Roughly speaking, section is an appropriate
 
-### Why it is called section? 
+### Why is it called section? 
 What's the relationship of this section with that section in the context of fibration?
 
 ## Family of Presheaf 
