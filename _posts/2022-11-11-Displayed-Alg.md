@@ -40,7 +40,11 @@ They are talked about in the earlier post
 
 # Displayed Cat
 
+
+
 # Signature, Displayed Algebra, its section
+
+
 
 ## Theory of Signature
 * "Constructing quotient inductive-inductive types" introduces the concept of theory of signature
@@ -52,9 +56,21 @@ The motivation of introducing theory of signature is that,
 * The trick is to use theory of signature to encode all kinds of signatures, and mapping signature to appropriate type for notions of algebra, algebra morphism and etc
 * A concrete example is at Section 1.1, if we want equation inside signature, Section 1.2 is sufficient
 
-## Displayed Algebra, and its section
+## Displayed Algebra (over other algebra), and its section
+Section 1.1 has roughly illustrated how displayed algebra looks like. Basically a predicate over type (as motive) and terms for 
 
+For example, for `ℕ ≡ (N : 𝕌, zero : N , suc : N → N)` as a signature, we have its algebra `ℕᴬ ≡ ∑ N : Set, ∑ zero : N, ` (Note that ℕ is expressed inside theory of signature (an internal type theory), while ℕᴬ is a type in the ambient type theory)
+
+Then for an algebra `a : ℕᴬ` a display algebra for a particular algebra `a`, would be `ℕᴰ(a) ≡ ∑ Nᴾ : N → Set, ∑ Nᴾ z, (x : N) → Nᴾ x → Nᴾ (succ x)`
+
+
+One can see that, displayed algebra is basically just the "dependent part of the dependent pair". Or if I speak more clearly, `(∑ (a : ℕᴬ) . ℕᴰ(a)) : Set ` itself is an algebra. So basically it is a systematic and clearer concept when we do logical relation. 
+
+The section is the required coherence condition to make it possible to have `f : ℕᴬ → (∑ (a : ℕᴬ) . ℕᴰ(a))` an algebra homomorphism, such that `π₁ ∘ f = id`. Roughly speaking, section is an appropriate
+
+### Why it is called section? 
+What's the relationship of this section with that section in the context of fibration?
 
 ## Family of Presheaf 
-Family of presheaf is just a presheaf over 
+Family of presheaf is just a presheaf over elements of presheaf.
 https://types.pl/@endexl/109327370483620195
