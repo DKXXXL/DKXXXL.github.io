@@ -156,3 +156,9 @@ The operation `ND` is the unary logical predicate interpretation [Bernardy et al
 `ND` is just motive here. Catgeorical Gluing is saying we do a predicate on certain semantic. And here, this `ND` is a predicate on `Nᴬ` as the semantic of natural number `N`
 
 So set theoretically speaking, gluing along a functor `F` is just constructing a model from subsets of `F(C)` where `C` is usually the syntax
+
+Then we have this insight---dependent elimination is usually in a fixed style--- just like dependent elim is in a fixed style for function type, ***gluing for function type shoule be in a fixed style***!!!
+
+Actually most types with universal property (i.e. equational rules on their intro/elim) should be glued in a fixed way, and the only flexibility locates at 
+* the semantic category of the functor `F` (i.e. 'canonicity vs. normalization' as "closed term" vs. "presheaf model") 
+* and the interpretation at base type (binary logical relation can relate weird stuff at base type) 
