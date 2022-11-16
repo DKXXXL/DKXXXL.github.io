@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Review HOAS for meta-theory reasoning, I 🚧"
+title:  "Review HOAS for meta-theory reasoning, II 🚧"
 date:   2022-08-05 00:56:11 -0400
 categories: Type-Theory
 ---
@@ -110,4 +110,4 @@ In fact, I don't see the advantage of using this style -- I prefer HOAS because 
 Then the only question remain is that, what is (Hofmann 99) section 7 (3rd style) aiming at? Since (Despeyroux et al 1995) has shown in Coq an induction principle, and we have initial algebraic semantic for sure.
 
 
-# Review: Adequacy of Hofman's HOAS, intrinsically
+# Review: Adequacy of Hofmann's HOAS, intrinsically
