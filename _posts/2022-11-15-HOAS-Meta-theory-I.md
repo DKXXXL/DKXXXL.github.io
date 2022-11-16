@@ -23,4 +23,19 @@ Hofmann specifies the semantic of HOAS, which lives in the presheaf model. Our p
 2. Can we describe an elimination/model using the syntax of LF/HOAS? Because it is so lame to use HOAS to speicfy the syntax, then uses debruijn indices/(the corresponding CCC from HOAS) to specify the model --- because then we go back to substitution calculus
 3. If we describe the elimination/model using the syntax of LF/HOAS, does it mean we have to interpret this syntax inside the presheaf as well?
 
-# Hofmann Review
+So we will not cover any of the paper completely but using our own pace and the paper as reference only 
+
+## LF syntax for λ-calculus
+We use Sterling's Naive STC's formulation
+```Agda
+
+```
+
+## How do we interpret this syntax/signature?
+What is the generated category? It should be a cartesian closed category, right?
+
+
+## What is the elimination rule?
+The elimination rule should be directly corresponding to the universal property of CCC, right?
+
+## Can we write elimination/model in HOAS?
