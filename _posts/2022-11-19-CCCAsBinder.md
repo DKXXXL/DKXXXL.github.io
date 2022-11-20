@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CCC/LCCC as binding structure"
+title:  "CCC/LCCC as binding structure, I"
 date:   2022-08-05 00:56:11 -0400
 categories: Type-Theory
 ---
@@ -70,10 +70,7 @@ record CCC where
   Exp  : Obj → Obj → Obj -- internal hom
   Prod : Obj → Obj → Obj
   Adjun : Hom(Prod A B, C) ≅ Hom(A, Exp B C)
-  -- 𝕌 : Obj 
-  -- I know this 𝕌 doesn't make sense here but bare with me,
-  --  this 𝕌 is to let us define type 'code' inside
-  --   but do we really want it? due to the following ty
+
   
 
 -- We again use CCC as the binding
@@ -87,11 +84,16 @@ record Lang where
   --  thus at least one is making things into "presheaf", i.e. parametrici on the first argument, either El or tm. We choose El here
 
 
-  -- ty : Obj  -- this parts we mostly make ty = 𝕌, but things get weird as level doesn't match, let's try 
-  ty : Set --- let's try ty = Obj
+  ty : Set --- this will make ty = Obj
   --  this seems working, but it doesn't align with Sterling's formulation
   tm : ty → Obj  
-  -- tm A = Exp 
+  -- tm A = Exp ⋆ A
+  -- tm is working as well
+
+  -- an alternative choice is
+  -- ty : Obj 
+  -- tm : ty → Obj -- let's see later what it leads to
+
   -- the following should be directly Exp
   ⥇ : Obj → Obj → Obj
 
@@ -146,3 +148,28 @@ Maybe we can make `tm` also more transparent
 
 
 ***
+
+In the above signature is a bit off compared to Sterling's. let's see what is going on
+```Haskell
+  𝕌 : Obj 
+  -- I know this 𝕌 doesn't make sense here in STLC but bare with me,
+  --  this 𝕌 is to let us define type 'code' inside
+  --   but do we really want it? due to the following ty
+  ty : Obj -- ty = 𝕌 basically
+  tm : ty → Obj -- tm A = Exp ⋆ A, but universe lifting happens here
+
+```
+Apparently, `𝕌 = Set 0` and `Obj = Set 1`
+
+The most nervous part is that, we will have again
+```haskell
+_⇒_ ∷ ty ⥇ ty ⥇ ty
+lam ∷ (tm A ⥇ tm B) ⥇ tm (A ⇒ B)
+```
+but this time `⇒` and `⥇` are operating on the different levels now (One is between ty the other is between Obj), so it is hard to say if this is deducible.
+
+To resolve this, we actually want `⇒` and `⥇` operating on the same level, that means their input argument `tm A` and `A` should be the same level. That means `tm A = Exp ⋆ A` and `A` has to be at the same level. Basically saying `tm` has to have type `tm : Obj → Obj` make `ty = Obj`
+
+Sterling doesn't have this issue because his `el` is actually identity and thus doesn't have this issue. (He doesn't do things like here where we 'close' terms into (almost) ground term)
+
+So we will stick to earlier decision

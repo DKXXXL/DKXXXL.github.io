@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "CCC/LCCC as binding structure"
+title:  "CCC/LCCC as binding structure, II"
 date:   2022-08-05 00:56:11 -0400
 categories: Type-Theory
 ---
