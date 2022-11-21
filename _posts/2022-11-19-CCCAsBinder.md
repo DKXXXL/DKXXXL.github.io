@@ -77,18 +77,21 @@ record CCC where
 record Lang where
   El : Obj → Set
   -- we need following to construct  
-  mp : El (Exp A B) → El A → El B
-  -- modus ponens
+  mp : El (Exp A B) → El A → El B  
+  -- modus ponens, we use a better notation
+  ⋄ ≔ mp 
   -- El O = Hom(⋆, O), maybe?
   -- But note: if El = Hom(⋆, -) and tm = Exp(⋆, -), then we cannot create terms in open ctx
   --  thus at least one is making things into "presheaf", i.e. parametrici on the first argument, either El or tm. We choose El here
+  -- thus in the following, when we write down El A, it is actually Hom(-, A), i.e. a presheaf
 
 
   ty : Set --- this will make ty = Obj
   --  this seems working, but it doesn't align with Sterling's formulation
   tm : ty → Obj  
-  -- tm A = Exp ⋆ A
-  -- tm is working as well
+  -- tm A = Exp ⋆ A 
+  --    or tm A = A 
+  -- both tm definitions are working well
 
   -- an alternative choice is
   -- ty : Obj 
@@ -106,12 +109,20 @@ record Lang where
   lam ∷ (tm A ⥇ tm B) ⥇ tm (A ⇒ B)
   app ∷ tm (A ⇒ B) ⥇ tm A ⥇ tm B
 
-  
+  ⇒β : app ⋄ (lam ⋄ f) ⋄ a ≡ f ⋄ a
+  ⇒η : lam ⋄ (app ⋄ f) ≡ f
 
   𝔹 ∷ ty
   tt ∷ tm 𝔹
   -- tt : El (tm 𝔹)
   ff ∷ tm 𝔹
+  ifb ∷ tm 𝔹 ⥇ tm T ⥇ tm T ⥇ tm T
+  𝔹β₁ : ifb ⋄ tt ⋄ a ⋄ b ≡ a 
+  𝔹β₂ : ifb ⋄ ff ⋄ a ⋄ b ≡ b
+  -- to have 𝔹η : (u : ()) ⥇ ... we seemingly need LCCC as binder to have dependent binding
+  -- let's try the following
+  𝔹η  : (u : El (tm 𝔹 ⥇ tm T)) → u ≡ (λx. ifb ⋄ x ⋄ (u ⋄ tt) ⋄ (u ⋄ ff)) 
+
 ```
 
 Canonicity should be saying 
@@ -146,8 +157,10 @@ assume we have `Exp (Exp ⋆ A) (Exp ⋆ B) ≅ Exp A B` which makes sense becau
 
 Maybe we can make `tm` also more transparent
 
+Since above when `tm A = Exp ⋆ A` is working, `tm A = A` must be working as well
 
 ***
+### Side Note
 
 In the above signature is a bit off compared to Sterling's. let's see what is going on
 ```Haskell
@@ -172,4 +185,29 @@ To resolve this, we actually want `⇒` and `⥇` operating on the same level, t
 
 Sterling doesn't have this issue because his `el` is actually identity and thus doesn't have this issue. (He doesn't do things like here where we 'close' terms into (almost) ground term)
 
-So we will stick to earlier decision
+So we have to use `tm A = A` instead. However, there are still two levels of arrows and we still have two different level arrows `⇒` and `⥇` a bit different to each other. To make things easier, we use our own HOAS notation instead of Sterling's (i.e. `ty : Set` instead)
+
+
+***
+
+Anyway, for 
+```haskell
+  𝔹 ∷ ty
+  tt ∷ tm 𝔹
+  -- tt : El (tm 𝔹)
+  ff ∷ tm 𝔹
+```
+we actually have
+```haskell
+  𝔹 : Obj 
+  tt : Hom(-, Exp(⋆, 𝔹))
+  ff : Hom(-, Exp(⋆, 𝔹))
+```
+seems a bit hard to glue
+
+so it is bettern let `tm A = A` then we would have
+```haskell
+  𝔹 : Obj 
+  tt : Hom(-, 𝔹)
+  ff : Hom(-, 𝔹)
+```
