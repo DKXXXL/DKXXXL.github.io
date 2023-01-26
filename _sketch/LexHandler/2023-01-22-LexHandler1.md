@@ -217,7 +217,7 @@ Fₚ : (T₂ : VTy₂ Δ₂) → CTyₚ Δ₂ (F T)
 Fₚ T₂   = λ t → (∑ v, (t ~>* produce v) or (t ~>* raise ϵ /\ HasC Δ ϵ))
 
 _→_/_ : (A₂ : VTy₂ Δ₂) → (B₂ : CTy₂ Δ₂) → (S₂ : ℙC₂ Δ₂) → CTyₚ Δ₂ (A → B / S)
-A₂ → B₂ / S = λ t → ∑ f. (t ~>* lam f) and (x₂ : VTm₂ Δ₂ ⋅₂ A₂) → Bₚ (f * t)
+A₂ → B₂ / S = λ t → ∑ f. (t ~>* lam f) and (x₂ : VTm₂ Δ₂ ⋅₂ A₂) → Bₚ (f * x)
 
 VTmₚ  : (Δ₂ : CCon₂) → (Γ₂ : Con₂) → (T₂ : VTy₂ Δ₂) → VTm Δ Γ T → Set 
 VTmsₚ : (Δ₂ : CCon₂) → (Γ₂ : Con₂) → (Θ₂ : Con₂) → VTms Δ Γ Θ → Set 
@@ -225,6 +225,14 @@ CTmₚ : (Δ₂ : CCon₂) → (Γ₂ : Con₂) → (T₂ : CTy₂ Δ₂) → CT
 CTmₚ Δ₂ Γ₂ T₂ S₂ t = (γ₂ : Γ₂) → Tₚ (t[γ]) 
 // so weird S is not used at all..
 
-lam : (f₂ : CTm₂ Δ₂ (Γ₂ ▷₂ A₂) B₂ s₂)       → CTmₚ C₂ Γ₂ (A₂ →₂ B₂ / s₂) ∅₂ (lam f)
-lam f
+lamₚ : (f₂ : CTm₂ Δ₂ (Γ₂ ▷₂ A₂) B₂ s₂)       → CTmₚ Δ₂ Γ₂ (A₂ →₂ B₂ / s₂) ∅₂ (lam f)
+     ≡ (f₂ : CTm₂ Δ₂ (Γ₂ ▷₂ A₂) B₂ s₂) → (γ₂ : Γ₂) → (A₂ →₂ B₂ / s₂)ₚ ((lam f) [γ])
+     ≡ (f₂ : CTm₂ Δ₂ (Γ₂ ▷₂ A₂) B₂ s₂) → (γ₂ : Γ₂) → ∑ g . ((lam f) [γ]) ~>* (lam g) and (x₂ : VTm₂ Δ₂ ⋅₂ A₂) → Bₚ (g * x)
+lamₚ f₂ γ₂ = 
+  //
+    let g = f [ γ ^ _ ]
+    let ~>*tml : ((lam f) [γ]) ~>* (lam g) ≡ ((lam f[γ ^ _]) ) ~>* (lam g)
+    since fₚ : CTmₚ Δ₂ (Γ₂ ▷₂ A₂) B₂ s₂ f 
+       ≡ (γa₂ : (Γ₂ ▷₂ A₂)) → Bₚ (f[γa])
+  //
 ```
