@@ -45,10 +45,19 @@ The solution is to define concrete representation -- actually define for each eq
 
 Note that, due to similar reason, there cannot be any quotient in `Nf`, `Ne`, otherwise we are returning to "equivalence class".
 
-## But I thought we are working on figuring out the yoneda?
+## But I thought we are working on figuring out the yoneda? -- Presheaf over REN
 The problem is back again as now we know `y(t) : Tms ? Γ ⇒ Tm ? T` is not working, it should be at least some term of type `?? : Tms ? Γ ⇒ Nf ? T`, but then (1). it is not yoneda embedding, (2). it is not even an arrow in one category!
 
-2 is more serious, to fix this, we need to enlarge the presheaf category so that `Nf ? T`, `Ne ? T`, `Tm ? T`, `Tms ? T` are all objects in this category, and that is *Presheaf over Renaming Category* as the generalization of Kripke Semantic with context as words. (Sterling & Spitters, 2018) points out embedding functor `i : Ren-Cat → Nf-Cat`, `Ne-Cat` and `Tm-Cat`, and thus we have precomposition functors ` _∘i = i* : Pr(Nf-Cat) → Pr(Ren-Cat)`, thus `i*(Tms ? T)` and `i*(Nf ? Γ)` are all embedded objects in `Pr(Ren-Cat)`. 
+2 is more serious, to fix this, we need to enlarge the presheaf category so that `Nf ? T`, `Ne ? T`, `Tm ? T`, `Tms ? T` are all objects in this category, and that is *Presheaf over Renaming Category* as the generalization of Kripke Semantic with context as worlds. 
+
+You might feel confused why the hell is world useful here. 
+0. Notes that Presheaf over arbitrary small category, including terminal category 𝟙, are all topos (Actually `Pr(𝟙) ≃ Set`). So STLC (or even simple MLTT) can find (standard model) semantic in it. That means `Pr(?)` is enough to model everything here. 
+1. The best way to understand the `?` in `Pr(?)` as worlds/stages from Kripke Semantic. They are not used in standard semantic or canonicity model.
+2. [Define Exponential on Pr(?)](https://ncatlab.org/nlab/show/closed+monoidal+structure+on+presheaves)
+3. But still ... why renaming and stages? Where is renaming and stages used? 
+
+
+(Sterling & Spitters, 2018) points out embedding functor `i : Ren-Cat → Nf-Cat`, `Ne-Cat` and `Tm-Cat`, and thus we have precomposition functors ` _∘i = i* : Pr(Nf-Cat) → Pr(Ren-Cat)`, thus `i*(Tms ? T)` and `i*(Nf ? Γ)` are all embedded objects in `Pr(Ren-Cat)`. 
 
 Now that we have a larger category, we can still use the embedding `Nf ? T`, `Nfs ? Γ` and etc. to embed syntactic terms (though we may only use `Nf ? T` and `Nfs ? Γ`). Yoneda over presheaf of renaming here, due to the fact that there are only variable permutation in renaming, will be pretty weak.
 
