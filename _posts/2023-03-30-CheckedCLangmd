@@ -35,4 +35,6 @@ Checked C is based on LLVM/Clang.
 The change also appear in CodeGen, seemingly only located at 
 1. [emitting CHKCBindTemporaryExpr](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/CodeGen/CGExpr.cpp#L1346)
    1. CHKCBindTemporaryExpr seems to be a temporary expression to a reference or pointer
-2. [emitting dynamic check](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/CodeGen/CGDynamicCheck.cpp#L11)
+2. [emitting dynamic check](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/CodeGen/CGDynamicCheck.cpp#L11), the dynamic check is also [here](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/CodeGen/CGBuiltin.cpp#L4867)
+3. Weird, why the codegen is not located in LLVM directory, but Clang directory?
+4. also there must be changes in llvm directory but I cannot yet see
