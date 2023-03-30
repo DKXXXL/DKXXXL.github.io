@@ -25,3 +25,14 @@ Checked C is based on LLVM/Clang.
 1. Note that, Clang/LLVM parser doesn't have a concise Context Free Grammar rules as Parser (Generator)
    1. so the Parser Rules are embedded as C, located around [here](https://github.com/llvm/llvm-project/blob/5b0705961841349c3b90a46e5349cd9469e0382f/clang/lib/Parse/ParseStmt.cpp#L167)
    2. the change done by checked C in parser is around [here](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/Parse/ParseStmt.cpp#L943), can be found via searching `[CHECKED C]` 
+
+
+## About AST/IR
+1. Interestingly, it seems like most stuff is unchanged --- i.e. the interaction with any other passes are almost zero (if not none)
+2. The change is mainly located at `clang/lib/Parse` and `clang/lib/AST`, can be found via searching `Checked C` globally
+
+## About CodeGen
+The change also appear in CodeGen, seemingly only located at 
+1. [emitting CHKCBindTemporaryExpr](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/CodeGen/CGExpr.cpp#L1346)
+   1. CHKCBindTemporaryExpr seems to be a temporary expression to a reference or pointer
+2. [emitting dynamic check](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/CodeGen/CGDynamicCheck.cpp#L11)
