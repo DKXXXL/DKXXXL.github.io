@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "Understanding Checked C Source Structure"
+date:   2022-03-30 00:56:11 -0400
+categories: Compiler
+---
+
+Checked C is based on LLVM/Clang.
+
+Note that, for clang, the entry point is located at
+`llvm-project/clang/tools/driver/` [Link](https://github.com/llvm/llvm-project/blob/d03d98b71d03eaf2a84e62e461b4fc87940866f1/clang/tools/driver/cc1_main.cpp#L185)
+
+Most Clang functionalities are wrapped inside [tools/libs](https://github.com/llvm/llvm-project/tree/main/clang/lib) to achieve reuses.
+
+For checked C, the main documentation is located in [checkedc-clang/clang/docs/checkedc](https://github.com/microsoft/checkedc-clang/tree/master/clang/docs/checkedc)
+
+## About Parser
+
+1. Note that, Clang/LLVM parser doesn't have a concise Context Free Grammar rules as Parser (Generator)
+2. It is done by handwritten rules in Clang
+   1. for example, 
