@@ -13,16 +13,15 @@ Checked C is based on LLVM/Clang.
 2. The driver will invoke `ExecuteCompilerInvocation` -> `CreateFrontendBaseAction` -> `ASTFrontendAction::ExecuteAction` [here](https://github.com/llvm/llvm-project/blob/a755e80ed1d2fe439d7c8c0fa38c399e398aa4f0/clang/lib/Frontend/FrontendAction.cpp#L1149)
 
 3. The `ParseAST` in that function will make sure the result of parsing (an AST tree) is assigned to the `CI.getSema`, the AST info is usually stored in `ASTContext`... more information here [clang ast intro](https://clang.llvm.org/docs/IntroductionToTheClangAST.html)
+4.  Parser is done by handwritten rules in Clang
+   1. for example, the parsing for statements including if while locates [here](https://github.com/llvm/llvm-project/blob/5b0705961841349c3b90a46e5349cd9469e0382f/clang/lib/Parse/ParseStmt.cpp#L167)
 
-4. Most Clang functionalities are wrapped inside [tools/libs](https://github.com/llvm/llvm-project/tree/main/clang/lib) to achieve reuses.
+5. Most Clang functionalities are wrapped inside [tools/libs](https://github.com/llvm/llvm-project/tree/main/clang/lib) to achieve reuses.
 
-5. For checked C, the main documentation is located in [checkedc-clang/clang/docs/checkedc](https://github.com/microsoft/checkedc-clang/tree/master/clang/docs/checkedc)
+6. For checked C, the main documentation is located in [checkedc-clang/clang/docs/checkedc](https://github.com/microsoft/checkedc-clang/tree/master/clang/docs/checkedc)
 
 ## About Parser
 
 1. Note that, Clang/LLVM parser doesn't have a concise Context Free Grammar rules as Parser (Generator)
-2. [clang ast intro](https://clang.llvm.org/docs/IntroductionToTheClangAST.html) indicates we have following ast structure
-   1. for example, [Parser](https://github.com/llvm/llvm-project/tree/main/clang/lib/Parse) can parse into `Stmt`, `Decl` and `Types` 
-3. Parser is done by handwritten rules in Clang
-   1. for example, the parsing for statements including if while locates [here](https://github.com/llvm/llvm-project/blob/5b0705961841349c3b90a46e5349cd9469e0382f/clang/lib/Parse/ParseStmt.cpp#L167)
-4. the result of parsing will be stored 
+   1. so the Parser Rules are embedded as C, located around [here](https://github.com/llvm/llvm-project/blob/5b0705961841349c3b90a46e5349cd9469e0382f/clang/lib/Parse/ParseStmt.cpp#L167)
+   2. the change done by checked C in parser is around [here](https://github.com/microsoft/checkedc-clang/blob/a620b39440453ac1783d5b8f4b64e8ba8ff3f8d9/clang/lib/Parse/ParseStmt.cpp#L943), can be found via searching `[CHECKED C]` 
