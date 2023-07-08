@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: index
 title: About ...
 ---
 This is Ende Jin. A Graduated Thesis Master Student from University of Waterloo, loving Type Theory, Programming Language and Category Theory.
