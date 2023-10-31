@@ -98,8 +98,8 @@ record Tyᴺ (T : Ty) : PSet where
 ```
 We construct QIIT-algebra, and the display algebra for type is where we starts.
 
-Then we can use Ty² := Σ T : Ty, Tyᴺ T to become a normal algebra; 
-but Ty² will be a Presheaf... trivially
+Then we can use Tyᴾ := Σ T : Ty, Tyᴺ T to become a normal algebra; 
+but Tyᴾ will be a Presheaf... trivially
 
 and we do similar for other display algebra.
 
@@ -134,23 +134,84 @@ record Conᴺ (Γ : Con) : PSet where
 As Coquand, we define `El T := Tm ? T` as a presheaf, and we do glue/display algebra on it
 
 ```agda
-Elᴺ T² : El T → PSet
-Elᴺ T² t = Tᴺ.C t
+Elᴺ Tᴾ : El T → PSet
+Elᴺ Tᴾ = Tᴺ.C
 
 
-Elᴺ Δ² : El Δ → PSet
-Elᴺ Δ² γ = Δᴺ.C γ
+Elᴺ Δᴾ : El Δ → PSet
+Elᴺ Δᴾ γ = Δᴺ.C γ
 
 ```
 
 
+According to Coquand 
 
+For `t : El T`, we have `⟦ t ⟧ t = Tᴺ.C t` (why? WHy there is an induction?)
+Then `⟦ T ⟧ : Tyᴺ T ` and we have `⟦ T ⟧.⇓ :  (t : Tm ? T) → C t → {x : Nf ? T | [x] = t} `
+
+Thus we aim for `⟦ T ⟧.⇓ t (⟦ t ⟧ t ) : {x : Nf ? T | [x] = t}`, which is almost what we want. 
+
+
+Still there are too many problems 
+1. Why? Why there is an induction from `El T`?
+2. how to reflect `{x : Nf ? T | [x] = t}` back to `Nf Γ T` ?
+
+Basically our problem is about the boundary between presheaf topos and our conventional mathmatic world 
+
+# What is PSet
+In Coquand, he uses 
+> We write V₀, V₁, . . . the cumulative sequence of presheaf universes, so that Vₙ(X) is the set of 𝑈ₙ-valued dependent presheaves on the presheaf represented by X.
+
+y(X) is representing X, y(X) = Ren(?, X)
+
+In other word, Vₙ : Presheaf over renaming category
+Vₙ : Ren → Set
+Vₙ X = (Z : Ren) → y(X)(Z) → 𝑈ₙ
+
+But why it is a PSet? i.e. why it can be considered as a universe in presheaf topos?
+
+Basically the extensional property we want for a Universe V, is that, if x : V, then "x" is an object, i.e. a presheaf
+
+
+⊢ x : Vₙ, i.e. x ∈ Hom(1, Vₙ) ≅ Hom (y(1), Vₙ) ≅ Vₙ(1) = (Z : Ren) → y(1)(Z) → Uₙ ≅ (Z : Ren) → {∗} → Uₙ 
+-- since product is a limit and yoneda preserves limit, and yoneda lemma
+
+by the above, every presheaf is actually in the Hom(1, Vₙ). 
+Actually not only presheaf, every function (Z : Ren) → Uₙ can be lifted to Vₙ 
+
+0. More investigation on the presheaf universe 
+1. Figuring out how normalization function work
+2. Glue the Boolean type
+3. Glue the function type (to figure out Var stuff)
+
+<!-- # Attempt 1: Disassemble The El
 Now the above motive is enough: For 
 ```agda
 Given t : Tm Γ T, we have t[-] : Tms ? Γ → Tm ? T
-⟦ t ⟧ t : Tmᴺ Γᴾ
+⟦ t ⟧ t : Tmᴺ Γᴾ Tᴾ t 
 
 ⇓T :  ∀ (u : Tm ? T) → C u → {x : Nf ? T | [x] = u}
 
 f (z : Tms ? Γ) = ⇓T (yt z) ()
 ```
+We are stuck here -- without knowing the concrete structure of `PSet`, we cannot filling `C u` properly -->
+
+# Attempt 1: Disassemble The El
+
+We use El, Elᴺ, to define Tmᴺ, but not in presheaf topos anymore
+
+```agda
+Tmᴺ Γᴾ Tᴾ : Tm Γ T → Set 
+-- Tᴺ.C : Tm ? T → PSet
+-- Tᴺ.C Γ : Tm Γ T → Vₙ Γ
+--        ≡ Tm Γ T → (Z : Ren) → y(Γ)(Z) → 𝑈ₙ
+Tmᴺ Γᴾ Tᴾ t = Tᴺ.C Γ t
+
+```
+
+# Attempt 2 : Lift everything into Presheaf Topos
+Currently we know 
+`Tmᴺ Γᴾ Tᴾ : Tm Γ T → Set `
+is not in Presheaf topos, we can try to lift `Tm Γ T` into presheaf topos to remedy that 
+
+What are the advantages of doing so?
