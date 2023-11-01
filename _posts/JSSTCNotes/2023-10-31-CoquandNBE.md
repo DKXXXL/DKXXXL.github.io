@@ -9,6 +9,8 @@ categories: Type-Theory Cat-Theory
 https://www.cse.chalmers.se/~coquand/norm.pdf
 and 
 https://arxiv.org/abs/1810.09367 
+and 
+https://doi.org/10.1016/j.tcs.2019.01.015 
 
 # Syntax 
 Still start with QIIT, 
@@ -201,3 +203,60 @@ Thus finally
 <!-- The only concern is that, dependent natural transformation, can
       they be instantiated to get the above stuff? -->
 
+### Recover (Dependent Presheaf) intro conventional math
+
+We unfold the dependent presheaf into the conventional math, 
+to see what each natural transformation, and stuff looks like
+
+# Glue
+
+## Context Extension
+
+```agda
+▷ᴺ : (Γᴾ : Conᴾ) → (Tᴾ : Tyᴾ) → Conᴺ (Γ ▷ T)
+Γᴾ ▷ᴺ Tᴾ
+```
+
+## Boolean Type
+
+Recall Boolean type has following syntax
+```agda 
+Bool : Ty
+true : Tm Γ Bool
+false : Tm Γ Bool
+```
+
+```agda
+Boolᴺ : Tyᴺ Bool
+Boolᴺ.C : Tm ? Bool → PSet 
+Boolᴺ.C t = { x : Nf ? Bool | [x] = t }
+Boolᴺ.⇑ : (t : Ne ? Bool) → C [t]
+        ≡ (t : Ne ? Bool) → { x : Nf ? Bool | [x] = [t] }
+Boolᴺ.⇑ t = t
+// according to the definitions from Coquand
+Boolᴺ.⇓ : (t : Tm ? Bool) → Boolᴺ.C t → {x : Nf ? Bool | [x] = t}
+Boolᴺ.⇓ t tᴺ = tᴺ
+
+trueᴺ : Tmᴺ Γᴾ Boolᴾ true 
+      ≡ (ρ : Tms ? Γ) → (ρᴺ : Γᴺ.C ρ) → Boolᴺ.C (true[-] ρ)
+      ≡ (ρ : Tms ? Γ) → (ρᴺ : Γᴺ.C ρ) →  {x : Nf ? Bool | [x] = (true[-] ρ)}
+// holds trivially
+```
+
+
+Function type's syntax
+```agda
+Π : Ty → Ty → Ty
+lam : Tm (Γ, A) B → Tm Γ (Π A B)
+app : Tm Γ (Π A B) → Tm (Γ, A) B
+```
+
+```agda
+Πᴺ Aᴾ Bᴾ : Tyᴾ (Π A B)
+(Πᴺ Aᴾ Bᴾ).C : Tm ? (Π A B) → PSet 
+
+lamᴺ : (tᴾ : Tmᴾ (Γ, A)ᴾ Bᴾ) → Tmᴺ Γᴾ (Π A B)ᴾ (lam t)
+```
+
+
+## Function Type
