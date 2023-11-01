@@ -99,6 +99,23 @@ Actually not only presheaf, every function (Z : Ren) → Uₙ can be lifted to V
 2. Glue the Boolean type
 3. Glue the function type (to figure out Var stuff)
 
+## What is dependent presheaf
+
+A dependent presheaf `G` over another presheaf `F`, according to the definition, is just a presheaf `G` over the category of element of `F`, i.e. `∫F`.
+
+However, this make dependent presheaf a dependent type in the internal language of presheaf topos.
+
+For a presheaf `F : C → Set`
+
+Because `Psh(∫F) ≅ Psh(C)/F` (prove it!), thus `G ∈ Psh(C)/F`， i.e. `G` over `F`, 
+
+Thus, in the (internal language of the) topos, `F` is an object thus a type, and `G` is a type dependent on `F`, i.e. `x : F ⊢ G(x) : Type`
+
+So a dependent presheaf is really a dependent type in the internal language of presheaf topos. (That is the reason it is called dependent presheaf).
+
+Thus the variant `Var, Elem, ...` with single parameter are just some dependent type in the internal language of presheaf. 
+They are not global type, so not presheaf in general.
+
 # Semantic
 The key is Coquand's simple formulation of the motive for normalization. 
 We type-set type-thoeretically the computability strucutre (display algebra).
