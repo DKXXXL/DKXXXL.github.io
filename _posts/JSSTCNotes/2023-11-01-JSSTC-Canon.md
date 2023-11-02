@@ -50,9 +50,41 @@ We provide the logical relation model using STC. We start with introducing new c
 
 ## New Connectives : Refinement Type
 
+## Logical Relation itself
+
 # Glue the topos, Explore the topos, Fullfill the connectives
 
-This section might be too involved -- we suggest readers to go to the next section to see *HOW* to use STC, before knowing why STC has these logical/type connectives -- what this section is focusing on.
+<!-- This section might be too involved -- we suggest readers to go to the next section to see *HOW* to use STC, before knowing why STC has these logical/type connectives -- what this section is focusing on. -->
+
+## Artin Gluing
+
+## Why Sierpinski Topos matters?
+
+## Interpret the Connectives
+We will explore some new and existent connectives. 
+### Connective : Refinement Type
+The intepretation of refinement type is too complicated, it relates to Strong Universe (https://doi.org/10.48550/arXiv.2202.12012).
+
+### Connective : ¶
+
+¶ has shown its power as to neatly separate and project stuff into object (syntax) space (or metaspace)
+
+#### Why ¶ can project syntax/meta component?
+
+It relates to the 
+### Subtype
+
+In STC, JS uses frequently a notation { A | ¶ ↪ a} := {x : A | ¶ → x = a}, gives a subtype (really a refinement). 
+we will see how in 
+
+
+### Function Extensionality
+
+Internal language of topos is an extensional type theory, equip with 
+
+
+
+***
 
 STC is actually the internal language of artin glued topos. Fullfill the folklore logrel ~ artin gluing.
 
