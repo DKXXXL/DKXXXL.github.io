@@ -206,11 +206,87 @@ Thus generally speaking, to fill in `{... | ¶ ↪ X}`, we use either formation 
 
 # Glue the topos, Explore the topos, Fullfill the connectives
 
+We first review some basic property and their interpretation in a topos
+
 <!-- This section might be too involved -- we suggest readers to go to the next section to see *HOW* to use STC, before knowing why STC has these logical/type connectives -- what this section is focusing on. -->
+
+### Subtype
+
+In STC, JS uses frequently a notation { A | ¶ ↪ a} := {x : A | ¶ → x = a}, gives a subtype (really a refinement). 
+we will see how to express this 
+
+### Function Extensionality
+
+Internal language of topos is an extensional type theory, equip with 
+
 
 ## Artin Gluing
 
-## Why Sierpinski Topos matters?
+Artin Gluing is described by 2.4∗6, is induced by 
+the **pullback** of
+a left exact morphism (logos functor) and a codomain (logos-)functor.  
+
+SetG -----> SetY^→
+  |          |
+  |          | cod
+  |          |
+SetU --ρ--> SetY
+
+SetG is the result of gluing. So to do artin gluing on topos(logos), we only need to spcify the ρ : SetU → SetY left exact logos functor.
+
+***
+
+To make canonicity work, we have figure shape (JS2, 4.3∗1) ρ : 1 → 𝑇 and thus ρ* : Pr(𝑇) → Pr(1) ≅ Set, and then 
+
+ SetG -----> Set^→
+  |          |
+  |          | cod
+  |          |
+Pr(T) --ρ--> Set
+
+According to 4.3∗4∗2, and  SetG is simply the artin gluing by figure shape ρ : 1 → 𝑇
+
+Also according to 4.5.1 (especioally 4.5.1∗4∗1), as the inverse image functor of ∘ is exactly cod functor
+while 4.5.1∗2 has this 0T* : Pr(T) → Set := Hom_(Pr(T))(1, -)
+
+ρ*(E) = E ∘ ρ
+ρ*(E)(∗) = E(ρ(1)) = E(1) ≅ Hom_(Pr(T))(y(1), E) ≅ Hom_(Pr(T))(1, E) = 0T*(E)
+
+<!-- Why are these two equivalent? There are so many equivalence! -->
+<!-- maybe saying ρ* and 0T* equivalent is too strong, 
+      but saying two version of SetG equivalent is fine  -->
+
+
+https://ncatlab.org/nlab/show/Artin+gluing 
+Gives a concrete description of artin gluing
+
+Basically a comma category
+
+Given topoi and left exact morphism Φ : Set_E → Set_F, we get a glued topos `G` as logos `Set_G`
+
+its concrete structure as a comma category is covered in the above nlab
+
+### Open/Close immersion
+
+There will be open immersion i : Set_E ↪ Set_G,
+and closed immersion j : Set_F ↪ Set_G, 
+
+covered in nlab
+
+### ¶ itself?
+
+¶ = (1 ∈ (Set_E), 0 ∈ Set_F, f : 0 → Φ(1))
+
+### Why closed space under ¶ is 1?
+
+### Why open space under closed space is not 1?
+
+### Other structures
+
+### Initial, Terminal Object?
+
+
+
 
 ## Interpret the Connectives
 We will explore some new and existent connectives. 
@@ -222,10 +298,7 @@ We will not try to explain them here
 
 ¶ has shown its power as to neatly separate and project stuff into object (syntax) space (or metaspace)
 
-### Subtype
 
-In STC, JS uses frequently a notation { A | ¶ ↪ a} := {x : A | ¶ → x = a}, gives a subtype (really a refinement). 
-we will see how in 
 
 #### Why ¶ can project syntax/meta component?
 
@@ -233,11 +306,8 @@ It relates to the
 
 
 
-### Function Extensionality
 
-Internal language of topos is an extensional type theory, equip with 
-
-
+### Why Sierpinski Topos matters?
 
 ***
 
