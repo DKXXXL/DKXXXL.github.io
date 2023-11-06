@@ -273,6 +273,20 @@ and closed immersion j : Set_F ↪ Set_G,
 
 covered in nlab
 
+What's more, (inverse image of)open immersion automatically has left and right adjoint. (i.e. open immersion is essential)
+
+What's more, 
+when JS using STC, by (5.5.2∗7) every gluing using left exact morphism arises from figure shape, and thus essential.
+
+This makes (by 4.3∗5, 5.5.3∗2) the closed immersion is an essential map.
+
+So in STC for Canonicity/NbE, both open and closed immersion are essential map (! ⊣ * ⊣ _*)
+
+Another characterization of open subspace is a slice of logos (2.1*6). So the inverse image of its open immersion automatically
+has a left adjoint (as left adjoint to the pullback functor, sigma type) 
+
+
+
 ### ¶ itself?
 
 ¶ = (1 ∈ (Set_E), 0 ∈ Set_F, f : 0 → Φ(1))
