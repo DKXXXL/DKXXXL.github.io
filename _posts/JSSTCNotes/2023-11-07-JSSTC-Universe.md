@@ -37,7 +37,7 @@ Covered in (JS5, Definition 1.9.1)
 For example, for dependent product, we have a `Π : 𝕌 → 𝕌 → U` simply because 1.9.1 tells us `𝕌` will classifies the dependent product.
 In other words, Π A B = code of ∏ (⌜ A ⌝) (⌜ B ⌝). 
 
-This idea can work on most connectives, simply because universe classifies well.
+This idea can work on most connectives, simply when universe classifies well.
 
 ### Why natural models on connective looks like that
 
@@ -50,13 +50,23 @@ Most (if not all of the basic) connectives has been covered above, but unlike mo
 This is mainly because ○ (and ⚈) has two definition while most connectives mentioned above only has one definition 
 (and the function mainpulating code is derived from the one definition)
 
-However, ○ (and ⚈) has two definition on `𝕌 → 𝕌` (JS2, 3.6) and as a functor (JS2, 2.1∗8, open modality). We need to prove these two coincide
+However, ○ (and ⚈) has two definition on `𝕌 → 𝕌` (JS2, 3.6) and as a functor (JS2, 2.1∗8, open modality). 
+We need to prove these two definitions coincide.
+
+
 
 ## Cumulative Universe
 
 ## Realignment/Refinement
-Not clear what kind of topos has realignment/refinement
 
+(JS2) seems using strict universe and strong universe as synonym.
+
+(JS2, 3.3∗2) describes a general form of realigment. (JS2, 3.3∗6) introduces a type-threotic style of the realignment. 
+
+(JS2, 3.4∗8) explains (when assume enough universes in the ambient set theory), any
+logos has a strong hierarchy of universes as exposed by Gratzer, Shulman, and Sterling
+
+(JS2, 3.4∗4) defines of a strong hierarchy of universe. 
 
 
 
