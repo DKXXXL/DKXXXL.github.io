@@ -25,126 +25,39 @@ dependent type to express predicate or all kinds of information.
 `B : A → Type` something like this. However, in internal language, this `Type` needs to be interpreted
 and is usually interpreted as an **Universe Object**
 
-
-
-# General Proof Structure
-
-This is a summary of proof structure in (JS2, Chapter 5)
-
-1. Still we use the same syntax.
-
-2. Then we glue a topos based on renaming/atomic category 𝐴, and then do a glue (5.5.1∗7) via the figure shape α : 𝐴 → 𝑇.
-
-
-3. Then we explore the existence of `var(A)` (JS2,5.5.3∗3) **The hardest! Have no idea**
-
-4. Then we define normal, neutral form in the closed subspace of the glued topos (Section 5.4.1)
-
-5. Finally we construct Synthetic Logical Relation 
-
-
-## 5.5.3∗3
-
-
-
-## The structure of Adequacy 
-
-We need to spit out the adequacy result. This part is commeting (JS2, Sec 5.6).
-
-
-First, recall https://ncatlab.org/nlab/show/Artin+gluing#some_details_and_further_adjunctions 
-provides specifics for open/close immersion
-
-### (5.6.1∗1) 
-using `i_!` as part of the definition of atomic substitution simply because (5.6.1∗3) 
-
-### (5.6.1∗4) 
-
-claims, following 5.6.1∗4 itself
-
-α! : Set𝐴 → Set𝑇 ⊣ α* : Set𝑇 
-
-j*(i!(yA(Γ))) = j*(α!(yA(Γ)), ...) = α!(yA(Γ)) ≅ yT(α(Γ)) (α! is yoneda extension of α)
-
-```
-Hom (yA(Δ), α*j*(| Γ |))
-≅ Hom (α_! yA(Δ), j*(| Γ |) )
-≅ Hom (yT(α(Δ)), yT(α(Γ)))
-≅ Hom(α(Δ), α(Γ))
-```
-
-### (5.6.2∗4) 
-
-**We have computability structure of a canonical point**
-
-Canonical points are form of `⟦Γ⟧ → X`.
-
-
-So a `Hom_Set𝐺(⟦-⟧, X) : Set𝐴` turn into a computability structure by : 
-1. by (5.6.2∗4) we have an arrow `f : Hom_Set𝐺(⟦-⟧, X) → α*j*X` in `Set𝐴`
-2. an object in `Set𝐺` is a triple `(_₁ : Set𝑇, _₂ : Set𝐴, _₂ → α*(_₁) : Set𝐴)`.
-
-3. So the turned computability is 
-`(j*X, Hom_Set𝐺(⟦-⟧, X), f) `
-
-
-So given `X`, we have `X_can := (j*X, Hom_Set𝐺(⟦-⟧, X), f) `
-
-**We have computability structure of a atomic point**
-
-Atomic points are form of `(| Γ |) → X`.
-
-
-By (5.6.1∗3), `iso : i*X ≅ Hom_Set𝐺((| - |), X)`
-
-So given `X`, we have `X = (j*X, i*X, X_f) ≅ (j*X, Hom_Set𝐺((| - |), X), iso ∘ X_f)`
-
-A bit confusion comes from, is `X_f` one to one correspondes ` Hom_Set𝐺((| - |), X) → α*j*X`?
-
-I guess so because every `X_f` uniquely corresponds to `X`, which uniquely corresponds to `X → j_*j*X`,
-but we need a proof
-
-Conjecture : every `X_f` is uniquely corresponding to the ` Hom_Set𝐺((| - |), X) → α*j*X` in 5.6.2∗4
-
-## 5.6.2∗3
-
-Why it can be pattern matching like that?
-
-## 5.6.2∗6
-
-
-`M(T) → M#(T)_can` is `α*yT(T) → Hom_Set𝐺(⟦-⟧,M#T)` simply because
-
-```
-M(T) = j_* (yT(T)) = (yT(T), α*yT(T), id)
-```
-So this commutative diagram is enough to specify this function
-
 ***
 
-## Questions about adequacy
-1. Why this adequacy is so complicated compared to STC-Canonicity proof? 
 
-*** 
-Then we can rearrange the above proof into our current STLC-NbE proof.
+A Universe in a category is defined in (JS2, 3.2∗1), basically a "type" `𝕌` s.t. `X ⊢ T : 𝕌` (code of type) `T : X → U` can be reflected into an object `⌜ T ⌝` an object as a (dependent) type `⌜ T ⌝ → X`
 
-# Syntax
+## Connective 
 
-Syntax in STC is written in HOAS, as before
+Covered in (JS5, Definition 1.9.1)
 
-```agda 
-record STLC : Set where 
-  ty : □
-  tm : ty → □
-  bool : ty 
-  true :  tm bool
-  false : tm bool
-  arr : ty → ty → ty
-  lam : (tm A → tm B) → tm (arr A B)
-  app : tm (arr A B) → tm A → tm B
-  lamβ : app (lam f) = f
-  lamη : lam (app f) = f 
-```
+For example, for dependent product, we have a `Π : 𝕌 → 𝕌 → U` simply because 1.9.1 tells us `𝕌` will classifies the dependent product.
+In other words, Π A B = code of ∏ (⌜ A ⌝) (⌜ B ⌝). 
 
-Like STC for Canonicity, we write
+This idea can work on most connectives, simply because universe classifies well.
+
+### Why natural models on connective looks like that
+
+Unlike (JS5, Definition 1.9.1), we also have (JS2, 3.2∗3, 3.2∗4).
+
+## JS2, Modal Universe
+
+Most (if not all of the basic) connectives has been covered above, but unlike modal universe in (JS2, 3.6)
+
+This is mainly because ○ (and ⚈) has two definition while most connectives mentioned above only has one definition 
+(and the function mainpulating code is derived from the one definition)
+
+However, ○ (and ⚈) has two definition on `𝕌 → 𝕌` (JS2, 3.6) and as a functor (JS2, 2.1∗8, open modality). We need to prove these two coincide
+
+## Cumulative Universe
+
+## Realignment/Refinement
+Not clear what kind of topos has realignment/refinement
+
+
+
+
 

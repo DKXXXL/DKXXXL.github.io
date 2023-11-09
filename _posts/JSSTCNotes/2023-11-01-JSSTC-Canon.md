@@ -168,6 +168,7 @@ M.el : { ? | ¶ ↪ S.el} ⊆ M.ty → Set
 M.el T* : { ? | ¶ ↪ S.el T} ⊆ Set
 
 M.el T*: { Set | ¶ S.el T } = Set
+M.el T* = T*.₂
 ```
 
 When we start to construct M.arr
