@@ -53,6 +53,20 @@ This is mainly because ○ (and ⚈) has two definition while most connectives m
 However, ○ (and ⚈) has two definition on `𝕌 → 𝕌` (JS2, 3.6) and as a functor (JS2, 2.1∗8, open modality). 
 We need to prove these two definitions coincide.
 
+*** 
+No we actually don't need to do it. We only need to show the internal lex monad
+`○ T = ¶ → T`
+will lift to external type/object `¶ → T`, which can automatically be decomposed 
+as the adjoint of open immersion.
+
+***
+Ref :
+1. Modalities in homotopy type theory https://arxiv.org/abs/1706.07526
+2. Syntax and semantics of modal type theory § 5.2  https://jozefg.github.io/papers/phd-thesis.pdf 
+3. Logical Relation as types §3.2 https://arxiv.org/pdf/2010.08599.pdf 
+
+
+
 
 
 ## Cumulative Universe
@@ -68,6 +82,16 @@ logos has a strong hierarchy of universes as exposed by Gratzer, Shulman, and St
 
 (JS2, 3.4∗4) defines of a strong hierarchy of universe. 
 
+### (JS4, Notation  3.3) How does it work?
+
+{tᵢ}(i ∈ I) 是term of ∏ᵢ FUᵢ
+
+q ({tᵢ}(i ∈ I)) 
+= {tⱼ|(Uᵢ ∩ Uⱼ)}(i ∈ I, j ∈ I)
+= {tⱼ|(Uⱼ ∩ Uᵢ)}(i ∈ I, j ∈ I)
+= {tₓ|(Uₓ ∩ Uj)}(j ∈ I, x ∈ I) // change name i -> j, j -> x
+= {tᵢ|(Uᵢ ∩ Uj)}(j ∈ I, i ∈ I) // change name 
+?= {tᵢ|(Uᵢ ∩ Uj)}(i ∈ I, j ∈ I) // change index order (is this step wrong?)
 
 
 
