@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Review System F Meta-theory"
+title:  "Review Meta-theory of Language with AlgEff"
 date:   2023-11-11 00:56:11 -0400
 categories: Type-Theory Cat-Theory
 ---
@@ -20,10 +20,12 @@ Ref:
 
 ***
 
-We review meta-theory of System F, in LCCC LF style.
-We have already told you that write out all substitution lemmas is a nightmare
-especially for the case there are two different binder and two 
-different kinds of substitution
+We review meta-theory of  algebraic effect. 
+But our focus is on how the algebraic operation is modeled in STLC. 
+
+Our main motivation is to achieve canonicity (as implementation) and parametricity (for equational reasoning).
+
+We start with one specific 
 
 # Syntax
 
@@ -32,12 +34,6 @@ different kinds of substitution
 record SysF where
   ty : □
   tm : ty → □
-  ∀  : (ty → ty) → ty 
-  Λ  : (F : (ty → ty)) → ((α : ty) → tm (F α)) → tm (∀ F)
-  App : (F : (ty → ty)) → tm (∀ F) → (α : ty)  → tm (F α)
-  Λβ : App F (Λ F f) ≡ f
-  -- do we want the following?
-  Λη : Λ F (App F f) ≡ f
   ⇒  : ty → ty → ty 
   λ  : (tm A → tm B) → tm (A ⇒ B)
   app : tm (A ⇒ B) → (tm A → tm B)
@@ -263,22 +259,3 @@ ff : tm 𝔹
 
 
 # Parametricity (Agda)
-
-
-
-***
-# Pape Structure
-1. Metatheoretic Property of Lex
-   1. NbE of Lex
-   2. Parametricity
-      1. recovering abstraction-safety from https://cs.uwaterloo.ca/~yizhou/papers/abseff-popl2019.pdf 
-2. Verifying Property of Lex
-   0. A Program that has input (n ∈ N) and output (∈ 𝔹), will sum up the [fib 0, ... fib n], and return if it is odd number 
-   1. Verify This Program
-      1. Since we only have a 𝔹 as primitive data, 
-         1. so in the program we will use church encoding to encode ℕ and `List`
-         2. and we will write out the specification in the metaspace, so that we can realize them 
-   2. Compile This Program 
-      1. similar challenge, but we are compiling to a stack machine, with ℕ as primitive data type 
-   3. Compile a Second Program, achieve stack-free compilation of Effect Handler (Mentioned by Yizhou)
-      1. what's more, we use different data layout as the above example.
