@@ -147,6 +147,9 @@ tmᴾ T = ∑ t : Hom(1, S.tm Tₛ), T.₂ t
               ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ tˢ Tₛ)
 
 Λ  : (F : (ty → ty)) → ((α : ty) → tm (F α)) → tm (∀ F)
+Λ F f : ∑ t : Hom(1, S.tm Tₛ), (∀ F).₂ t
+Λ F f : ∑ t : Hom(1, S.tm Tₛ), ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ t Tₛ)
+Λ F f = (S.Λ F f, (λ T, f T))
 App : (F : (ty → ty)) → tm (∀ F) → (α : ty)  → tm (F α)
 Λβ : App F (Λ F f) ≡ f
 -- do we want the following?
@@ -212,6 +215,10 @@ A ⇒ B = [¶ ↪ S.⇒ A B |
      ]
   where ?b : tm(S.⇒ A B) → ⚈Ω
         ?b t = ⚈ ∀ (a : tm(A)),  B.₂ (app t (○ a))
+        // maybe we should flatten this function, i.e., use
+        // ∀ (a : ⚈ tm(A)),  B.₂ (app t (○ a))
+        // instead
+        // so that eta rules will hold more directly
 λ  : (tm A → tm B) → tm (A ⇒ B)
 λ f : tm (A ⇒ B) ⊆ { ¶ ↪ S.λ f}
 λ f : [ ¶ ↪ (t : S.tm T) | ⚈ ∀ (a : tm(A)),  B.₂ (S.app t (○ a))]
@@ -219,12 +226,14 @@ A ⇒ B = [¶ ↪ S.⇒ A B |
   where ?c : ⚈ ∀ (a : tm(A)),  B.₂ (f (○ a))
         f : tm A → tm B
         f a : [ ¶ ↪ (x : S.tm T) | B.₂ x]
-        ?c = ⚈ (f a).₂
+        ?c = ⚈ λ a, (f a).₂
+λ f = [ ¶ ↪ (S.λ ○f) | ⚈ (f a).₂ ]
 app : tm (A ⇒ B) → (tm A → tm B)
 app t a : tm B
   where t : tm (A ⇒ B) 
           ≡  [ ¶ ↪ (x : S.tm ((A ⇒ B))) | ⚈ ∀ (a : tm(A)),  B.₂ (app x (○ a))]
-app t a = [ ¶ ↪ (S.app t a) | t.₂ a]
+          
+app t a = [ ¶ ↪ (S.app t a) | t.₂ >>= λ t, t a]
 λβ : app (λ f) ≡ f
 λη : λ (app f) ≡ f
 
@@ -235,12 +244,32 @@ app t a = [ ¶ ↪ (S.app t a) | t.₂ a]
         ?b t = ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ tˢ Tₛ)
 
 Λ  : (F : (ty → ty)) → ((α : ty) → tm (F α)) → tm (∀ F)
+Λ F f : [ ¶ ↪ (x : S.tm (∀ F)) | (∀ F).₂ x]
+       ≡ [ ¶ ↪ (x : S.tm (∀ F)) | ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ t Tₛ) ]
+Λ F f = [ ¶ ↪ (S.Λ F f) | ?d ]
+  where ?d : ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ (S.Λ F f) Tₛ)
+              ≡ ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (f Tₛ)
+        f T : tm (F T) ≡ [ ¶ ↪ (x : S.tm (F T)) | (F T).₂ x]
+        ?d = ⚈ (λ T, (f T).₂)
 App : (F : (ty → ty)) → tm (∀ F) → (α : ty)  → tm (F α)
+App F t T : tm (F α) ≡ [ ¶ ↪ (x : S.tm (F α)) | (F α).₂ x]
+App F t T = [ ¶ ↪  (S.App F t T) | ?e ]
+  where ?e : (F T).₂ (S.App F t T)
+  t : [ ¶ ↪ (x : S.tm (∀ F)) | (∀ F).₂ x]
+        ≡  [ ¶ ↪ (x : S.tm (∀ F)) | ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ x Tₛ)]
+        ?e = t.₂ ∗ (⚈ T) 
+        // apparently ∗ : ⚈(A → B) → ⚈ A → ⚈ B
 
 Λβ : App F (Λ F f) ≡ f
--- do we want the following?
-Λη : Λ F (App F f) ≡ f
-
+since (App F (Λ F f) x).₂ 
+        = (Λ F f).₂ >>= λ t, t x 
+        = ⚈ (λ T, (f T).₂) >>= λ t, t x 
+        = ⚈ (f x).₂ = (f x).₂
+Λη : (Λ F (App F f)).₂
+     = ⚈ (λ T, ((App F f) T).₂)
+     = ⚈ (λ T, f.₂ ∗ (⚈ T)) 
+     ?= f.₂
+    //  I think it is correct, some basic law from monad
 
 𝔹 : [ ¶ ↪ T : S.ty | 
         // I want it to be 
