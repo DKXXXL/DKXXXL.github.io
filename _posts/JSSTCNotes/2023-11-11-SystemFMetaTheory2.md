@@ -196,15 +196,11 @@ we need ⚈Ω as the proposition universe. That is we assume (later to prove)
 ```Haskell
 Module M where
 ty : {𝒰 | ¶ ↪ ty}
-ty = [ ¶ ↪ T : S.ty | 
-        // I want it to be 
-        S.tm(T) → ⚈Ω 
-      ]
+ty = [ ¶ ↪ T : S.ty | S.tm(T) → ⚈Ω ]
 // this can work simply because ○ ⚈ Ω ≅ 1.
 tm : {ty → 𝒰 | ¶ ↪ S.tm}
 tm (T : M.ty) = [ ¶ ↪ (x : S.tm T) | T.₂ x]
   // T.₂
-  
 
 //  let's first see if function type can be recovered
 ⇒  : ty → ty → ty 
@@ -290,9 +286,155 @@ ff : tm 𝔹
 3. ⚈ is a monad
 4. ⚈ (∀a, P) can be applied with ⚈a
 
+## Adequacy
 
-# Parametricity (Agda)
+We recall the adequacy here :
 
+
+# Paramtricity (Agda)
+
+Almost the same! Just make things binary.
+
+Related stuff goes to related stuff.
+```haskell
+
+module Paramtricity where 
+tyᴾ : Set
+tyᴾ = ∑ (T₁ T₂ : Hom(1, S.ty)), ∑ R: Hom (1, tm(T)) → Hom (1, tm(T)) → Prop
+
+
+tmᴾ : tyᴾ → Set
+tmᴾ T = ∑ t₁ t₂ : Hom(1, S.tm Tₛ), T.₂ t₁ t₂
+
+∀ᴾ  : (tyᴾ → tyᴾ) → tyᴾ 
+∀ᴾ (Fₛ, F) :  ∑ (T : Hom(1, S.ty)), Hom (1, tm(T)) → Prop
+∀ᴾ (Fₛ, F) = (S.∀ Fₛ, ?X)
+  where F : (tyᴾ → tyᴾ)
+  where ?X : Hom(1, tm(S.∀ Fₛ)) → Prop
+        ?X = λ tₛ : Hom(1, tm(S.∀ Fₛ)), 
+              ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ tˢ Tₛ)
+
+Λ  : (F : (ty → ty)) → ((α : ty) → tm (F α)) → tm (∀ F)
+Λ F f : ∑ t : Hom(1, S.tm Tₛ), (∀ F).₂ t
+Λ F f : ∑ t : Hom(1, S.tm Tₛ), ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ t Tₛ)
+Λ F f = (S.Λ F f, (λ T, f T))
+App : (F : (ty → ty)) → tm (∀ F) → (α : ty)  → tm (F α)
+Λβ : App F (Λ F f) ≡ f
+-- do we want the following?
+Λη : Λ F (App F f) ≡ f
+⇒  : ty → ty → ty 
+λ  : (tm A → tm B) → tm (A ⇒ B)
+app : tm (A ⇒ B) → (tm A → tm B)
+λβ : app (λ f) ≡ f
+λη : λ (app f) ≡ f
+//  observable for parametricity later
+𝔹 : ty 
+tt : tm 𝔹
+ff : tm 𝔹
+
+```
+
+## Parametricity, Example, Adequacy
+
+We try to prove, given `⊢ x : ∀ a , a → a` then `(x, (ΛA, λ x, x)) ∈ tm()`
+
+# Parametricity (STC)
+
+We start with the STC proof, then we proceed to the structure of the gluing topos.
+
+Following (JS4)， we postulate `¶ := ¶L ∨ ¶R` and `¶L ∧ ¶R = ⊥`, 
+
+that means `¶L → (¶R = ⊥)` and `¶R → (¶L = ⊥)`
+
+in other words, we also need under `¶L`, ` [¶R ↪ (r : ?) | ?A] ≅ 1 `
+
+This makes it possible to have 
+`[ ¶L ↪  ] `
+
+```Haskell
+Module P where
+ty : {𝒰 | ¶ ↪ ty}
+ty = [ ¶ ↪ T : S.ty | S.tm(T) → S.tm(T) → ⚈Ω ]
+// this can work simply because ○ ⚈ Ω ≅ 1.
+tm : {ty → 𝒰 | ¶ ↪ S.tm}
+tm (T : M.ty) = [ ¶ ↪ (x : S.tm T) | T.₂ x]
+  // T.₂
+
+//  let's first see if function type can be recovered
+⇒  : ty → ty → ty 
+A ⇒ B : [ ¶ ↪ T : S.ty | tm(T) → ⚈Ω ] ⊆ { ty | ¶ ↪ S.⇒ A B }
+A ⇒ B = [¶ ↪ S.⇒ A B | 
+      ?b
+      // [¶ ↪ (f : S.tm (S.⇒ A B)) | ⚈ ∀ (a : tm(A)),  tm (B) (app f (○ a)) ]
+     ]
+  where ?b : tm(S.⇒ A B) → ⚈Ω
+        ?b t = ⚈ ∀ (a : tm(A)),  B.₂ (app t (○ a))
+        // maybe we should flatten this function, i.e., use
+        // ∀ (a : ⚈ tm(A)),  B.₂ (app t (○ a))
+        // instead
+        // so that eta rules will hold more directly
+λ  : (tm A → tm B) → tm (A ⇒ B)
+λ f : tm (A ⇒ B) ⊆ { ¶ ↪ S.λ f}
+λ f : [ ¶ ↪ (t : S.tm T) | ⚈ ∀ (a : tm(A)),  B.₂ (S.app t (○ a))]
+λ f = [ ¶ ↪ (S.λ ○f) | ?c ]
+  where ?c : ⚈ ∀ (a : tm(A)),  B.₂ (f (○ a))
+        f : tm A → tm B
+        f a : [ ¶ ↪ (x : S.tm T) | B.₂ x]
+        ?c = ⚈ λ a, (f a).₂
+λ f = [ ¶ ↪ (S.λ ○f) | ⚈ (f a).₂ ]
+app : tm (A ⇒ B) → (tm A → tm B)
+app t a : tm B
+  where t : tm (A ⇒ B) 
+          ≡  [ ¶ ↪ (x : S.tm ((A ⇒ B))) | ⚈ ∀ (a : tm(A)),  B.₂ (app x (○ a))]
+          
+app t a = [ ¶ ↪ (S.app t a) | t.₂ >>= λ t, t a]
+λβ : app (λ f) ≡ f
+λη : λ (app f) ≡ f
+
+∀  : (ty → ty) → ty 
+∀ (F : ty → ty) : [ ¶ ↪ T : S.ty | S.tm(T) → ⚈Ω  ]
+∀ F = [ ¶ ↪ S.∀ F | ?b ]
+  where ?b : S.tm(T) → ⚈Ω
+        ?b t = ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ tˢ Tₛ)
+
+Λ  : (F : (ty → ty)) → ((α : ty) → tm (F α)) → tm (∀ F)
+Λ F f : [ ¶ ↪ (x : S.tm (∀ F)) | (∀ F).₂ x]
+       ≡ [ ¶ ↪ (x : S.tm (∀ F)) | ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ t Tₛ) ]
+Λ F f = [ ¶ ↪ (S.Λ F f) | ?d ]
+  where ?d : ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ (S.Λ F f) Tₛ)
+              ≡ ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (f Tₛ)
+        f T : tm (F T) ≡ [ ¶ ↪ (x : S.tm (F T)) | (F T).₂ x]
+        ?d = ⚈ (λ T, (f T).₂)
+App : (F : (ty → ty)) → tm (∀ F) → (α : ty)  → tm (F α)
+App F t T : tm (F α) ≡ [ ¶ ↪ (x : S.tm (F α)) | (F α).₂ x]
+App F t T = [ ¶ ↪  (S.App F t T) | ?e ]
+  where ?e : (F T).₂ (S.App F t T)
+  t : [ ¶ ↪ (x : S.tm (∀ F)) | (∀ F).₂ x]
+        ≡  [ ¶ ↪ (x : S.tm (∀ F)) | ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ x Tₛ)]
+        ?e = t.₂ ∗ (⚈ T) 
+        // apparently ∗ : ⚈(A → B) → ⚈ A → ⚈ B
+
+Λβ : App F (Λ F f) ≡ f
+since (App F (Λ F f) x).₂ 
+        = (Λ F f).₂ >>= λ t, t x 
+        = ⚈ (λ T, (f T).₂) >>= λ t, t x 
+        = ⚈ (f x).₂ = (f x).₂
+Λη : (Λ F (App F f)).₂
+     = ⚈ (λ T, ((App F f) T).₂)
+     = ⚈ (λ T, f.₂ ∗ (⚈ T)) 
+     ?= f.₂
+    //  I think it is correct, some basic law from monad
+
+𝔹 : [ ¶ ↪ T : S.ty | 
+        // I want it to be 
+        S.tm(T) → ⚈Ω 
+      ]
+𝔹 = [ ¶ ↪ S.𝔹 | λ t, ⚈ t = S.tt ∨ t = S.ff ]
+tt : tm 𝔹
+   ≡ [ ¶ ↪ (x : S.tm 𝔹) | ⚈ x = S.tt ∨ x = S.ff]
+tt = [ ¶ ↪ S.tt | ... ]
+ff : tm 𝔹
+```
 
 
 ***
@@ -301,13 +443,16 @@ ff : tm 𝔹
    1. NbE of Lex
    2. Parametricity
       1. recovering abstraction-safety from https://cs.uwaterloo.ca/~yizhou/papers/abseff-popl2019.pdf 
+      2. Prove the some property around LexEff and Primitive Alg-Eff
+         1. like commutativity or something
+      3. We want ObsEquivalence as the ultimate notion
 2. Verifying Property of Lex
-   0. A Program that has input (n ∈ N) and output (∈ 𝔹), will sum up the [fib 0, ... fib n], and return if it is odd number 
-   1. Verify This Program
+   1. A Program that has input (n ∈ N) and output (∈ 𝔹), will sum up the [fib 0, ... fib n], and return if it is odd number 
+   2. Verify This Program
       1. Since we only have a 𝔹 as primitive data, 
          1. so in the program we will use church encoding to encode ℕ and `List`
          2. and we will write out the specification in the metaspace, so that we can realize them 
-   2. Compile This Program 
+   3. Compile This Program 
       1. similar challenge, but we are compiling to a stack machine, with ℕ as primitive data type 
-   3. Compile a Second Program, achieve stack-free compilation of Effect Handler (Mentioned by Yizhou)
+   4. Compile a Second Program, achieve stack-free compilation of Effect Handler (Mentioned by Yizhou)
       1. what's more, we use different data layout as the above example.
