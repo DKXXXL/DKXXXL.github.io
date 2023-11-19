@@ -458,6 +458,7 @@ for arbitrary `t : S.tm (∀A, A → A)`, we want to show `S.App t T x = x`
 
 for arbitrary `x, y : S.tm (∀A, A → A) `, we want to show `x = y`
 
+## Boolean, Church Encoding
 
 
 ***

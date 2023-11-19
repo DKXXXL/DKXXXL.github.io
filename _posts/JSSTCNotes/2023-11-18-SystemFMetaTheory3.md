@@ -26,7 +26,19 @@ We want to achieve more contextual equivalence here.
 # About Programming with Type Refinement
 
 
-# More About Representation Independence/ Realization
+## With List
+```Haskell
+Module AboutList where 
+// Assume we have a list type, already glued
+  list : P.ty → P.ty
+  cons : tm(A) → tm(list A) → tm(list A)
+  nil : tm(list A)
+  reclist : 
+
+
+```
+
+# More About Representation Independence/Realization
 
 We have shown representation independence, or equivalence of two implementation.
 
@@ -36,3 +48,4 @@ and directly implement it using church encoding + sigma type?
 Basically last section is about implementation spec according to function, this 
 section is about implement data type according to function
 
+## Implement List
