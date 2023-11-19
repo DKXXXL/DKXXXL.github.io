@@ -404,7 +404,7 @@ app t a = [ ¶ ↪ (S.app t₁ a₁, S.app t₂ a₂) | t.₂ >>= λ t, t a]
 𝔹 : [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → ⚈Ω ]
 𝔹 = [ ¶ ↪ (S.𝔹, S.𝔹) | λ t₁ t₂, t₁ = t₂ ]
 tt : tm 𝔹
-   ≡ [ ¶ ↪ (x,y : S.tm 𝔹) | ⚈ x = S.tt ∨ x = S.ff]
+   ≡ [ ¶ ↪ (x,y : S.tm 𝔹) | x = y ]
 tt = [ ¶ ↪ S.tt, S.tt | ... ]
 ff : tm 𝔹
 // ...similar
@@ -432,7 +432,32 @@ without explicit showing the induction. It is just a matter of specification we 
 Apparently, `P` itself is not only reflexive -- once we have sigma type, 
 we can relate different implementation of a module 
 
-## Adequacy
+
+***
+# Sigma Type / Existential Type
+
+To have more adequacy result (more abstraction) and encode more data type in our calculus, 
+we have to introduce sigma type (to control the interface of the data operation).
+We need the 
+
+
+
+# More Adequacy
+
+## Observational Equivalence
+For `x, y ∈ S.tm(A)`, if we have `xy* : {P.tm A | ¶ ↪ (x, y)}`,
+
+then we have given arbitrary `f : S.tm(A) → S.tm(𝔹)`, s.t. `f* : P.tm(A) → P.tm(𝔹)`
+and thus `f* xy* : {P.tm(𝔹) | ¶ ↪ (f x, f y)}`, thus `f x = f y`
+
+## Free Theorem 1 using Canonicity Model
+
+for arbitrary `t : S.tm (∀A, A → A)`, we want to show `S.App t T x = x`
+
+## Free Theorem 2 using Paramtricity Model
+
+for arbitrary `x, y : S.tm (∀A, A → A) `, we want to show `x = y`
+
 
 
 ***
