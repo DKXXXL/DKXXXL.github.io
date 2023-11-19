@@ -485,4 +485,8 @@ for arbitrary `x, y : S.tm (∀A, A → A) `, we want to show `x = y`
       1. one default (using Church Encoding)
       2. The other uses tuples in stack machine 
       3. apparently different data layout for list
-Just one example makes the whole paper readable
+The paper is about just one example to make the whole paper readable
+
+Appendix : Support Intensional analysis
+1. We need to show we can write arbitrary predicate over syntax, i.e. `S.tm(list A) → ⚈Ω`
+2. By writing a sort function, and the list is an abstract type defined in System F
