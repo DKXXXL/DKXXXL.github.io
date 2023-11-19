@@ -471,12 +471,18 @@ for arbitrary `x, y : S.tm (∀A, A → A) `, we want to show `x = y`
          1. like commutativity or something
       3. We want ObsEquivalence as the ultimate notion
 2. Verifying Property of Lex
-   1. A Program that has input (n ∈ N) and output (∈ 𝔹), will sum up the [fib 0, ... fib n], and return if it is odd number 
-   2. Verify This Program
-      1. Since we only have a 𝔹 as primitive data, 
-         1. so in the program we will use church encoding to encode ℕ and `List`
-         2. and we will write out the specification in the metaspace, so that we can realize them 
-   3. Compile This Program 
-      1. similar challenge, but we are compiling to a stack machine, with ℕ as primitive data type 
-   4. Compile a Second Program, achieve stack-free compilation of Effect Handler (Mentioned by Yizhou)
-      1. what's more, we use different data layout as the above example.
+   1. Assume N as part of the primitive data
+   2. A Program that has input (n ∈ N) and output [0,...,n-1]  
+      1. Implement this program using one spec and implement two different ways
+         1. One use List (which is church encoded and proved correct)
+         2. The other use Lex Effect Handler's generator
+      2. prove the implementation equivalence
+   3. Compile the given two implementation
+      1. Compile to stack machine
+      2. Two different implementation of compilation; 
+         1. one default; the other achieve stack-free compilation of Effect Handler (Mentioned by Yizhou)
+   4. Also show how a list implementation can be compiled in difference way
+      1. one default (using Church Encoding)
+      2. The other uses tuples in stack machine 
+      3. apparently different data layout for list
+Just one example makes the whole paper readable
