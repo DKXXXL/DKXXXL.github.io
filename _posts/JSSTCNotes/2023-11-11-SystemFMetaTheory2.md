@@ -342,52 +342,53 @@ We try to prove, given `⊢ x : ∀ a , a → a` then `(x, (ΛA, λ x, x)) ∈ t
 
 We start with the STC proof, then we proceed to the structure of the gluing topos.
 
-Following (JS4)， we postulate `¶ := ¶L ∨ ¶R` and `¶L ∧ ¶R = ⊥`, 
+If we follow (JS4)， we postulate `¶ := ¶L ∨ ¶R` and `¶L ∧ ¶R = ⊥`,  that means `¶L → (¶R = ⊥)` and `¶R → (¶L = ⊥)` in other words, we also need under `¶L`, ` [¶R ↪ (r : ?) | ?A] ≅ 1 `. This makes it possible to have  `[ ¶L ↪  ] ` ...
 
-that means `¶L → (¶R = ⊥)` and `¶R → (¶L = ⊥)`
+Instead, we approach it easier by directly assume syntax is binary syntax, i.e. `¶ ↪ (Left Piece Syntax, Right Piece Syntax)`. 
 
-in other words, we also need under `¶L`, ` [¶R ↪ (r : ?) | ?A] ≅ 1 `
+Basically when we glue, we glue using a product of syntax.
 
-This makes it possible to have 
-`[ ¶L ↪  ] `
 
 ```Haskell
 Module P where
-ty : {𝒰 | ¶ ↪ ty}
-ty = [ ¶ ↪ T : S.ty | S.tm(T) → S.tm(T) → ⚈Ω ]
+ty : {𝒰 | ¶ ↪ ty × ty}
+ty = [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → ⚈Ω ]
+// it is possible to require 
 // this can work simply because ○ ⚈ Ω ≅ 1.
-tm : {ty → 𝒰 | ¶ ↪ S.tm}
-tm (T : M.ty) = [ ¶ ↪ (x : S.tm T) | T.₂ x]
+tm : {ty → 𝒰 | ¶ ↪ (S.tm, S.tm)}
+tm (T : M.ty) = [ ¶ ↪ (x,y : S.tm T₁ × S.tm T₂) | T.₂ x y]
   // T.₂
 
 //  let's first see if function type can be recovered
 ⇒  : ty → ty → ty 
-A ⇒ B : [ ¶ ↪ T : S.ty | tm(T) → ⚈Ω ] ⊆ { ty | ¶ ↪ S.⇒ A B }
+A ⇒ B : [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → ⚈Ω ] 
+          ⊆ { ty | ¶ ↪ S.⇒ A B } // this is actually ¶ ↪ (S.⇒ A₁ B₁, S.⇒ A₂ B₂), but written this way is easier
 A ⇒ B = [¶ ↪ S.⇒ A B | 
       ?b
       // [¶ ↪ (f : S.tm (S.⇒ A B)) | ⚈ ∀ (a : tm(A)),  tm (B) (app f (○ a)) ]
      ]
-  where ?b : tm(S.⇒ A B) → ⚈Ω
-        ?b t = ⚈ ∀ (a : tm(A)),  B.₂ (app t (○ a))
+  where ?b : S.tm(S.⇒ A₁ B₁) → S.tm(S.⇒ A₂ B₂) → ⚈Ω
+        ?b t₁ t₂ = ⚈ ∀ (a : tm(A)),  B.₂ (app t₁ (○ a₁)) (app t₂ (○ a₂))
         // maybe we should flatten this function, i.e., use
         // ∀ (a : ⚈ tm(A)),  B.₂ (app t (○ a))
         // instead
         // so that eta rules will hold more directly
 λ  : (tm A → tm B) → tm (A ⇒ B)
 λ f : tm (A ⇒ B) ⊆ { ¶ ↪ S.λ f}
-λ f : [ ¶ ↪ (t : S.tm T) | ⚈ ∀ (a : tm(A)),  B.₂ (S.app t (○ a))]
-λ f = [ ¶ ↪ (S.λ ○f) | ?c ]
-  where ?c : ⚈ ∀ (a : tm(A)),  B.₂ (f (○ a))
+λ f : [ ¶ ↪ (x,y : S.tm (A ⇒ B)₁ × S.tm (A ⇒ B)₂) | ⚈ ∀ (a : tm(A)),  B.₂ (app t₁ (○ a₁)) (app t₂ (○ a₂))]
+λ f = [ ¶ ↪ (S.λ ○f₁, S.λ ○f₂) // actually two element but
+          | ?c ]
+  where ?c : ⚈ ∀ (a : tm(A)),  B.₂ (app (S.λ ○f₁) (○ a₁)) (app (S.λ ○f₁) (○ a₂))
+             ≡ ⚈ ∀ (a : tm(A)),  B.₂ ( ○f₁ (○ a₁)) (○f₂ (○ a₂))
         f : tm A → tm B
-        f a : [ ¶ ↪ (x : S.tm T) | B.₂ x]
         ?c = ⚈ λ a, (f a).₂
-λ f = [ ¶ ↪ (S.λ ○f) | ⚈ (f a).₂ ]
+λ f = [ ¶ ↪ (S.λ ○f₁, S.λ ○f₂) | ⚈ (λ a, f a).₂ ]
 app : tm (A ⇒ B) → (tm A → tm B)
 app t a : tm B
   where t : tm (A ⇒ B) 
-          ≡  [ ¶ ↪ (x : S.tm ((A ⇒ B))) | ⚈ ∀ (a : tm(A)),  B.₂ (app x (○ a))]
+          ≡  [ ¶ ↪ (x,y : S.tm (A ⇒ B)₁ × S.tm (A ⇒ B)₂) | ⚈ ∀ (a : tm(A)),  B.₂ (app t₁ (○ a₁)) (app t₂ (○ a₂))]
           
-app t a = [ ¶ ↪ (S.app t a) | t.₂ >>= λ t, t a]
+app t a = [ ¶ ↪ (S.app t₁ a₁, S.app t₂ a₂) | t.₂ >>= λ t, t a]
 λβ : app (λ f) ≡ f
 λη : λ (app f) ≡ f
 
@@ -397,44 +398,41 @@ app t a = [ ¶ ↪ (S.app t a) | t.₂ >>= λ t, t a]
   where ?b : S.tm(T) → ⚈Ω
         ?b t = ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ tˢ Tₛ)
 
-Λ  : (F : (ty → ty)) → ((α : ty) → tm (F α)) → tm (∀ F)
-Λ F f : [ ¶ ↪ (x : S.tm (∀ F)) | (∀ F).₂ x]
-       ≡ [ ¶ ↪ (x : S.tm (∀ F)) | ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ t Tₛ) ]
-Λ F f = [ ¶ ↪ (S.Λ F f) | ?d ]
-  where ?d : ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ (S.Λ F f) Tₛ)
-              ≡ ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (f Tₛ)
-        f T : tm (F T) ≡ [ ¶ ↪ (x : S.tm (F T)) | (F T).₂ x]
-        ?d = ⚈ (λ T, (f T).₂)
-App : (F : (ty → ty)) → tm (∀ F) → (α : ty)  → tm (F α)
-App F t T : tm (F α) ≡ [ ¶ ↪ (x : S.tm (F α)) | (F α).₂ x]
-App F t T = [ ¶ ↪  (S.App F t T) | ?e ]
-  where ?e : (F T).₂ (S.App F t T)
-  t : [ ¶ ↪ (x : S.tm (∀ F)) | (∀ F).₂ x]
-        ≡  [ ¶ ↪ (x : S.tm (∀ F)) | ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ x Tₛ)]
-        ?e = t.₂ ∗ (⚈ T) 
-        // apparently ∗ : ⚈(A → B) → ⚈ A → ⚈ B
+// the rest are similar, just making canonicity model into a binary model
 
-Λβ : App F (Λ F f) ≡ f
-since (App F (Λ F f) x).₂ 
-        = (Λ F f).₂ >>= λ t, t x 
-        = ⚈ (λ T, (f T).₂) >>= λ t, t x 
-        = ⚈ (f x).₂ = (f x).₂
-Λη : (Λ F (App F f)).₂
-     = ⚈ (λ T, ((App F f) T).₂)
-     = ⚈ (λ T, f.₂ ∗ (⚈ T)) 
-     ?= f.₂
-    //  I think it is correct, some basic law from monad
 
-𝔹 : [ ¶ ↪ T : S.ty | 
-        // I want it to be 
-        S.tm(T) → ⚈Ω 
-      ]
-𝔹 = [ ¶ ↪ S.𝔹 | λ t, ⚈ t = S.tt ∨ t = S.ff ]
+𝔹 : [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → ⚈Ω ]
+𝔹 = [ ¶ ↪ (S.𝔹, S.𝔹) | λ t₁ t₂, t₁ = t₂ ]
 tt : tm 𝔹
-   ≡ [ ¶ ↪ (x : S.tm 𝔹) | ⚈ x = S.tt ∨ x = S.ff]
-tt = [ ¶ ↪ S.tt | ... ]
+   ≡ [ ¶ ↪ (x,y : S.tm 𝔹) | ⚈ x = S.tt ∨ x = S.ff]
+tt = [ ¶ ↪ S.tt, S.tt | ... ]
 ff : tm 𝔹
+// ...similar
 ```
+
+## Fundamental Lemma
+
+`P` is just like compatibility lemma, 
+
+thus we need (a bit more) extra computation to show it is reflexive,
+
+which is also the fundamental lemma, i.e. 
+
+if `b : tm(𝔹)`, then we have an algebra
+`b* : {P.tm(P.𝔹) | ¶ ↪ (b, b)}`
+
+Basically we need to do another induction, reuse `P` to show an (explicit) 
+reflexive algebra ... But it can be hand-waved -- we can just say 
+"by induction, we have `b* : {P.tm(P.𝔹) | ¶ ↪ (b, b)}`", 
+without explicit showing the induction. It is just a matter of specification we can ignore. 
+
+
+***
+
+Apparently, `P` itself is not only reflexive -- once we have sigma type, 
+we can relate different implementation of a module 
+
+## Adequacy
 
 
 ***
