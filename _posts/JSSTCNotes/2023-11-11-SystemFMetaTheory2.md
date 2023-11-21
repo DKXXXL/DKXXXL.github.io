@@ -47,6 +47,9 @@ record SysF where
   𝔹 : ty 
   tt : tm 𝔹
   ff : tm 𝔹
+  ifb : tm 𝔹 → tm T → tm T → tm T
+  ifbβ₁ : ifb tt x y ≡ x 
+  ifbβ₁ : ifb ff x y ≡ y 
 ```
 
 <!-- # Consistency (Set Theory, Classically)
@@ -201,7 +204,7 @@ ty = [ ¶ ↪ T : S.ty | S.tm(T) → ⚈Ω ]
 tm : {ty → 𝒰 | ¶ ↪ S.tm}
 tm (T : M.ty) = [ ¶ ↪ (x : S.tm T) | T.₂ x]
   // T.₂
-
+语法层的□应该被解释到同一个地方去(ty : □, tm : ty → □)，不过既然 𝒰_ir ⊆ 𝒰, 问题应该不是很大
 //  let's first see if function type can be recovered
 ⇒  : ty → ty → ty 
 A ⇒ B : [ ¶ ↪ T : S.ty | tm(T) → ⚈Ω ] ⊆ { ty | ¶ ↪ S.⇒ A B }
@@ -276,6 +279,20 @@ tt : tm 𝔹
    ≡ [ ¶ ↪ (x : S.tm 𝔹) | ⚈ x = S.tt ∨ x = S.ff]
 tt = [ ¶ ↪ S.tt | ... ]
 ff : tm 𝔹
+
+ifb : tm 𝔹 → tm T → tm T → tm T
+ifb bb b1 b2 : tm T 
+// bb : [ ¶ ↪ (x : S.tm 𝔹) | ⚈ x = S.tt ∨ x = S.ff]
+// so we know bb.2 : ⚈  bb.₁ = S.tt ∨ bb.₁ = S.ff 
+ifb [¶ ↪ tt | ?] b1 b2 = b1
+// unlike what is done in Naive STC, we cannot pattern match on the proposition
+ifb [¶ ↪ ff | ?] b1 b2 = b2
+ifb [¶ ↪ ?x | ∗] b1 b2 = S.ifb ∗ b1 b2
+  // here, we assume ?x ≠ tt, ff, so we know ∗ cannot be type of ?x = S.tt ∨ ?x = S.ff
+  // thus ¶ holds 
+ifbβ₁ : ifb tt x y ≡ x 
+ifbβ₁ : ifb ff x y ≡ y 
+
 ```
 
 
@@ -438,9 +455,32 @@ we can relate different implementation of a module
 
 To have more adequacy result (more abstraction) and encode more data type in our calculus, 
 we have to introduce sigma type (to control the interface of the data operation).
-We need the 
+
+Directly from https://www.cs.uoregon.edu/research/summerschool/summer16/notes/AhmedLR.pdf
 
 
+We first need ifb
+
+*Syntax*
+
+```Haskell
+Module SynExist where 
+
+  ∃ : (ty → ty) → ty
+  pack : (F : ty → ty) → α : ty → (p : tm (F α)) → tm(∃ F)
+  unpack : (F : ty → ty) → 
+            (tm ∃ F) →
+            (f : (α : ty) → (x : tm (F α)) → tm T) → tm T
+  ∃β : unpack F (pack F α p) f ≡ f α p
+
+```
+
+*Canonicity*
+
+
+
+
+*Parametricity*
 
 # More Adequacy
 
@@ -452,12 +492,34 @@ and thus `f* xy* : {P.tm(𝔹) | ¶ ↪ (f x, f y)}`, thus `f x = f y`
 
 ## Free Theorem 1 using Canonicity Model
 
-for arbitrary `t : S.tm (∀A, A → A)`, we want to show `S.App t T x = x`
+for arbitrary `t : S.tm (∀A, A → A)`, we want to show `S.app (S.App _ t T) x = x`
+
+Thus we have `t* : C.tm(∀A, A → A)`, where 
+`F X = X ⇒ X`
+`t*.₂ : ⚈ ∀ Tᴾ : tyᴾ,  (Tᴾ ⇒ Tᴾ).₂ (S.App _ t Tₛ)`
+`≡ ⚈ ∀ Tᴾ : tyᴾ, ⚈ ∀ (a : tm(T)),  T.₂ (app (S.App _ t Tₛ) (○ a)) `
+
+
+Say `T : ty`, and `x : tm(T)`
+
+We define `T* = [¶ ↪ T | λ t, ⚈ t = x] : C.ty`.
+We define `x* = [...] : C.tm(T*)`
+
+
+Now, apply `t*` with `T*` and `x*`, we get what we want
+
 
 ## Free Theorem 2 using Paramtricity Model
 
-for arbitrary `x, y : S.tm (∀A, A → A) `, we want to show `x = y`
+for arbitrary `x, y : S.tm (∀A, A → A) `, we want to show `x ~ y` i.e. observational eq
 
+We want to show `? : {P.tm (∀A, A → A) | ¶ ↪ (x,y)}`
+`? : ⚈ ∀ Tᴾ : P.ty, ⚈ ∀ (a : P.tm(T)),  T.₂ (app (S.App _ x Tₛ) (○ a₁)) (app (S.App _ y Tₛ) (○ a₂))`
+It requires Free Theorem 1, to show any `x : S.tm (∀A, A → A)`, we have `S.app (S.App _ t T) x = x`, 
+
+thus `?` is exactly `⚈ ∀ Tᴾ : P.ty, ⚈ ∀ (a : P.tm(T)), P.tm(T)`, which is exactly identity function
+
+{p : Ω | ¶ ↪ p}
 ## Boolean, Church Encoding
 
 
@@ -490,3 +552,8 @@ The paper is about just one example to make the whole paper readable
 Appendix : Support Intensional analysis
 1. We need to show we can write arbitrary predicate over syntax, i.e. `S.tm(list A) → ⚈Ω`
 2. By writing a sort function, and the list is an abstract type defined in System F
+
+
+***
+
+Sheaf, (Contextual) Modal Type, Realizability Topos
