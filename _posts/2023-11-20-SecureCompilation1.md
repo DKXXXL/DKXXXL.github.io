@@ -70,3 +70,17 @@ C₁ ~ C₂ : Source Program Context of Continuation
 ⇔ ⟦ C₁ ⟧ ⋈ ⟦ id ⟧ ~ ⟦ C₁ ⟧ ⋈ ⟦ id ⟧ : The above property
 ⇔ ⟦ C₁ ⟧ ~ ⟦ C₁ ⟧
 ```
+
+
+***
+# Trace Preserving 
+Another way to achieve memory-safety is by trace invariant. i.e. 
+Temporal and Spatial safety can both be achieved by trace invariant.
+
+And we only need to show compilation preserves this trace invariant, by back-simulation.
+
+i.e. if ⟦ P₁ ⟧ ~> P₂', then exists P₂ : Source Program, s.t. P₁ ~> P₂ and P₂’ relates P₂
+
+Then the compiled program has behaviour strictly smaller than that of source program, and thus safe
+
+But we also need to prove that ⟦ P₁ ⟧ relates P₁
