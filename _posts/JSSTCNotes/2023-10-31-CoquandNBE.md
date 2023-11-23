@@ -175,11 +175,11 @@ Before giving motive for Tm and Tms, we need to notice that
 
 ```agda
 Tmᴺ Γᴾ Aᴾ : Tm Γ A → PSet
-Tmᴺ Γᴾ Aᴾ t = (ρ : |Γ|) → (ρᴺ : Γᴺ.C ρ) → Aᴺ.C (t[-] ρ)
+Tmᴺ Γᴾ Aᴾ t = (ρ : Tms ? Γ) → (ρᴺ : Γᴺ.C ρ) → Aᴺ.C (t[-] ρ)
 
 // Tms is similar
 Tmsᴺ Γᴾ Δᴾ : Tms Γ Δ → PSet
-Tmsᴺ Γᴾ Δᴾ γ = (ρ : |Γ|) → (ρᴺ : Γᴺ.C ρ) → Δᴺ.C ( [γ ∘] ρ )
+Tmsᴺ Γᴾ Δᴾ γ = (ρ : Tms ? Γ) → (ρᴺ : Γᴺ.C ρ) → Δᴺ.C ( [γ ∘] ρ )
 
 ```
 
@@ -252,10 +252,26 @@ app : Tm Γ (Π A B) → Tm (Γ, A) B
 ```
 
 ```agda
+Module _ where 
 Πᴺ Aᴾ Bᴾ : Tyᴾ (Π A B)
 (Πᴺ Aᴾ Bᴾ).C : Tm ? (Π A B) → PSet 
+(Πᴺ Aᴾ Bᴾ).C t = ∏ (a : Tm ? A) (Aᴺ.C a), Bᴺ.C (app t a) 
+(Πᴺ Aᴾ Bᴾ).⇑ : (t : Ne ? (Π A B)) → C [t]
+(Πᴺ Aᴾ Bᴾ).⇑ t : ∏ (a : Tm ? A) (Aᴺ.C a), Bᴺ (app [t] a) 
+// since a is normalizable
+// app t (⇓ a) is another neutral
+
+(Πᴺ Aᴾ Bᴾ).⇓ : (t : Tm ? (Π A B)) → 
+               (∏ (a : Tm ? A) (Aᴺ.C a), Bᴺ.C (app t a)) t 
+                → {x : Nf ? (Π A B) | [x] = t}
+(Πᴺ Aᴾ Bᴾ).⇓ t tC : {x : Nf ? T | [x] = t}
 
 lamᴺ : (tᴾ : Tmᴾ (Γ, A)ᴾ Bᴾ) → Tmᴺ Γᴾ (Π A B)ᴾ (lam t)
+(lamᴺ tᴾ) : (ρ : Tms ? Γ) 
+            → (ρᴺ : Γᴺ.C ρ) 
+            → (Π A B)ᴺ.C (t[-] ρ)
+(lamᴺ tᴾ) ρ ρᴺ : ∏ (a : Tm ? A) (Aᴺ.C a), Bᴺ.C (app (t[-] ρ) a)
+(lamᴺ tᴾ) ρ ρᴺ = 
 ```
 
 
