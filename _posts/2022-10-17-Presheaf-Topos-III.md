@@ -22,6 +22,20 @@ Also act like a post that trains about yoneda, representable functor and etc.
 
 ## Presheaf topos reflects representable exponential
 
+Sure, since
+
+よA^よB(X) ≅ Hom(よX, よA^よB)
+≅ Hom(よX × よA, よB)
+≅ Hom(よ(X × A), よB)
+≅ Hom(X, A^B)
+≅ よ(A^B)(X)
+
+However, the above make sense because, `X` is natural, i.e.
+よA^よB ≅ よ(A^B) is an natural isomporphism (these two functors are isomorphic to each other)
+
+Because all the above reasoning use natural isomorphism.
+
+
 * For `C`, sicne `Pr(C)` has exponential `X'` and if `X' ≅ Hom(-, X)` for
 
 ***
@@ -30,6 +44,16 @@ Can Presheaf Topos reflects more? like limit and colimit?
 ***
 
 fully faithful functor [reflects limit and colimit](https://ncatlab.org/nlab/show/full+and+faithful+functor)
+
+
+## Exponential in Presheaf
+
+(y(X) => B)(K) ≅ B(X, K)
+
+(A => B)(X) ≅ Hom(y(X), A => B)
+≅ Hom(A, y(X) => B)
+≅ Hom(A, B(X × -))
+
 
 ## What does 3 mean? Detailedly?
 
@@ -50,3 +74,5 @@ For example, can we prove some equivalence argument (in System F that would be p
 ## Presheaf Topos on CCC
 
 ## HOAS in Presheaf Topos
+
+
