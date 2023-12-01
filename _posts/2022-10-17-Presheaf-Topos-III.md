@@ -32,11 +32,12 @@ Sure, since
 
 However, the above make sense because, `X` is natural, i.e.
 よA^よB ≅ よ(A^B) is an natural isomporphism (these two functors are isomorphic to each other)
-
+∑ n : ℕ, [n] → X 
 Because all the above reasoning use natural isomorphism.
 
 
 * For `C`, sicne `Pr(C)` has exponential `X'` and if `X' ≅ Hom(-, X)` for
+
 
 ***
 Can Presheaf Topos reflects more? like limit and colimit?
