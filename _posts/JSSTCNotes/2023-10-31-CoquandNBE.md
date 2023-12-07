@@ -134,6 +134,7 @@ We start from context
 Now types
 
 ```agda
+Module _ where
 record Tyᴺ (T : Ty) : PSet 
   C : Tm ? T → PSet 
   // an arrow type by two objects in the presheaf topos

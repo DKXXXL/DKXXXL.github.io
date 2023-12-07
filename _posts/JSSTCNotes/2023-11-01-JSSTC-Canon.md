@@ -331,3 +331,29 @@ STC is actually the internal language of artin glued topos. Fullfill the folklor
 # Adequacy
 
 Finally, we can tell you how to use the logical relation model to achieve canonicity proof. 
+
+Directly copy and paste from §4.5.3 : 
+Given `b : Hom(1, tm(bool))`, we have 
+`b* : Hom(1, tm*(bool*))`, where 
+`tm*(bool*) = {tm*(bool*) | ¶ ↪ b}`
+and we can derive a term `⚈ (b = tt) + (b = ff)`
+thus we have a term `Hom(1, ⚈ (b = tt) + (b = ff))`
+
+```
+Hom(1, ⚈(b = tt) + (b = ff))
+≅ Hom(1, i_*i*(b=tt) + (b = ff))
+≅ Hom(i*1, i*(b=tt) + (b = ff))
+≅ Hom(1, b=tt + b=ff) 
+```
+because i* always preserves finite limit and colimit
+***
+
+So given `k : Hom(tm(bool), tm(bool))`, we have `k* : Hom(tm*(bool*), tm*(bool*))`, internally speaking,
+that is 
+```
+x* : {tm*(bool*) | ¶ ↪ x} ⊢ k* : {tm*(bool*) | ¶ ↪ k[x]}
+```
+Note that in the internal language, we have a dependent type language and can be written in the sequent form,
+with explicit substitution. So substitution is available here. 
+
+But better to use the internal hom, i.e. make `k : Hom(tm(bool), tm(bool)) ≅ Hom(1, tm(bool)^tm(bool))` as a global term.
