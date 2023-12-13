@@ -188,13 +188,90 @@ Tmsᴺ Γᴾ Δᴾ γ = (ρ : Tms ? Γ) → (ρᴺ : Γᴺ.C ρ) → Δᴺ.C ( [
 
 The above motive, lest we can construct a model according to it, can give us normalization function already
 
+given `t : Tm Γ T`, we have `t[-] : Tms ? Γ → Tm ? T` as a natural transformation
+
 we have ⟦ t ⟧ : Tmᴺ Γᴾ Tᴾ t = (ρ : Tms ? Γ) → (ρᴺ : Γᴺ.C ρ) → Tᴺ.C (t[-] ρ)
 
 ⟦ T ⟧.⇓ : (t : Tm ? T) → ⟦ T ⟧.C t → {x : Nf ? T | [x] = t}
 <!-- is the following true? -->
-⟦ T ⟧.⇓ Γ : (t : Tm Γ T) → ⟦ T ⟧.C Γ t  → {x : Nf Γ T | [x] = t}
+<!-- ⟦ T ⟧.⇓ Γ : (t : Tm Γ T) → ⟦ T ⟧.C Γ t  → {x : Nf Γ T | [x] = t} -->
+
+
+⟦ t ⟧ : (ρ : Tms ? Γ) → (ρᴺ : Γᴺ.C ρ) → Tᴺ.C (t[-] ρ)
 <!-- is the following true? -->
-⟦ t ⟧ Γ : (ρ : Tms Γ Γ) → (ρᴺ : Γᴺ.C Γ ρ) → Tᴺ.C Γ (t[ρ])
+<!-- ⟦ t ⟧ Γ : (ρ : Tms Γ Γ) → (ρᴺ : Γᴺ.C Γ ρ) → Tᴺ.C Γ (t[ρ]) -->
+
+Now given an arbitrary `ρ : Tms ? Γ` and `ρᴺ : Γᴺ.C ρ`
+```
+t[-] ρ : Tm ? T
+
+⟦ T ⟧.⇓ (t[-] ρ) : ⟦ T ⟧.C (t[-] ρ) → {x : Nf ? T | [x] = (t[-] ρ)}
+⟦ t ⟧ ρ ρᴺ : Tᴺ.C (t[-] ρ)
+
+⟦ T ⟧.⇓ (t[-] ρ) (⟦ t ⟧ ρ ρᴺ) : {x : Nf ? T | [x] = (t[-] ρ)}
+
+```
+
+Thus we have construct internally a derivation 
+`ρ : Tms ? Γ, ρᴺ : Γᴺ.C ρ ⊢ ⟦ T ⟧.⇓ (t[-] ρ) (⟦ t ⟧ ρ ρᴺ) : {x : Nf ? T | [x] = (t[-] ρ)}`
+that means, internally we have a depenent function
+`λ ρ ρᴺ, ⟦ T ⟧.⇓ (t[-] ρ) (⟦ t ⟧ ρ ρᴺ) : (ρ : Tms ? Γ) → Γᴺ.C ρ → {x : Nf ? T | [x] = (t[-] ρ)}`
+
+Now we need to work externally, 
+
+### What is the external view of a internal dependent function in presheaf topos?
+
+So usually, we know a function `f : Hom(Γ, B^A) ≅ Hom(Γ × A, B)` is a natural transformation externally.
+
+### Apply internal dependent function with stuff
+
+Actually we don't even need to know concretely what dependent function is externally, we only need to show that 
+given `x : ∏ A B` in presheaf over C, and for Γ ∈ C, can we have externally a function `x Γ : ∏ (A C) (B C)`, that can helps us to get `(ρ : Tms Γ Γ) → Γᴺ.C ρ → {x : Nf Γ T | [x] = (t[-] ρ)}` from the above internal function
+
+#### dependent product
+Recall ∑ ⊣ pullback ⊣ ∏, 
+
+Recall given a A : type, B : A → type, actually `Γ ⊢ A`, `Γ ,A ⊢ B`, that is 
+Remember `π : Γ, A → Γ`, we have a pullback functor `π* : C / Γ → C / (Γ, A)`, 
+with a right adjoint, `∏A : C / (Γ, A) → C / Γ `, 
+
+i.e. ` ∋ Hom(π* X, Y) ≅ Hom(X, (∏A) Y) ∈ C / Γ`
+then given `B ∈ C / (Γ, A)`, we thus have `∏A B : C / Γ`
+
+Let's make `C = Psh(C)` `Γ = ⋅ = 1 ∈ Psh(C)`, and consider what is the presheaf `∏A B ∈ Psh(C)`
+
+then `π : (1, A) → 1` is the terminal map, and `π* : C / 1 → C / A` map an `X` to the pair projection `X × A → A`
+
+Detecting `(∏A B)(X)` will be a set of something, really useless.
+
+So we detect `Hom(1, ∏A B)` instead.
+
+```
+Hom(1, ∏A B): Psh(C)
+≅ Hom(π*(1), B) : Psh/A
+```
+
+`Hom(1, ∏A B)` is the `Hom(A, (A ▷ B))` morphism between context but retaining the first element;
+That is natural transformation `f` between `A` and `(A ▷ B)` but `π₁ ∘ f = id`.
+
+Now consider `Γ ∈ C`, 
+
+We need a notion that transforms a dependent presheaf into a dependent type, i.e. 
+If `Γ ⊢ B` is a dependent presheaf, then `Γ(C) ⊢ B(C)` is a dependent type
+
+Since Γ is a presheaf over C, B is a dependent presheaf over Γ,
+`Γ : Psh(C)`, `B : Psh(∫Γ) or (Psh(C) / Γ)`
+`(Γ ▷ B) = `
+then we have 
+
+ `Γ ⊢ B` is `π : (Γ ▷ B) → Γ`, which gives us `πX : (Γ ▷ B)(X) → Γ(X)`
+
+
+### Can we try to compute a normal form using our model?
+Since the whole construction is constructive, we should be able to do it.
+Let's do it on a small example.
+
+
 
 ⟦ t ⟧ Γ id (⟦ Γ ⟧.⇑ id) : Tᴺ.C Γ (t[id])
 
