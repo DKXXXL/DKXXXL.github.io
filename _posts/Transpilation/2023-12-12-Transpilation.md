@@ -89,9 +89,38 @@ things can work, but downside
 
 ***
 
-## Use Canonicity model for y(SysF) 
+## First Attempt : Use Canonicity model for y(SysF) 
 
-And at the 
+And at the semantic/meta/⚈ level, we introduce a QIIT syntax for STLC to do compilation --
+achieve compilation using unary LR.
+
+This way we can introduce multiple compilation target.
+
+```haskell
+ty* = [¶ ↪ T : ty | tm T → P T → ⚈Ω ]
+tm* A = [¶ ↪ t : tm A | ∑ c : P (○ A),  A.₂ t c  ]
+
+```
+This won't work. It works for base type, but in won't work for lambdas.
+
+## Second Attempt -- binary log rel but assymetric
+
+We glue two piece of syntax there
+
+## Something easier : Compile STLC to STLC
+But left hand side is HOAS while RHS is syntax with contexts.
+
+We need to solve the following problem
+1. We need to specify syntax + semantic in semantic/meta-space
+   1. We either use HOAS (the `var(A)`)
+   2. or we use first order syntax
+   3. Use the former one, how to specify the quotient and semantic? we cannot apply `var(A) → ?` with `tm(A)`
+   4. the latter one we can easily specify the quotient (semantic) but it would be lengthy (with explicit subst)
+      1. and it is hard to imagine how to glue it -- each syntax maps to what? a `Hom(-, syntax)`? 
+      2. This requires internal natural transformation? no?
+   5.  
+
+
 
 
 ***

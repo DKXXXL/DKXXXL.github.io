@@ -349,7 +349,7 @@ lamᴺ : (tᴾ : Tmᴾ (Γ, A)ᴾ Bᴾ) → Tmᴺ Γᴾ (Π A B)ᴾ (lam t)
             → (ρᴺ : Γᴺ.C ρ) 
             → (Π A B)ᴺ.C (t[-] ρ)
 (lamᴺ tᴾ) ρ ρᴺ : ∏ (a : Tm ? A) (Aᴺ.C a), Bᴺ.C (app (t[-] ρ) a)
-(lamᴺ tᴾ) ρ ρᴺ = 
+(lamᴺ tᴾ) ρ ρᴺ = // use tᵖ
 ```
 
 
