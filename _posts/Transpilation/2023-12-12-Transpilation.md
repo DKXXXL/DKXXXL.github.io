@@ -105,7 +105,7 @@ This won't work. It works for base type, but in won't work for lambdas.
 
 ## Second Attempt -- binary log rel but assymetric
 
-We glue two piece of syntax there
+We glue two piece of syntax at the syntax piece. Basically look like 
 
 ## Something easier : Compile STLC to STLC
 But left hand side is HOAS while RHS is syntax with contexts.
