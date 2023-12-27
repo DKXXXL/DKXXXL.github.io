@@ -15,6 +15,7 @@ Ref
    3. https://ncatlab.org/nlab/show/classifying+topos+for+the+theory+of+objects
 5. https://arxiv.org/pdf/2302.05190.pdf
 6. https://eprints.illc.uva.nl/id/eprint/2195/1/DS-2021-09.text.pdf 
+7. https://ncatlab.org/nlab/show/classifying+topos#background_on_the_theory_of_theories 
 ***
 We finish (Ref 1,2&3) sections about Classifying Category, theory-model correspondence, and Lawvere Modality
 
@@ -49,3 +50,7 @@ A stronger notion than Classifying Category is theory-model correspondence, whic
 Note : (Ref 1, §1.2.1) is very vague about free-generated model, and thus a bit hard to read. We can directly start from §1.2.2, which might be easier to read.
 
 # Finite Limit Theory and GAT
+
+Ref 7 has talked about classes of theories and their classes of models, where it claims finite limit theory
+
+(Π A B)[σ] = Π A[σ] B[σ↑] 

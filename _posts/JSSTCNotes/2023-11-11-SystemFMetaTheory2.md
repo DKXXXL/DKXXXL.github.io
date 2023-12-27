@@ -195,6 +195,9 @@ we need ⚈Ω as the proposition universe. That is we assume (later to prove)
 1. if p ∈ Ω, ⚈p ∈ ⚈Ω
 2. ○⚈Ω ≅ 1 (basically no syntax component)
 
+But this is not simply correct, we need Ω⚈ s.t. 
+1. if p ∈ Ω, ⚈p ∈ Ω⚈
+2. ○Ω⚈ ≅ 1 (basically no syntax component)
 
 ```Haskell
 Module M where
@@ -202,8 +205,8 @@ ty : {𝒰 | ¶ ↪ ty}
 ty = [ ¶ ↪ T : S.ty | S.tm(T) → ⚈Ω ]
 // this can work simply because ○ ⚈ Ω ≅ 1.
 tm : {ty → 𝒰 | ¶ ↪ S.tm}
-tm (T : M.ty) = [ ¶ ↪ (x : S.tm T) | T.₂ x]
-  // T.₂
+tm (T : M.ty) = [ ¶ ↪ (x : S.tm T) | T.₂ x] 
+  // T.₂ x is not necessary a type!
 语法层的□应该被解释到同一个地方去(ty : □, tm : ty → □)，不过既然 𝒰_ir ⊆ 𝒰, 问题应该不是很大
 //  let's first see if function type can be recovered
 ⇒  : ty → ty → ty 
