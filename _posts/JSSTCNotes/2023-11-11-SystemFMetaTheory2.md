@@ -191,31 +191,29 @@ We will use sterling's thesis's syntax, a record syntax.
 We also use JS6's syntax and JS2's syntax for realignment/refinement.
 
 To correctly translate the `∑ P: Hom (1, tm(T)) → Prop` into internal logic, 
-we need ⚈Ω as the proposition universe. That is we assume (later to prove)
-1. if p ∈ Ω, ⚈p ∈ ⚈Ω
-2. ○⚈Ω ≅ 1 (basically no syntax component)
-
-But this is not simply correct, we need Ω⚈ s.t. 
+we need Ω⚈ as the proposition universe. That is we assume (later to prove)
 1. if p ∈ Ω, ⚈p ∈ Ω⚈
 2. ○Ω⚈ ≅ 1 (basically no syntax component)
+
+The idea is to use the Ω in the closed subspace. 
+The other way is to use `Ω⚈ := {Ω | ¶ ↪ 1}`, the subset of proposition that is sealed. 
+Under `¶`, `Ω⚈` is a singleton type `{1} ≅ 1`
 
 ```Haskell
 Module M where
 ty : {𝒰 | ¶ ↪ ty}
-ty = [ ¶ ↪ T : S.ty | S.tm(T) → ⚈Ω ]
+ty = [ ¶ ↪ T : S.ty | S.tm(T) → Ω⚈ ]
 // this can work simply because ○ ⚈ Ω ≅ 1.
 tm : {ty → 𝒰 | ¶ ↪ S.tm}
 tm (T : M.ty) = [ ¶ ↪ (x : S.tm T) | T.₂ x] 
-  // T.₂ x is not necessary a type!
-语法层的□应该被解释到同一个地方去(ty : □, tm : ty → □)，不过既然 𝒰_ir ⊆ 𝒰, 问题应该不是很大
 //  let's first see if function type can be recovered
 ⇒  : ty → ty → ty 
-A ⇒ B : [ ¶ ↪ T : S.ty | tm(T) → ⚈Ω ] ⊆ { ty | ¶ ↪ S.⇒ A B }
+A ⇒ B : [ ¶ ↪ T : S.ty | tm(T) → Ω⚈ ] ⊆ { ty | ¶ ↪ S.⇒ A B }
 A ⇒ B = [¶ ↪ S.⇒ A B | 
       ?b
       // [¶ ↪ (f : S.tm (S.⇒ A B)) | ⚈ ∀ (a : tm(A)),  tm (B) (app f (○ a)) ]
      ]
-  where ?b : tm(S.⇒ A B) → ⚈Ω
+  where ?b : tm(S.⇒ A B) → Ω⚈
         ?b t = ⚈ ∀ (a : tm(A)),  B.₂ (app t (○ a))
         // maybe we should flatten this function, i.e., use
         // ∀ (a : ⚈ tm(A)),  B.₂ (app t (○ a))
@@ -240,9 +238,9 @@ app t a = [ ¶ ↪ (S.app t a) | t.₂ >>= λ t, t a]
 λη : λ (app f) ≡ f
 
 ∀  : (ty → ty) → ty 
-∀ (F : ty → ty) : [ ¶ ↪ T : S.ty | S.tm(T) → ⚈Ω  ]
+∀ (F : ty → ty) : [ ¶ ↪ T : S.ty | S.tm(T) → Ω⚈  ]
 ∀ F = [ ¶ ↪ S.∀ F | ?b ]
-  where ?b : S.tm(T) → ⚈Ω
+  where ?b : S.tm(T) → Ω⚈
         ?b t = ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ tˢ Tₛ)
 
 Λ  : (F : (ty → ty)) → ((α : ty) → tm (F α)) → tm (∀ F)
@@ -275,7 +273,7 @@ since (App F (Λ F f) x).₂
 
 𝔹 : [ ¶ ↪ T : S.ty | 
         // I want it to be 
-        S.tm(T) → ⚈Ω 
+        S.tm(T) → Ω⚈ 
       ]
 𝔹 = [ ¶ ↪ S.𝔹 | λ t, ⚈ t = S.tt ∨ t = S.ff ]
 tt : tm 𝔹
@@ -301,8 +299,8 @@ ifbβ₁ : ifb ff x y ≡ y
 
 ## Assumption needs to be resolved:
 
-1. if p ∈ Ω, ⚈p ∈ ⚈Ω
-2. ○⚈Ω ≅ 1 (basically no syntax component)
+1. if p ∈ Ω, ⚈p ∈ Ω⚈
+2. ○Ω⚈ ≅ 1 (basically no syntax component)
 3. ⚈ is a monad
 4. ⚈ (∀a, P) can be applied with ⚈a
 
@@ -372,7 +370,7 @@ Basically when we glue, we glue using a product of syntax.
 ```Haskell
 Module P where
 ty : {𝒰 | ¶ ↪ ty × ty}
-ty = [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → ⚈Ω ]
+ty = [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → Ω⚈ ]
 // it is possible to require 
 // this can work simply because ○ ⚈ Ω ≅ 1.
 tm : {ty → 𝒰 | ¶ ↪ (S.tm, S.tm)}
@@ -381,13 +379,13 @@ tm (T : M.ty) = [ ¶ ↪ (x,y : S.tm T₁ × S.tm T₂) | T.₂ x y]
 
 //  let's first see if function type can be recovered
 ⇒  : ty → ty → ty 
-A ⇒ B : [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → ⚈Ω ] 
+A ⇒ B : [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → Ω⚈ ] 
           ⊆ { ty | ¶ ↪ S.⇒ A B } // this is actually ¶ ↪ (S.⇒ A₁ B₁, S.⇒ A₂ B₂), but written this way is easier
 A ⇒ B = [¶ ↪ S.⇒ A B | 
       ?b
       // [¶ ↪ (f : S.tm (S.⇒ A B)) | ⚈ ∀ (a : tm(A)),  tm (B) (app f (○ a)) ]
      ]
-  where ?b : S.tm(S.⇒ A₁ B₁) → S.tm(S.⇒ A₂ B₂) → ⚈Ω
+  where ?b : S.tm(S.⇒ A₁ B₁) → S.tm(S.⇒ A₂ B₂) → Ω⚈
         ?b t₁ t₂ = ⚈ ∀ (a : tm(A)),  B.₂ (app t₁ (○ a₁)) (app t₂ (○ a₂))
         // maybe we should flatten this function, i.e., use
         // ∀ (a : ⚈ tm(A)),  B.₂ (app t (○ a))
@@ -413,15 +411,15 @@ app t a = [ ¶ ↪ (S.app t₁ a₁, S.app t₂ a₂) | t.₂ >>= λ t, t a]
 λη : λ (app f) ≡ f
 
 ∀  : (ty → ty) → ty 
-∀ (F : ty → ty) : [ ¶ ↪ T : S.ty | S.tm(T) → ⚈Ω  ]
+∀ (F : ty → ty) : [ ¶ ↪ T : S.ty | S.tm(T) → Ω⚈  ]
 ∀ F = [ ¶ ↪ S.∀ F | ?b ]
-  where ?b : S.tm(T) → ⚈Ω
+  where ?b : S.tm(T) → Ω⚈
         ?b t = ⚈ ∀ Tᴾ : tyᴾ,  (F Tᴾ).₂ (S.App Fₛ tˢ Tₛ)
 
 // the rest are similar, just making canonicity model into a binary model
 
 
-𝔹 : [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → ⚈Ω ]
+𝔹 : [ ¶ ↪ T₁, T₂ : S.ty × S.ty | S.tm(T₁) → S.tm(T₂) → Ω⚈ ]
 𝔹 = [ ¶ ↪ (S.𝔹, S.𝔹) | λ t₁ t₂, t₁ = t₂ ]
 tt : tm 𝔹
    ≡ [ ¶ ↪ (x,y : S.tm 𝔹) | x = y ]
@@ -553,7 +551,7 @@ thus `?` is exactly `⚈ ∀ Tᴾ : P.ty, ⚈ ∀ (a : P.tm(T)), P.tm(T)`, which
 The paper is about just one example to make the whole paper readable
 
 Appendix : Support Intensional analysis
-1. We need to show we can write arbitrary predicate over syntax, i.e. `S.tm(list A) → ⚈Ω`
+1. We need to show we can write arbitrary predicate over syntax, i.e. `S.tm(list A) → Ω⚈`
 2. By writing a sort function, and the list is an abstract type defined in System F
 
 
