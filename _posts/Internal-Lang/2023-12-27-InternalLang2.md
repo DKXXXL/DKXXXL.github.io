@@ -13,6 +13,7 @@ Ref
 5. https://ncatlab.org/nlab/show/subobject+classifier 
 6. http://mathieu.anel.free.fr/mat/80514-814/Awodey-Bauer-catlog(2019).pdf 
 7. Revisiting the categorical interpretation of dependent type theory https://www.sciencedirect.com/science/article/pii/S0304397514001789
+8. Locally cartesian closed categories and type theory https://www.math.mcgill.ca/rags/LCCC/LCCC.pdf
 
  
 ***
@@ -112,7 +113,7 @@ So, let `y ∈ 𝒞/Y` and `x ∈ 𝒞/X`,
 
 Now if `x` is a monomorphism in `𝒞`,  -->
 
-**Question** : We know LCCC is a category with pullback, terminal, and each pullback functor has right adjoint. Why pullback functor has a left adjoint?
+**Question** : We know LCCC is a category with pullback, terminal, and each pullback functor has right adjoint. Why pullback functor has a left adjoint? (Check Ref 7)
 
 ### Universal/Existential Quantifier
 It is in (Ref 3, IV.9, Thm 2, Prop 4, Pg300) -- how we have internal power of Ω
@@ -128,17 +129,20 @@ Given `∑ ⊣ π* ⊣ ∏ : 𝒞/(Γ, A) → 𝒞/Γ`
 
 Now `B` a dependent type over `Γ, A`, 
 that is we have `⟦ B ⟧ : Γ, A, B → Γ, A`
-that is `⟦ B ⟧  ∈ Hom(Γ, A, B, (Γ, A)) ⊆ 𝒞/(Γ, A)`, we have `∏ ⟦ B ⟧ ∈ 𝒞/Γ`.
+that is `⟦ B ⟧  ∈ Hom((Γ, A, B), (Γ, A)) ⊆ 𝒞/(Γ, A)`, we have `∏ ⟦ B ⟧ ∈ 𝒞/Γ`.
 
 So we denote, if `B` a dependent type over `Γ, A`, then we have `∏ B` a dependent type over `Γ`, where
 `⟦ ∏ B ⟧ = ∏ ⟦ B ⟧`
 
 This models the formation rule.
 
-* (Introduction Rule/Elim Rule) We have a section `t : Γ, A → Γ, A, B`, iff we have a section `λt : Γ → Γ, ∏ ⟦ B ⟧`
-By the definition of LCCC, every slice category is cartesian closed, so `𝒞/Γ (X , Y) ≅ 𝒞/Γ ( 1 , Y^X)`, and here it correspnds exactly the intro/elim rule. 
+* (Introduction Rule/Elim Rule) We have a section `t : Γ, A → Γ, A, B`, iff we have a section `λt : Γ → Γ, ∏B`
+* That is, we have `t ∈ (𝒞/(Γ, A))(1, B)` iff we have `(𝒞/Γ)(1, ∏ B)`
+  * simply by the adjunction `(𝒞/Γ)(1, ∏ ⟦ B ⟧) ≅ (𝒞/(Γ, A))(π*1, ⟦ B ⟧) ≅ (𝒞/(Γ, A))(1, ⟦ B ⟧)`, and the fact that
+    * right adjoint functor preserves limit (and thus terminal)
+  * By the definition of LCCC, every slice category is cartesian closed, so `𝒞/Γ (X , Y) ≅ 𝒞/Γ ( 1 , Y^X)`, and here it correspnds exactly the intro/elim rule. 
+    * But using this interpretation we need to restate the type interpretation for `∏`
 
-We only need to verify the adjoint construction `∏ ⟦ B ⟧` and this local exponential `Y^X` corresponds.
 
 
 ### Dependent Sum type
