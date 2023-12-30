@@ -146,13 +146,32 @@ This models the formation rule.
 
 
 ### Dependent Sum type
-∑ is modeled in (Ref 7, §9). Also according to (Ref 7, Pg5) if `∑ ⊣ f` `∑ (h) = f ∘ h`
+∑ is modeled in (Ref 7, §9). Also according to (Ref 7, Pg5) if `∑ ⊣ f*` `∑ (h) = f ∘ h`
+
+A simple syntax formulation for Σ type is that `Γ, X, Y ⊣⊢ Γ , Σ X Y`, but this doesn't explicitly provide intro rule
+Or we makes things more uniform w.r.t. to function type, that is 
+* (Introduction Rule/Elim Rule) We have sections `a : Γ → Γ, A` and `b : Γ → Γ, B[a]` iff we have a section `? : Γ → Γ, ∑ B`
+* That is, for a pair `a ∈ (𝒞/Γ)(1, π)` and `b ∈ (𝒞/Γ)(1, a*⟦ B ⟧)`, iff we have a section `? ∈ (𝒞/Γ)(1, ∑ ⟦B⟧)`
+
+<!-- TODO! -->
+
+<!-- Σ-type doesn't have concise intro/elim rule. We need to  -->
+
+* (Introduction Rule)
+* (Elim Rule)
+
 
 
 ## Function Extensionality
 
+# Exercises for (Ref 1, Part 2, §4)
 
-
-# Exercises for (Ref 1)
+# Exercises for (Ref 1, Part 2, §5)
 We will do exercise in Ref 1, but our internal language is using MB language + internal dependent type theory. So we need to connect two different styles of internal language of topos.
-* 
+
+* (Prop 5.1)  `∃ₓ ⊣ πₓ* ⊣ ∀ₓ : 𝒞/(Γ, X) → 𝒞/Γ`
+  * Given `f ≡ g ∈ (𝒞/(Γ, X))(1, Y)`,
+  * iff `⊢ ∀ₓ (f = g)` is valid in topos
+(=>) since `f ≡ g`, thus `(f = g) ∈ Sub((Γ, X))` is actually `id ∈ Sub((Γ, X))`
+
+# Exercises for (Ref 1, Part 2, §7)
