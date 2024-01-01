@@ -60,7 +60,7 @@ In (Ref3) `op: P ~> A` corresponds to `op: P ⟨ A ⟩`, 10.1 typing rule indica
 
 
 ```
-V: P  M : A → Bcomp
+V: P , M : A → Bcomp
 -------------------------
 opV(M): BComp
 
