@@ -10,71 +10,53 @@ Ref
 7. https://proofassistants.stackexchange.com/a/1836/455 correct impredicative data encoding
 8. Revisiting the categorical interpretation of dependent type theory 
 9. https://www.cs.cmu.edu/~rwh/students/sterling.pdf Sterling Thesis
+10. Semantics of Type Theory 
+11. Categorical Logic and Type Theory 
 ***
 
 # Review Impredicativity
 [Ref 6] and [Ref 1, Def 2.1]
 The key point is that, even impredicativity doesn't gives us `Ω : Ω` which is automatically causing inconsistency.
 
+(What about `U : El U`?)
+
 The correct formulation of impredictive `Type` is `A : BigType`, `B : Type`, then `(∀ A B) : Type`. 
 This is useful in a lot of situation.
 
+# Cumulative Universe
+[Ref 4, Def 3.2.15] covers the definition of Cumulative Universe -- 
+basically 
+1. a sequent of `𝒮0 ⊆ 𝒮1 ...` 
+2. and for each `i`, the terminal map `𝒰i → 1` locates in `𝒮_{i+1}`. 
+
+Thus this two interprets to two judgement 
+`Γ ⊢ T : typei ⇒ Γ ⊢ T : type(i+1)` and `⊢ 𝒰i : type (i + 1)`
+
+# We have cumulative universe 𝒮0 ⊆ 𝒮1 ..
+and thus especially for `x : 𝒰0 ⊢ T type 0`  we have  `⊢ ((x : 𝒰0) → T x) type 1`
+
+**Categorically speaking**, we have `U0 : 𝒰0 → 1 ` ∈ `𝒮1`, and we have `𝑇 : T → 𝒰0`  ∈ `𝒮0 ⊆ 𝒮1` as the type judgement.
+`∏U0 : 𝒞/𝒰0 → 𝒞` and thus by definition of the universe `∏U0 𝑇 : 𝒞` and in `𝒮1`
+
+# If we have impredicative universe 𝒮, 𝒰
+contrary to above, when given `x : 𝒰 ⊢ T type`  we have  `⊢ ((x : 𝒰) → T x) type`
 
 
-# We have dependent product closed under 𝒮
-We use the universe definition in [Ref 3] (and [Ref 4]).
-
-Following [Ref 3, Def 2.1],
-the universe 𝒮 is a set of morphisms in the category .
-
-[Ref 3, Def 2.1∗(4)], mentions how dependent product is closed under 𝒮
-> Given `f : A → I ∈ 𝒮` and `g : B → A ∈ 𝒮`, then `∏f g : 𝒞/I ∈ 𝒮`
-
-
-## We unfold this definition a bit:
-
-[Ref 5, Def 4.4.1] and [Ref 8, §3]
-tells us how to interpret dependent type in LCCC.
-
-Basically given 
-```C
-Γ ⊢ A; Γ, A ⊢ B 
-----------------
-Γ ⊢ ∏ A B
-```
-we interpret each context as object, and each type judgemnt `Γ ⊢ A`, as the morphism `𝐴 : Γ.A → Γ`. Due to certain syntax rule in depndent type theory, `Γ.A` will have the "same" interpretation as `∑ Γ A`, so they are quite close. 
-
-Thus this rule we have `𝐴 : Γ.A → Γ`， `𝐵 : Γ.A.B → Γ.A`
-and `∏ 𝐴 : 𝒞/(Γ.A) → 𝒞/Γ`
-and thus `∏ 𝐴 𝐵 : 𝒞/Γ` is the type `∏ A B` we want. We can further verify its intro,elim, computation, rules to see this is a correct definition.
-
-
-Thus [Ref 3, Def 2.1∗(4)] as part of the universe definition can cover the closure of dependent function.
-
-# 𝒮 and 𝒰
-The universe 𝒮 is a set of morphisms in the category.
-The generic family/map `El : E → 𝒰` is defined in [Ref 3, Def 2.1] (and [Ref 4, Def 3.2.10]), basically it weakly classifies the morphisms in 𝒮.
-
-One way to look at 𝒮 and 𝒰 is that:
-1. an arrow `𝑇 ∈ 𝒮` stands for a corresponding type judgement `𝑇` `Γ ⊢ 𝑇 type`, as in the interpretation, we can consider arbitrary arrow as a type
-2. `𝑇 : Γ → 𝒰` as an arrow corresponds to `Γ ⊢ 𝑇 : 𝒰`, the code of type 
+Correspondingly, **Categorically speaking**, we should have `U : 𝒰 → 1` ∈ `𝒮` 
 
 # We have dependent product closed under 𝒮's generic family 𝒰
 
-Now we know what it means to have dependnet product in 𝒮, as 𝒰 is so strong, we should have a similar definition:
+Now we know what it means to have dependnet product in 𝒮, as 𝒰 is so strong and classifies everything in 𝒮, we should have a similar definition:
 "What it means that 𝒰 equips dependent product type?"
 
 This is covered by [Ref 4, Lemma 3.2.13] and [Ref 9, §3.2∗4].
 
 
-# We have cumulative universe
-and thus especially for `x : 𝒰0 ⊢ T : 𝒰0`  we have  `((x : 𝒰0) → T x) ：𝒰1`
-
-
-# If we have impredicative universe
-contrary to above, when given `x : 𝒰 ⊢ T : 𝒰`  we have  `((x : 𝒰) → T x) ：𝒰`
-
 # We have dependent product closed under 𝒮's generic family 𝒰, impredicative
-So the correct categorical formulation of impredicative universe, with respect to that generic mapping 𝒰, is 
+For impredictive universe, the previous section should be re-formulated as:
+
+<!-- So the correct categorical formulation of impredicative universe, with respect to that generic mapping 𝒰, is  -->
+
+
 # Realizability Topos has this impredicative universe
 
