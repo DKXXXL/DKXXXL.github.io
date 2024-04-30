@@ -60,3 +60,11 @@ For impredictive universe, the previous section should be re-formulated as:
 
 # Realizability Topos has this impredicative universe
 
+<!-- Things want to cover 
+1. Jacob § 6, NNO inside Effect Topos (Data inside Effective Topos)
+2. There are three style of models for impred polymorphic
+   1. Hofmann-Streicher Lifting gives imprediactive universe in the world of STC
+   2. Directly using modest set to construct
+   3. Similarly to 2, but following Jacobs to pack everything in the language of fibration
+ -->
+

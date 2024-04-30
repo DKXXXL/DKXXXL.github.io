@@ -8,6 +8,7 @@ Ref
 3. https://www.math.mcgill.ca/rags/LCCC/LCCC.pdf LCCC interpretation of dependent type
 4. Revisiting the categorical interpretation of dependent type theory 
 5. https://www.cs.cmu.edu/~rwh/students/sterling.pdf Sterling Thesis
+6. https://www2.mathematik.tu-darmstadt.de/~streicher/NOTES/lift.pdf Lifting
 
 ***
 
@@ -52,6 +53,19 @@ One way to look at 𝒮 and 𝒰 is that:
 
 We will say an object `T` resides in `𝒮` when the terminal map `T → 1` is in `𝒮`, according to the above interpretation, this simply means `⊢ T type` is a valid type judgement.
 
-# Hofmann-Stricher Lifting of the universe
+# Hofmann-Stricher Lifting (HS Lifting) of the universe
+[Ref 6] is the main reference about lifting a universe into generic family. 
+Its notation is a bit too unfamiliar for the PL people, we will unfold and explain it.
 
+We fix `𝒞` as a 𝒰-small category. In other words, there is a grothendieck universe 𝒰. Thus `𝒞.obj, 𝒞.Hom ∈ 𝒰`.
+HS lifting is about making a set `𝒰` into a generic family `𝑈` in `Pr(𝒞)`. 
 
+The main insight this can work is that
+1. The 𝒰-small presheaf and dependent presheaf `A ⊢ B` , their dependent product `∏ A B` is still 𝒰-small
+2. The `𝒰`-small presheaf [Ref 6, Page 1] is `𝑈`-small in presheaf topos [Ref 5, ], i.e. these two definitions, set-theoretic and category-theoretic, coincides
+
+We will
+
+1. `F ∈ Pr(𝒞)` is small iff `F(I) ∈ 𝒰` for all `I ∈ 𝒞`
+2. Recall the equivalence between `P(𝒞)/F` ≅ `Pr(∫F)`, where `∫F` is the category of element of a presheaf `F`
+3. 

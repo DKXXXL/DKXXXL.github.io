@@ -1,0 +1,1 @@
+We explore HOAS spec for the (renaming/syntax) algebra; or just HOAS spec for the inductive type.
