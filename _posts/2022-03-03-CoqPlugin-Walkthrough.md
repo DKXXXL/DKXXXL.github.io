@@ -55,6 +55,8 @@ For these four tutorials:
 
 ### How far can I extend Parser?
 
+*TODO:...*
+
 ### Module Component
 1. The projection on module fields like `a.b.c` will be interpreted as `Names.ModPath.t`. 
 2. `MPdot` is the constructor that represent `.` projection; `MPbound of uniq_ident (* reference to a module parameter in a functor *)` (locate at `names.mli`) is also related
@@ -149,7 +151,7 @@ For these four tutorials:
     1.  see `Declaremods.declare_modtype`, before `add_modtype`, there are a bunch of work on universe solving
     2.  So the most reliable idea seems to be check how  `Printmod.print_module` reify the module signature information
         1.  and then we use parser again (I know it is ugly)
-20. To resolve 
+<!-- 20. To resolve  -->
 
 
 
