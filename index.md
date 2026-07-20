@@ -2,9 +2,9 @@
 layout: index
 title: About ...
 ---
-This is Ende Jin. A PhD Student from University of Waterloo since 2025, under the supervision of [Yizhou Zhang](https://cs.uwaterloo.ca/~yizhou/). I love (Statically Typed) Programming Language, Type Theory and Category Theory (2 out of 3 in the [computational trinitarianism](https://ncatlab.org/nlab/show/computational+trilogy)).
+This is Ende Jin. A PhD Student from University of Waterloo since 2025, under the supervision of [Yizhou Zhang](https://cs.uwaterloo.ca/~yizhou/). I am a semantic engineerer, focus on (Statically Typed) Programming Language and (Dependent) Type Theory.
 
-My publications can be found [here](https://scholar.google.com/citations?hl=en&user=v6slfBAAAAAJ&view_op=list_works&sortby=pubdate).
+<!-- My publications can be found [here](https://scholar.google.com/citations?hl=en&user=v6slfBAAAAAJ&view_op=list_works&sortby=pubdate). -->
 
 
 
