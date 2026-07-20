@@ -21,9 +21,3 @@ O. Ebresafe, I. Zhao, **E. Jin**, A. Bright, C. Jian, Y. Zhang
 **E. Jin**, G. Rosenblatt, M. Might, L. Zhang  
 *Relational Programming Workshop*, 2021  
 [ [paper](https://icfp21.sigplan.org/details/minikanren-2021-papers/2/Universal-Quantification-and-Implication-in-miniKanren) ]
-
-# Writings
-
-**Parametrized CDCL Verified in Coq**  
-**E. Jin**  
-[ [preprint](https://www.researchgate.net/profile/Ende-Jin/publication/357605442_Parametrized_CDCL_Verified_in_Coq) | [implementation](https://github.com/DKXXXL/ParaCDCL) ]
