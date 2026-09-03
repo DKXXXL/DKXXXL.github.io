@@ -39,7 +39,7 @@
     </nav>
 
     <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
-    <p style="font-size: 12px">{{ site.mottoes | sample }}</p>
+    <p style="font-size: 12px">{% include motto.html %}</p>
 
     {% endif %}
     

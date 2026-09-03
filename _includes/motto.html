@@ -1,0 +1,12 @@
+<span class="motto" data-mottoes="{{ site.mottoes | jsonify | escape }}"></span>
+<script>
+(function () {
+  var els = document.querySelectorAll('.motto');
+  if (!els.length) return;
+  if (!window.__mottoPick) {
+    var list = JSON.parse(els[0].getAttribute('data-mottoes'));
+    window.__mottoPick = list[Math.floor(Math.random() * list.length)];
+  }
+  for (var i = 0; i < els.length; i++) els[i].textContent = window.__mottoPick;
+})();
+</script>
