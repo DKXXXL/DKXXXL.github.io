@@ -23,3 +23,8 @@ O. Ebresafe, I. Zhao, **E. Jin**, A. Bright, C. Jian, Y. Zhang
 [ [paper](https://icfp21.sigplan.org/details/minikanren-2021-papers/2/Universal-Quantification-and-Implication-in-miniKanren) ]
 <br><small style="color: grey; font-style: italic">Attempts to lift miniKanren to FOL.</small>
 
+
+# Writings
+
+**[Who verify the verifier?](/writings/who-verify-the-verifier/)**  
+<small style="color: grey; font-style: italic">Presented at CS846 @ Fall 2026, UWaterloo</small>
