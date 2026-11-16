@@ -27,4 +27,4 @@ O. Ebresafe, I. Zhao, **E. Jin**, A. Bright, C. Jian, Y. Zhang
 # Writings
 
 **[Who verify the verifier?](/writings/who-verify-the-verifier/)**  
-<small style="color: grey; font-style: italic">Presented at CS846 @ Fall 2026, UWaterloo</small>
+<small style="color: grey; font-style: italic">Presented at CS846 @ December 1, 2026, UWaterloo</small>
